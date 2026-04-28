@@ -28,7 +28,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Build all packages
-RUN pnpm -r run build --filter=@ferroui/registry...
+RUN pnpm --filter=@ferroui/registry... build
 
 # Runtime stage
 FROM node:25-alpine AS runner

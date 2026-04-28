@@ -28,7 +28,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Build all packages and the web app
-RUN pnpm -r run build --filter=web...
+RUN pnpm --filter=web... build
 
 # Runtime stage
 FROM nginx:alpine
