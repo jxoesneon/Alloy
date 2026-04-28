@@ -156,7 +156,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       # NOTE: Snyk failures are now blocking per Phase A mandates.
+      # Guard with token check to avoid auth failures when secrets are missing.
       - name: Run Snyk to check for vulnerabilities
+        if: ${{ secrets.SNYK_TOKEN != '' }}
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
