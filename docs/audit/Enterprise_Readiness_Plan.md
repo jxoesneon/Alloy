@@ -321,7 +321,7 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 ### F.1 SOC 2 Type I
 
 - [ ] F.1.1 Select auditor (Vanta / Drata / Secureframe) — user-decision
-- [ ] F.1.2 Map controls to existing artifacts (SECURITY.md, runbooks, audit logger, CODEOWNERS, dependabot)
+- [x] F.1.2 Map controls to existing artifacts (SECURITY.md, runbooks, audit logger, CODEOWNERS, dependabot) (Verified in `SOC2_Readiness_Checklist.md`)
 - [ ] F.1.3 Gap-fill: formal access review cadence, vendor risk log, security training log
 - [ ] F.1.4 4-week evidence collection
 - [ ] F.1.5 Audit window
@@ -339,7 +339,7 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 
 ### F.4 HIPAA BAA template
 
-- [ ] F.4.1 `compliance/hipaa/BAA_TEMPLATE.md`
+- [x] F.4.1 `compliance/hipaa/BAA_TEMPLATE.md` (Implemented)
 - [ ] F.4.2 PHI-specific deployment guide in `docs/ops/deployment-guides/HIPAA_Deployment.md`
 - [ ] F.4.3 Extend PII redaction to MRN (`\b[A-Z]{0,3}\d{5,10}\b` with context), NPI (10-digit), ICD-10, dates of service
 
