@@ -1,23 +1,23 @@
-import { describe, it, expect } from 'vitest';
-import { assertProductionInvariants } from './server.js';
+import { describe, it, expect } from "vitest";
+import { assertProductionInvariants } from "./server.js";
 
-describe('assertProductionInvariants', () => {
-  it('is a no-op when NODE_ENV is not production', () => {
+describe("assertProductionInvariants", () => {
+  it("is a no-op when NODE_ENV is not production", () => {
     // Even with unsafe values, non-production environments are permitted.
     expect(() =>
       assertProductionInvariants({
-        NODE_ENV: 'development',
-        SKIP_AUTH: 'true',
-        JWT_SECRET: 'x',
+        NODE_ENV: "development",
+        SKIP_AUTH: "true",
+        JWT_SECRET: "x",
       }),
     ).not.toThrow();
   });
 
-  it('is a no-op when NODE_ENV is test', () => {
+  it("is a no-op when NODE_ENV is test", () => {
     expect(() =>
       assertProductionInvariants({
-        NODE_ENV: 'test',
-        SKIP_AUTH: 'true',
+        NODE_ENV: "test",
+        SKIP_AUTH: "true",
       }),
     ).not.toThrow();
   });
@@ -25,9 +25,15 @@ describe('assertProductionInvariants', () => {
   it('throws in production when SKIP_AUTH is "true"', () => {
     expect(() =>
       assertProductionInvariants({
+<<<<<<< HEAD
         NODE_ENV: 'production',
         SKIP_AUTH: 'true',
         JWT_SECRET: 'this-is-a-32-char-secret-padding-000', // gitleaks:allow
+=======
+        NODE_ENV: "production",
+        SKIP_AUTH: "true",
+        JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }),
     ).toThrow(/SKIP_AUTH is enabled/);
   });
@@ -35,51 +41,62 @@ describe('assertProductionInvariants', () => {
   it('throws in production when SKIP_AUTH is "1"', () => {
     expect(() =>
       assertProductionInvariants({
+<<<<<<< HEAD
         NODE_ENV: 'production',
         SKIP_AUTH: '1',
         JWT_SECRET: 'this-is-a-32-char-secret-padding-000', // gitleaks:allow
+=======
+        NODE_ENV: "production",
+        SKIP_AUTH: "1",
+        JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }),
     ).toThrow(/SKIP_AUTH is enabled/);
   });
 
-  it('throws in production when JWT_SECRET is missing', () => {
+  it("throws in production when JWT_SECRET is missing", () => {
     expect(() =>
       assertProductionInvariants({
-        NODE_ENV: 'production',
+        NODE_ENV: "production",
       }),
     ).toThrow(/JWT_SECRET must be set/);
   });
 
-  it('throws in production when JWT_SECRET is too short', () => {
+  it("throws in production when JWT_SECRET is too short", () => {
     expect(() =>
       assertProductionInvariants({
-        NODE_ENV: 'production',
-        JWT_SECRET: 'too-short',
+        NODE_ENV: "production",
+        JWT_SECRET: "too-short",
       }),
     ).toThrow(/JWT_SECRET must be set/);
   });
 
-  it('accepts a well-formed production configuration', () => {
+  it("accepts a well-formed production configuration", () => {
     expect(() =>
       assertProductionInvariants({
+<<<<<<< HEAD
         NODE_ENV: 'production',
         JWT_SECRET: 'this-is-a-32-char-secret-padding-000', // gitleaks:allow
+=======
+        NODE_ENV: "production",
+        JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }),
     ).not.toThrow();
   });
 
-  it('aggregates multiple violations into a single error', () => {
+  it("aggregates multiple violations into a single error", () => {
     try {
       assertProductionInvariants({
-        NODE_ENV: 'production',
-        SKIP_AUTH: 'true',
+        NODE_ENV: "production",
+        SKIP_AUTH: "true",
         // missing JWT_SECRET
       });
-      expect.fail('should have thrown');
+      expect.fail("should have thrown");
     } catch (err) {
       const msg = (err as Error).message;
-      expect(msg).toContain('SKIP_AUTH');
-      expect(msg).toContain('JWT_SECRET');
+      expect(msg).toContain("SKIP_AUTH");
+      expect(msg).toContain("JWT_SECRET");
     }
   });
 });

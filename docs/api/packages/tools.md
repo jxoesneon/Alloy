@@ -9,12 +9,19 @@ Tool registration, permission scopes, budgets, and sensitivity flags.
 - **Source:** [`packages/tools`](https://github.com/jxoesneon/FerroUI/tree/main/packages/tools)
 - **package.json:** [view on GitHub](https://github.com/jxoesneon/FerroUI/blob/main/packages/tools/package.json)
 
+## Generated API
 
+<<<<<<< HEAD
 ## Generated API
 
 **@ferroui/tools**
 
 ***
+=======
+**@ferroui/tools**
+
+---
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/tools
 
@@ -50,6 +57,7 @@ pnpm add @ferroui/tools
 ### Registering a Tool
 
 ```typescript
+<<<<<<< HEAD
 import { registerTool } from '@ferroui/tools';
 import { z } from 'zod';
 
@@ -61,21 +69,44 @@ const SalesMetricsSchema = z.object({
 registerTool({
   name: 'getSalesMetrics',
   description: 'Returns sales revenue and order counts.',
+=======
+import { registerTool } from "@ferroui/tools";
+import { z } from "zod";
+
+const SalesMetricsSchema = z.object({
+  revenue: z.number(),
+  orders: z.number(),
+});
+
+registerTool({
+  name: "getSalesMetrics",
+  description: "Returns sales revenue and order counts.",
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   parameters: z.object({ dateRange: z.string() }),
   returns: SalesMetricsSchema,
   execute: async ({ dateRange }) => {
     // Fetch from real backend
     return { revenue: 1000, orders: 10 };
+<<<<<<< HEAD
   }
+=======
+  },
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 });
 ```
 
 ### Filtering Tools for User
 
 ```typescript
+<<<<<<< HEAD
 import { getToolsForUser } from '@ferroui/tools';
 
 const userPermissions = ['sales.read', 'analytics.view'];
+=======
+import { getToolsForUser } from "@ferroui/tools";
+
+const userPermissions = ["sales.read", "analytics.view"];
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 const manifest = getToolsForUser(userPermissions);
 // manifest will only contain tools the user has permission to use.
 ```
@@ -86,4 +117,7 @@ const manifest = getToolsForUser(userPermissions);
 - `registerTool(definition)`: Registers a new tool.
 - `executeTool(name, args, context)`: Safely executes a registered tool.
 - `getToolsForUser(permissions)`: Returns a manifest for LLMs.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)

@@ -36,6 +36,7 @@ Navigate to each page in the flow and dump its interactive elements:
 // Run this for each page in the flow BEFORE writing the demo script
 const fields = await page.evaluate(() => {
   const els = [];
+<<<<<<< HEAD
   document.querySelectorAll('input, select, textarea, button, [contenteditable]').forEach(el => {
     if (el.offsetParent !== null) {
       els.push({
@@ -49,6 +50,23 @@ const fields = await page.evaluate(() => {
       });
     }
   });
+=======
+  document
+    .querySelectorAll("input, select, textarea, button, [contenteditable]")
+    .forEach((el) => {
+      if (el.offsetParent !== null) {
+        els.push({
+          tag: el.tagName,
+          type: el.type || "",
+          name: el.name || "",
+          placeholder: el.placeholder || "",
+          text: el.textContent?.trim().substring(0, 40) || "",
+          contentEditable: el.contentEditable === "true",
+          role: el.getAttribute("role") || "",
+        });
+      }
+    });
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   return els;
 });
 console.log(JSON.stringify(fields, null, 2));
@@ -97,6 +115,7 @@ Use `ensureVisible`, a wrapper that logs and fails loudly:
 
 ```javascript
 async function ensureVisible(page, locator, label) {
+<<<<<<< HEAD
   const el = typeof locator === 'string' ? page.locator(locator).first() : locator;
   const visible = await el.isVisible().catch(() => false);
   if (!visible) {
@@ -109,6 +128,26 @@ async function ensureVisible(page, locator, label) {
         .join('\n  ');
     });
     console.error('  Visible elements:\n  ' + found);
+=======
+  const el =
+    typeof locator === "string" ? page.locator(locator).first() : locator;
+  const visible = await el.isVisible().catch(() => false);
+  if (!visible) {
+    const msg = `REHEARSAL FAIL: "${label}" not found - selector: ${typeof locator === "string" ? locator : "(locator object)"}`;
+    console.error(msg);
+    const found = await page.evaluate(() => {
+      return Array.from(
+        document.querySelectorAll("button, input, select, textarea, a"),
+      )
+        .filter((el) => el.offsetParent !== null)
+        .map(
+          (el) =>
+            `${el.tagName}[${el.type || ""}] "${el.textContent?.trim().substring(0, 30)}"`,
+        )
+        .join("\n  ");
+    });
+    console.error("  Visible elements:\n  " + found);
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     return false;
   }
   console.log(`REHEARSAL OK: "${label}"`);
@@ -120,6 +159,7 @@ async function ensureVisible(page, locator, label) {
 
 ```javascript
 const steps = [
+<<<<<<< HEAD
   { label: 'Login email field', selector: '#email' },
   { label: 'Login submit', selector: 'button[type="submit"]' },
   { label: 'New Request button', selector: 'button:has-text("New Request")' },
@@ -128,19 +168,40 @@ const steps = [
   { label: 'Description field', selector: 'textarea:visible' },
   { label: 'Add Item button', selector: 'button:has-text("Add Item")' },
   { label: 'Submit button', selector: 'button:has-text("Submit")' },
+=======
+  { label: "Login email field", selector: "#email" },
+  { label: "Login submit", selector: 'button[type="submit"]' },
+  { label: "New Request button", selector: 'button:has-text("New Request")' },
+  { label: "Budget Code select", selector: "select" },
+  { label: "Delivery date", selector: 'input[type="date"]:visible' },
+  { label: "Description field", selector: "textarea:visible" },
+  { label: "Add Item button", selector: 'button:has-text("Add Item")' },
+  { label: "Submit button", selector: 'button:has-text("Submit")' },
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 ];
 
 let allOk = true;
 for (const step of steps) {
+<<<<<<< HEAD
   if (!await ensureVisible(page, step.selector, step.label)) {
+=======
+  if (!(await ensureVisible(page, step.selector, step.label))) {
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     allOk = false;
   }
 }
 if (!allOk) {
+<<<<<<< HEAD
   console.error('REHEARSAL FAILED - fix selectors before recording');
   process.exit(1);
 }
 console.log('REHEARSAL PASSED - all selectors verified');
+=======
+  console.error("REHEARSAL FAILED - fix selectors before recording");
+  process.exit(1);
+}
+console.log("REHEARSAL PASSED - all selectors verified");
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 ```
 
 ### When rehearsal fails
@@ -185,9 +246,15 @@ Inject an SVG arrow cursor that follows mouse movements:
 ```javascript
 async function injectCursor(page) {
   await page.evaluate(() => {
+<<<<<<< HEAD
     if (document.getElementById('demo-cursor')) return;
     const cursor = document.createElement('div');
     cursor.id = 'demo-cursor';
+=======
+    if (document.getElementById("demo-cursor")) return;
+    const cursor = document.createElement("div");
+    cursor.id = "demo-cursor";
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     cursor.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M5 3L19 12L12 13L9 20L5 3Z" fill="white" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
     </svg>`;
@@ -197,12 +264,21 @@ async function injectCursor(page) {
       transition: left 0.1s, top 0.1s;
       filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
     `;
+<<<<<<< HEAD
     cursor.style.left = '0px';
     cursor.style.top = '0px';
     document.body.appendChild(cursor);
     document.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
+=======
+    cursor.style.left = "0px";
+    cursor.style.top = "0px";
+    document.body.appendChild(cursor);
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     });
   });
 }
@@ -217,7 +293,12 @@ Never teleport the cursor. Move to the target before clicking:
 ```javascript
 async function moveAndClick(page, locator, label, opts = {}) {
   const { postClickDelay = 800, ...clickOpts } = opts;
+<<<<<<< HEAD
   const el = typeof locator === 'string' ? page.locator(locator).first() : locator;
+=======
+  const el =
+    typeof locator === "string" ? page.locator(locator).first() : locator;
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   const visible = await el.isVisible().catch(() => false);
   if (!visible) {
     console.error(`WARNING: moveAndClick skipped - "${label}" not visible`);
@@ -228,7 +309,13 @@ async function moveAndClick(page, locator, label, opts = {}) {
     await page.waitForTimeout(300);
     const box = await el.boundingBox();
     if (box) {
+<<<<<<< HEAD
       await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 10 });
+=======
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, {
+        steps: 10,
+      });
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       await page.waitForTimeout(400);
     }
     await el.click(clickOpts);
@@ -249,14 +336,23 @@ Type visibly, not instant-fill:
 
 ```javascript
 async function typeSlowly(page, locator, text, label, charDelay = 35) {
+<<<<<<< HEAD
   const el = typeof locator === 'string' ? page.locator(locator).first() : locator;
+=======
+  const el =
+    typeof locator === "string" ? page.locator(locator).first() : locator;
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   const visible = await el.isVisible().catch(() => false);
   if (!visible) {
     console.error(`WARNING: typeSlowly skipped - "${label}" not visible`);
     return false;
   }
   await moveAndClick(page, el, label);
+<<<<<<< HEAD
   await el.fill('');
+=======
+  await el.fill("");
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   await el.pressSequentially(text, { delay: charDelay });
   await page.waitForTimeout(500);
   return true;
@@ -268,7 +364,11 @@ async function typeSlowly(page, locator, text, label, charDelay = 35) {
 Use smooth scroll instead of jumps:
 
 ```javascript
+<<<<<<< HEAD
 await page.evaluate(() => window.scrollTo({ top: 400, behavior: 'smooth' }));
+=======
+await page.evaluate(() => window.scrollTo({ top: 400, behavior: "smooth" }));
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 await page.waitForTimeout(1500);
 ```
 
@@ -283,11 +383,23 @@ async function panElements(page, selector, maxCount = 6) {
     try {
       const box = await elements[i].boundingBox();
       if (box && box.y < 700) {
+<<<<<<< HEAD
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 8 });
         await page.waitForTimeout(600);
       }
     } catch (e) {
       console.warn(`WARNING: panElements skipped element ${i} (selector: "${selector}"): ${e.message}`);
+=======
+        await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, {
+          steps: 8,
+        });
+        await page.waitForTimeout(600);
+      }
+    } catch (e) {
+      console.warn(
+        `WARNING: panElements skipped element ${i} (selector: "${selector}"): ${e.message}`,
+      );
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     }
   }
 }
@@ -300,9 +412,15 @@ Inject a subtitle bar at the bottom of the viewport:
 ```javascript
 async function injectSubtitleBar(page) {
   await page.evaluate(() => {
+<<<<<<< HEAD
     if (document.getElementById('demo-subtitle')) return;
     const bar = document.createElement('div');
     bar.id = 'demo-subtitle';
+=======
+    if (document.getElementById("demo-subtitle")) return;
+    const bar = document.createElement("div");
+    bar.id = "demo-subtitle";
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     bar.style.cssText = `
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 999998;
       text-align: center; padding: 12px 24px;
@@ -312,14 +430,20 @@ async function injectSubtitleBar(page) {
       transition: opacity 0.3s;
       pointer-events: none;
     `;
+<<<<<<< HEAD
     bar.textContent = '';
     bar.style.opacity = '0';
+=======
+    bar.textContent = "";
+    bar.style.opacity = "0";
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     document.body.appendChild(bar);
   });
 }
 
 async function showSubtitle(page, text) {
   await page.evaluate((t) => {
+<<<<<<< HEAD
     const bar = document.getElementById('demo-subtitle');
     if (!bar) return;
     if (t) {
@@ -327,6 +451,15 @@ async function showSubtitle(page, text) {
       bar.style.opacity = '1';
     } else {
       bar.style.opacity = '0';
+=======
+    const bar = document.getElementById("demo-subtitle");
+    if (!bar) return;
+    if (t) {
+      bar.textContent = t;
+      bar.style.opacity = "1";
+    } else {
+      bar.style.opacity = "0";
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     }
   }, text);
   if (text) await page.waitForTimeout(800);
@@ -338,9 +471,15 @@ Call `injectSubtitleBar(page)` alongside `injectCursor(page)` after every naviga
 Usage pattern:
 
 ```javascript
+<<<<<<< HEAD
 await showSubtitle(page, 'Step 1 - Logging in');
 await showSubtitle(page, 'Step 2 - Dashboard overview');
 await showSubtitle(page, '');
+=======
+await showSubtitle(page, "Step 1 - Logging in");
+await showSubtitle(page, "Step 2 - Dashboard overview");
+await showSubtitle(page, "");
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 ```
 
 Guidelines:
@@ -352,6 +491,7 @@ Guidelines:
 ## Script Template
 
 ```javascript
+<<<<<<< HEAD
 'use strict';
 const { chromium } = require('playwright');
 const path = require('path');
@@ -361,6 +501,17 @@ const BASE_URL = process.env.QA_BASE_URL || 'http://localhost:3000';
 const VIDEO_DIR = path.join(__dirname, 'screenshots');
 const OUTPUT_NAME = 'demo-FEATURE.webm';
 const REHEARSAL = process.argv.includes('--rehearse');
+=======
+"use strict";
+const { chromium } = require("playwright");
+const path = require("path");
+const fs = require("fs");
+
+const BASE_URL = process.env.QA_BASE_URL || "http://localhost:3000";
+const VIDEO_DIR = path.join(__dirname, "screenshots");
+const OUTPUT_NAME = "demo-FEATURE.webm";
+const REHEARSAL = process.argv.includes("--rehearse");
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 // Paste injectCursor, injectSubtitleBar, showSubtitle, moveAndClick,
 // typeSlowly, ensureVisible, and panElements here.
@@ -369,7 +520,13 @@ const REHEARSAL = process.argv.includes('--rehearse');
   const browser = await chromium.launch({ headless: true });
 
   if (REHEARSAL) {
+<<<<<<< HEAD
     const context = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+=======
+    const context = await browser.newContext({
+      viewport: { width: 1280, height: 720 },
+    });
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     const page = await context.newPage();
     // Navigate through the flow and run ensureVisible for each selector.
     await browser.close();
@@ -378,7 +535,11 @@ const REHEARSAL = process.argv.includes('--rehearse');
 
   const context = await browser.newContext({
     recordVideo: { dir: VIDEO_DIR, size: { width: 1280, height: 720 } },
+<<<<<<< HEAD
     viewport: { width: 1280, height: 720 }
+=======
+    viewport: { width: 1280, height: 720 },
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   });
   const page = await context.newPage();
 
@@ -386,12 +547,17 @@ const REHEARSAL = process.argv.includes('--rehearse');
     await injectCursor(page);
     await injectSubtitleBar(page);
 
+<<<<<<< HEAD
     await showSubtitle(page, 'Step 1 - Logging in');
+=======
+    await showSubtitle(page, "Step 1 - Logging in");
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     // login actions
 
     await page.goto(`${BASE_URL}/dashboard`);
     await injectCursor(page);
     await injectSubtitleBar(page);
+<<<<<<< HEAD
     await showSubtitle(page, 'Step 2 - Dashboard overview');
     // pan dashboard
 
@@ -403,6 +569,19 @@ const REHEARSAL = process.argv.includes('--rehearse');
     await showSubtitle(page, '');
   } catch (err) {
     console.error('DEMO ERROR:', err.message);
+=======
+    await showSubtitle(page, "Step 2 - Dashboard overview");
+    // pan dashboard
+
+    await showSubtitle(page, "Step 3 - Main workflow");
+    // action sequence
+
+    await showSubtitle(page, "Step 4 - Result");
+    // final reveal
+    await showSubtitle(page, "");
+  } catch (err) {
+    console.error("DEMO ERROR:", err.message);
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   } finally {
     await context.close();
     const video = page.video();
@@ -411,11 +590,19 @@ const REHEARSAL = process.argv.includes('--rehearse');
       const dest = path.join(VIDEO_DIR, OUTPUT_NAME);
       try {
         fs.copyFileSync(src, dest);
+<<<<<<< HEAD
         console.log('Video saved:', dest);
       } catch (e) {
         console.error('ERROR: Failed to copy video:', e.message);
         console.error('  Source:', src);
         console.error('  Destination:', dest);
+=======
+        console.log("Video saved:", dest);
+      } catch (e) {
+        console.error("ERROR: Failed to copy video:", e.message);
+        console.error("  Source:", src);
+        console.error("  Destination:", dest);
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }
     }
     await browser.close();

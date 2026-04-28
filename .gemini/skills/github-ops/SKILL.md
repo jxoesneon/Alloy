@@ -137,6 +137,10 @@ gh pr list --label "dependencies" --json number,title
 ## Quality Gate
 
 Before completing any GitHub operations task:
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 - all issues triaged have appropriate labels
 - no PRs older than 7 days without a review or comment
 - CI failures have been investigated (not just re-run)

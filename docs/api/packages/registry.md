@@ -9,12 +9,19 @@ Atom / Molecule / Organism component registry with Zod schemas.
 - **Source:** [`packages/registry`](https://github.com/jxoesneon/FerroUI/tree/main/packages/registry)
 - **package.json:** [view on GitHub](https://github.com/jxoesneon/FerroUI/blob/main/packages/registry/package.json)
 
+## Generated API
 
+<<<<<<< HEAD
 ## Generated API
 
 **@ferroui/registry**
 
 ***
+=======
+**@ferroui/registry**
+
+---
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/registry
 
@@ -49,6 +56,7 @@ pnpm add @ferroui/registry
 ### Registering a Component
 
 ```typescript
+<<<<<<< HEAD
 import { registerComponent } from '@ferroui/registry';
 import { ComponentTier } from '@ferroui/schema';
 import { z } from 'zod';
@@ -64,17 +72,42 @@ registerComponent({
   tier: ComponentTier.ATOM,
   component: MyButton,
   schema: MyButtonSchema
+=======
+import { registerComponent } from "@ferroui/registry";
+import { ComponentTier } from "@ferroui/schema";
+import { z } from "zod";
+
+const MyButtonSchema = z.object({
+  label: z.string(),
+  variant: z.enum(["primary", "secondary"]).default("primary"),
+});
+
+registerComponent({
+  name: "MyButton",
+  version: 1,
+  tier: ComponentTier.ATOM,
+  component: MyButton,
+  schema: MyButtonSchema,
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 });
 ```
 
 ### Retrieving a Component
 
 ```typescript
+<<<<<<< HEAD
 import { registry } from '@ferroui/registry';
 
 const entry = registry.getComponentEntry('MyButton@1');
 // or get latest
 const latest = registry.getComponentEntry('MyButton');
+=======
+import { registry } from "@ferroui/registry";
+
+const entry = registry.getComponentEntry("MyButton@1");
+// or get latest
+const latest = registry.getComponentEntry("MyButton");
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 ```
 
 ## API Reference
@@ -83,4 +116,7 @@ const latest = registry.getComponentEntry('MyButton');
 - `registerComponent(options)`: Registers a new component.
 - `getComponentEntry(identifier)`: Retrieves a component entry.
 - `validateHierarchy(layout)`: Checks if a layout follows atomic rules.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)

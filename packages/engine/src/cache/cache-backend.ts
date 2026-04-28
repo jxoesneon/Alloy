@@ -15,7 +15,14 @@ export interface CacheBackend {
 
 // ─── In-Memory Backend ────────────────────────────────────────────────────────
 
+<<<<<<< HEAD
 export interface MemoryEntry { value: string; expiresAt: number; }
+=======
+export interface MemoryEntry {
+  value: string;
+  expiresAt: number;
+}
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 export class InMemoryCacheBackend implements CacheBackend {
   private store = new Map<string, MemoryEntry>();
@@ -41,8 +48,8 @@ export class InMemoryCacheBackend implements CacheBackend {
   async keys(pattern?: string): Promise<string[]> {
     const all = Array.from(this.store.keys());
     if (!pattern) return all;
-    const regex = new RegExp(pattern.replace(/\*/g, '.*'));
-    return all.filter(k => regex.test(k));
+    const regex = new RegExp(pattern.replace(/\*/g, ".*"));
+    return all.filter((k) => regex.test(k));
   }
 
   async clear(): Promise<void> {
@@ -52,7 +59,7 @@ export class InMemoryCacheBackend implements CacheBackend {
 
 // ─── Redis Backend ────────────────────────────────────────────────────────────
 
-import type { Redis } from 'ioredis';
+import type { Redis } from "ioredis";
 
 export class RedisCacheBackend implements CacheBackend {
   constructor(private client: Redis) {}
@@ -62,7 +69,7 @@ export class RedisCacheBackend implements CacheBackend {
   }
 
   async set(key: string, value: string, ttlMs: number): Promise<void> {
-    await this.client.set(key, value, 'PX', ttlMs);
+    await this.client.set(key, value, "PX", ttlMs);
   }
 
   async delete(key: string): Promise<void> {
@@ -70,7 +77,7 @@ export class RedisCacheBackend implements CacheBackend {
   }
 
   async keys(pattern?: string): Promise<string[]> {
-    return this.client.keys(pattern ?? '*');
+    return this.client.keys(pattern ?? "*");
   }
 
   async clear(): Promise<void> {
@@ -80,7 +87,7 @@ export class RedisCacheBackend implements CacheBackend {
 
 // ─── SQLite Backend ───────────────────────────────────────────────────────────
 
-import type { Database } from 'better-sqlite3';
+import type { Database } from "better-sqlite3";
 
 export class SQLiteCacheBackend implements CacheBackend {
   constructor(private db: Database) {
@@ -92,16 +99,19 @@ export class SQLiteCacheBackend implements CacheBackend {
       )
     `);
     // Create index for expiration cleanup
-    this.db.exec(`CREATE INDEX IF NOT EXISTS idx_expires ON ferroui_cache(expires_at)`);
+    this.db.exec(
+      `CREATE INDEX IF NOT EXISTS idx_expires ON ferroui_cache(expires_at)`,
+    );
   }
 
   async get(key: string): Promise<string | null> {
-    const row = this.db.prepare('SELECT value, expires_at FROM ferroui_cache WHERE key = ?')
+    const row = this.db
+      .prepare("SELECT value, expires_at FROM ferroui_cache WHERE key = ?")
       .get(key) as { value: string; expires_at: number } | undefined;
 
     if (!row) return null;
     if (Date.now() > row.expires_at) {
-      this.db.prepare('DELETE FROM ferroui_cache WHERE key = ?').run(key);
+      this.db.prepare("DELETE FROM ferroui_cache WHERE key = ?").run(key);
       return null;
     }
     return row.value;
@@ -109,37 +119,47 @@ export class SQLiteCacheBackend implements CacheBackend {
 
   async set(key: string, value: string, ttlMs: number): Promise<void> {
     const expiresAt = Date.now() + ttlMs;
-    this.db.prepare(
-      'INSERT OR REPLACE INTO ferroui_cache (key, value, expires_at) VALUES (?, ?, ?)'
-    ).run(key, value, expiresAt);
+    this.db
+      .prepare(
+        "INSERT OR REPLACE INTO ferroui_cache (key, value, expires_at) VALUES (?, ?, ?)",
+      )
+      .run(key, value, expiresAt);
   }
 
   async delete(key: string): Promise<void> {
-    this.db.prepare('DELETE FROM ferroui_cache WHERE key = ?').run(key);
+    this.db.prepare("DELETE FROM ferroui_cache WHERE key = ?").run(key);
   }
 
   async keys(pattern?: string): Promise<string[]> {
     // Clean up expired entries first
-    this.db.prepare('DELETE FROM ferroui_cache WHERE expires_at < ?').run(Date.now());
+    this.db
+      .prepare("DELETE FROM ferroui_cache WHERE expires_at < ?")
+      .run(Date.now());
 
     if (!pattern) {
-      return (this.db.prepare('SELECT key FROM ferroui_cache').all() as Array<{ key: string }>)
-        .map(r => r.key);
+      return (
+        this.db.prepare("SELECT key FROM ferroui_cache").all() as Array<{
+          key: string;
+        }>
+      ).map((r) => r.key);
     }
 
-    const likePattern = pattern.replace(/\*/g, '%');
-    return (this.db.prepare('SELECT key FROM ferroui_cache WHERE key LIKE ?').all(likePattern) as Array<{ key: string }>)
-      .map(r => r.key);
+    const likePattern = pattern.replace(/\*/g, "%");
+    return (
+      this.db
+        .prepare("SELECT key FROM ferroui_cache WHERE key LIKE ?")
+        .all(likePattern) as Array<{ key: string }>
+    ).map((r) => r.key);
   }
 
   async clear(): Promise<void> {
-    this.db.prepare('DELETE FROM ferroui_cache').run();
+    this.db.prepare("DELETE FROM ferroui_cache").run();
   }
 }
 
 // ─── Factory ──────────────────────────────────────────────────────────────────
 
-export type CacheBackendType = 'memory' | 'redis' | 'sqlite';
+export type CacheBackendType = "memory" | "redis" | "sqlite";
 
 export interface CacheBackendConfig {
   type: CacheBackendType;
@@ -149,13 +169,15 @@ export interface CacheBackendConfig {
 
 export function createCacheBackend(config: CacheBackendConfig): CacheBackend {
   switch (config.type) {
-    case 'redis':
-      if (!config.redisClient) throw new Error('Redis client is required for redis cache backend');
+    case "redis":
+      if (!config.redisClient)
+        throw new Error("Redis client is required for redis cache backend");
       return new RedisCacheBackend(config.redisClient);
-    case 'sqlite':
-      if (!config.sqliteDb) throw new Error('SQLite DB is required for sqlite cache backend');
+    case "sqlite":
+      if (!config.sqliteDb)
+        throw new Error("SQLite DB is required for sqlite cache backend");
       return new SQLiteCacheBackend(config.sqliteDb);
-    case 'memory':
+    case "memory":
     default:
       return new InMemoryCacheBackend();
   }

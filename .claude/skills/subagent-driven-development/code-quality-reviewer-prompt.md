@@ -18,6 +18,10 @@ Task tool (superpowers:code-reviewer):
 ```
 
 **In addition to standard code quality concerns, the reviewer should check:**
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 - Does each file have one clear responsibility with a well-defined interface?
 - Are units decomposed so they can be understood and tested independently?
 - Is the implementation following the file structure from the plan?

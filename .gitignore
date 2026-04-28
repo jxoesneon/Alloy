@@ -100,6 +100,13 @@ packages/tokens/src-tokens/
 # Puppeteer temp
 .tmp_pup/
 
+# Documentation and Reports
+docs/api/packages/.typedoc/
+docs/api/packages/typedoc_api/
+reports/
+project_structure.json
+demo/ferroui/dist/
+
 # Validation scripts (development only)
 check_page.js
 run_puppeteer.mjs

@@ -1,9 +1,20 @@
-import { metrics, Meter, Counter, Histogram as OTelHistogram, Attributes } from '@opentelemetry/api';
-import { FerroUIMetrics } from './types.js';
-import { Registry, Counter as PromCounter, Histogram as PromHistogram, Gauge as PromGauge } from 'prom-client';
+import {
+  metrics,
+  Meter,
+  Counter,
+  Histogram as OTelHistogram,
+  Attributes,
+} from "@opentelemetry/api";
+import { FerroUIMetrics } from "./types.js";
+import {
+  Registry,
+  Counter as PromCounter,
+  Histogram as PromHistogram,
+  Gauge as PromGauge,
+} from "prom-client";
 
-const INSTRUMENTATION_NAME = '@ferroui/telemetry';
-const INSTRUMENTATION_VERSION = '0.1.0';
+const INSTRUMENTATION_NAME = "@ferroui/telemetry";
+const INSTRUMENTATION_VERSION = "0.1.0";
 
 /**
  * Prometheus registry for prom-client
@@ -14,27 +25,27 @@ const promRegistry = new Registry();
  * prom-client metrics (shadowing OTel for /metrics endpoint)
  */
 const promRequestsDuration = new PromHistogram({
-  name: 'ferroui_requests_duration',
-  help: 'Total request duration in milliseconds',
+  name: "ferroui_requests_duration",
+  help: "Total request duration in milliseconds",
   registers: [promRegistry],
   buckets: [100, 250, 500, 1000, 2500, 5000, 10000],
 });
 
 const promCacheHits = new PromCounter({
-  name: 'ferroui_cache_hits',
-  help: 'Total number of cache hits',
+  name: "ferroui_cache_hits",
+  help: "Total number of cache hits",
   registers: [promRegistry],
 });
 
 const promCacheMisses = new PromCounter({
-  name: 'ferroui_cache_misses',
-  help: 'Total number of cache misses',
+  name: "ferroui_cache_misses",
+  help: "Total number of cache misses",
   registers: [promRegistry],
 });
 
 const promCacheHitRate = new PromGauge({
-  name: 'ferroui_cache_hit_rate',
-  help: 'Ratio of cache hits to total lookups',
+  name: "ferroui_cache_hit_rate",
+  help: "Ratio of cache hits to total lookups",
   registers: [promRegistry],
 });
 
@@ -81,27 +92,75 @@ export class MetricsRegistry {
   private constructor() {
     this.meter = getMeter();
 
-    this.requestsTotal = this.meter.createCounter(FerroUIMetrics.REQUESTS_TOTAL, { description: 'Total requests' });
-    this.requestsDuration = this.meter.createHistogram(FerroUIMetrics.REQUESTS_DURATION, { unit: 'ms', description: 'Request duration' });
-    this.requestsErrors = this.meter.createCounter(FerroUIMetrics.REQUESTS_ERRORS, { description: 'Error count' });
-    this.cacheHits = this.meter.createCounter(FerroUIMetrics.CACHE_HITS, { description: 'Cache hits' });
-    this.cacheMisses = this.meter.createCounter(FerroUIMetrics.CACHE_MISSES, { description: 'Cache misses' });
+    this.requestsTotal = this.meter.createCounter(
+      FerroUIMetrics.REQUESTS_TOTAL,
+      { description: "Total requests" },
+    );
+    this.requestsDuration = this.meter.createHistogram(
+      FerroUIMetrics.REQUESTS_DURATION,
+      { unit: "ms", description: "Request duration" },
+    );
+    this.requestsErrors = this.meter.createCounter(
+      FerroUIMetrics.REQUESTS_ERRORS,
+      { description: "Error count" },
+    );
+    this.cacheHits = this.meter.createCounter(FerroUIMetrics.CACHE_HITS, {
+      description: "Cache hits",
+    });
+    this.cacheMisses = this.meter.createCounter(FerroUIMetrics.CACHE_MISSES, {
+      description: "Cache misses",
+    });
 
-    this.llmCalls = this.meter.createCounter(FerroUIMetrics.LLM_CALLS, { description: 'LLM API calls' });
-    this.llmDuration = this.meter.createHistogram(FerroUIMetrics.LLM_DURATION, { unit: 'ms', description: 'LLM response time' });
-    this.llmTokensInput = this.meter.createCounter(FerroUIMetrics.LLM_TOKENS_INPUT, { description: 'Input tokens' });
-    this.llmTokensOutput = this.meter.createCounter(FerroUIMetrics.LLM_TOKENS_OUTPUT, { description: 'Output tokens' });
-    this.llmCost = this.meter.createCounter(FerroUIMetrics.LLM_COST, { description: 'Estimated cost', unit: 'USD' });
+    this.llmCalls = this.meter.createCounter(FerroUIMetrics.LLM_CALLS, {
+      description: "LLM API calls",
+    });
+    this.llmDuration = this.meter.createHistogram(FerroUIMetrics.LLM_DURATION, {
+      unit: "ms",
+      description: "LLM response time",
+    });
+    this.llmTokensInput = this.meter.createCounter(
+      FerroUIMetrics.LLM_TOKENS_INPUT,
+      { description: "Input tokens" },
+    );
+    this.llmTokensOutput = this.meter.createCounter(
+      FerroUIMetrics.LLM_TOKENS_OUTPUT,
+      { description: "Output tokens" },
+    );
+    this.llmCost = this.meter.createCounter(FerroUIMetrics.LLM_COST, {
+      description: "Estimated cost",
+      unit: "USD",
+    });
 
-    this.toolsCalls = this.meter.createCounter(FerroUIMetrics.TOOLS_CALLS, { description: 'Tool executions' });
-    this.toolsDuration = this.meter.createHistogram(FerroUIMetrics.TOOLS_DURATION, { unit: 'ms', description: 'Tool execution time' });
-    this.toolsErrors = this.meter.createCounter(FerroUIMetrics.TOOLS_ERRORS, { description: 'Tool errors' });
-    this.toolsTimeout = this.meter.createCounter(FerroUIMetrics.TOOLS_TIMEOUT, { description: 'Tool timeouts' });
+    this.toolsCalls = this.meter.createCounter(FerroUIMetrics.TOOLS_CALLS, {
+      description: "Tool executions",
+    });
+    this.toolsDuration = this.meter.createHistogram(
+      FerroUIMetrics.TOOLS_DURATION,
+      { unit: "ms", description: "Tool execution time" },
+    );
+    this.toolsErrors = this.meter.createCounter(FerroUIMetrics.TOOLS_ERRORS, {
+      description: "Tool errors",
+    });
+    this.toolsTimeout = this.meter.createCounter(FerroUIMetrics.TOOLS_TIMEOUT, {
+      description: "Tool timeouts",
+    });
 
-    this.validationTotal = this.meter.createCounter(FerroUIMetrics.VALIDATION_TOTAL, { description: 'Total validations' });
-    this.validationFailed = this.meter.createCounter(FerroUIMetrics.VALIDATION_FAILED, { description: 'Failed validations' });
-    this.validationRepairs = this.meter.createCounter(FerroUIMetrics.VALIDATION_REPAIRS, { description: 'Repair attempts' });
-    this.validationHallucinations = this.meter.createCounter(FerroUIMetrics.VALIDATION_HALLUCINATIONS, { description: 'Component hallucinations' });
+    this.validationTotal = this.meter.createCounter(
+      FerroUIMetrics.VALIDATION_TOTAL,
+      { description: "Total validations" },
+    );
+    this.validationFailed = this.meter.createCounter(
+      FerroUIMetrics.VALIDATION_FAILED,
+      { description: "Failed validations" },
+    );
+    this.validationRepairs = this.meter.createCounter(
+      FerroUIMetrics.VALIDATION_REPAIRS,
+      { description: "Repair attempts" },
+    );
+    this.validationHallucinations = this.meter.createCounter(
+      FerroUIMetrics.VALIDATION_HALLUCINATIONS,
+      { description: "Component hallucinations" },
+    );
   }
 
   public static getInstance(): MetricsRegistry {
@@ -127,7 +186,11 @@ export function recordRequest(attributes: Attributes = {}) {
 /**
  * Helper to record request duration and success/failure
  */
-export function recordRequestCompletion(durationMs: number, success: boolean, attributes: Attributes = {}) {
+export function recordRequestCompletion(
+  durationMs: number,
+  success: boolean,
+  attributes: Attributes = {},
+) {
   ferrouiMetrics.requestsDuration.record(durationMs, attributes);
   promRequestsDuration.observe(durationMs);
   if (!success) {
@@ -147,16 +210,16 @@ function updateCacheHitRate() {
   promCacheHitRate.set(rate);
 }
 
-export function recordCacheHit() { 
-  cacheHits++; 
-  ferrouiMetrics.cacheHits.add(1); 
+export function recordCacheHit() {
+  cacheHits++;
+  ferrouiMetrics.cacheHits.add(1);
   promCacheHits.inc();
   updateCacheHitRate();
 }
 
-export function recordCacheMiss() { 
-  cacheMisses++; 
-  ferrouiMetrics.cacheMisses.add(1); 
+export function recordCacheMiss() {
+  cacheMisses++;
+  ferrouiMetrics.cacheMisses.add(1);
   promCacheMisses.inc();
   updateCacheHitRate();
 }

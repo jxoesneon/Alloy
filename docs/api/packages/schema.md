@@ -9,12 +9,19 @@ The FerroUILayout Zod schema, component tiers, and action router.
 - **Source:** [`packages/schema`](https://github.com/jxoesneon/FerroUI/tree/main/packages/schema)
 - **package.json:** [view on GitHub](https://github.com/jxoesneon/FerroUI/blob/main/packages/schema/package.json)
 
+## Generated API
 
+<<<<<<< HEAD
 ## Generated API
 
 **@ferroui/schema**
 
 ***
+=======
+**@ferroui/schema**
+
+---
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/schema
 
@@ -43,6 +50,7 @@ pnpm add @ferroui/schema
 ## Usage
 
 ```typescript
+<<<<<<< HEAD
 import { FerroUILayoutSchema, type FerroUILayout } from '@ferroui/schema';
 
 const rawData = {
@@ -50,6 +58,15 @@ const rawData = {
   components: [
     { id: 'btn-1', type: 'button', tier: 'atom', props: { label: 'Click me' } }
   ]
+=======
+import { FerroUILayoutSchema, type FerroUILayout } from "@ferroui/schema";
+
+const rawData = {
+  version: "1.0",
+  components: [
+    { id: "btn-1", type: "button", tier: "atom", props: { label: "Click me" } },
+  ],
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 };
 
 // Validate and parse
@@ -57,9 +74,15 @@ const result = FerroUILayoutSchema.safeParse(rawData);
 
 if (result.success) {
   const layout: FerroUILayout = result.data;
+<<<<<<< HEAD
   console.log('Layout is valid!');
 } else {
   console.error('Validation failed:', result.error.format());
+=======
+  console.log("Layout is valid!");
+} else {
+  console.error("Validation failed:", result.error.format());
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 }
 ```
 
@@ -79,4 +102,7 @@ N/A
 const result = validateLayout(jsonInput);
 if (result.valid) { ... }
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)

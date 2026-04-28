@@ -9,12 +9,19 @@ React renderer with action router and state machine bridge.
 - **Source:** [`packages/renderer`](https://github.com/jxoesneon/FerroUI/tree/main/packages/renderer)
 - **package.json:** [view on GitHub](https://github.com/jxoesneon/FerroUI/blob/main/packages/renderer/package.json)
 
+## Generated API
 
+<<<<<<< HEAD
 ## Generated API
 
 **@ferroui/renderer**
 
 ***
+=======
+**@ferroui/renderer**
+
+---
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/renderer
 
@@ -50,6 +57,7 @@ pnpm add @ferroui/renderer
 ### Rendering a Layout
 
 ```tsx
+<<<<<<< HEAD
 import { FerroUIRenderer } from '@ferroui/renderer';
 
 const myLayout = {
@@ -62,12 +70,28 @@ function App() {
   return (
     <FerroUIRenderer layout={myLayout} />
   );
+=======
+import { FerroUIRenderer } from "@ferroui/renderer";
+
+const myLayout = {
+  type: "Dashboard",
+  props: { title: "Hello World" },
+  children: [],
+};
+
+function App() {
+  return <FerroUIRenderer layout={myLayout} />;
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 }
 ```
 
 ### Advanced Props Handling
 
 The renderer automatically handles:
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 - **`aria` merging**: Combines schema-defined accessibility with dynamic props.
 - **`ref` forwarding**: Every rendered component receives a ref for DOM access.
 
@@ -75,4 +99,7 @@ The renderer automatically handles:
 
 - `FerroUIRenderer`: The main React component for rendering layouts.
 - `renderComponent(node)`: Recursive helper for mapping JSON to React elements.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35868da (chore: final cleanup and enterprise alignment)
