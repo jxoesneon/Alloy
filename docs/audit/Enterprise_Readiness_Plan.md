@@ -107,50 +107,50 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 
 ### B.1 Playwright E2E suite
 
-- [ ] B.1.1 Add `tests/e2e/playwright.config.ts` + install `@playwright/test`
-- [ ] B.1.2 Scenario: create layout via prompt → streamed render → refresh action fires → toast shown
-- [ ] B.1.3 Scenario: error path renders `ErrorBoundary`
-- [ ] B.1.4 Scenario: self-healing repairs invalid tool result
-- [ ] B.1.5 Scenario: keyboard-only navigation (Tab, Enter, Space, Esc)
-- [ ] B.1.6 Add `e2e` job to `ci.yml` that starts engine + web, runs Playwright headless Chromium + WebKit
-- [ ] B.1.7 Upload Playwright report + traces as CI artifact
+- [x] B.1.1 Add `tests/e2e/playwright.config.ts` + install `@playwright/test`
+- [x] B.1.2 Scenario: create layout via prompt → streamed render → refresh action fires → toast shown (Verified in `layout-generation.spec.ts`)
+- [x] B.1.3 Scenario: error path renders `ErrorBoundary` (Verified in `layout-generation.spec.ts`)
+- [x] B.1.4 Scenario: self-healing repairs invalid tool result (Verified in `layout-generation.spec.ts`)
+- [x] B.1.5 Scenario: keyboard-only navigation (Tab, Enter, Space, Esc) (Verified in `accessibility.spec.ts`)
+- [x] B.1.6 Add `e2e` job to `ci.yml` that starts engine + web, runs Playwright headless Chromium + WebKit
+- [x] B.1.7 Upload Playwright report + traces as CI artifact
 
 ### B.2 Load tests (k6)
 
-- [ ] B.2.1 Add `tests/load/smoke.js` — 50 VUs × 30s validating `/api/ferroui/process` SSE
-- [ ] B.2.2 Add `tests/load/soak.js` — 200 VUs × 10 min for p95 < 5s validation
-- [ ] B.2.3 Add GitHub Action workflow `load.yml` triggered weekly + on-demand
-- [ ] B.2.4 Store k6 results as `tests/load/baseline.json` + compare drift
+- [x] B.2.1 Add `tests/load/smoke.js` — 50 VUs × 30s validating `/api/ferroui/process` SSE
+- [x] B.2.2 Add `tests/load/soak.js` — 200 VUs × 10 min for p95 < 5s validation
+- [x] B.2.3 Add GitHub Action workflow `load.yml` triggered weekly + on-demand
+- [x] B.2.4 Store k6 results as `tests/load/baseline.json` + compare drift
 
 ### B.3 Mutation testing (StrykerJS)
 
-- [ ] B.3.1 `pnpm -D add -w @stryker-mutator/core @stryker-mutator/vitest-runner`
-- [ ] B.3.2 Add `stryker.conf.mjs` scoped to `packages/engine` + `packages/schema`
-- [ ] B.3.3 Set mutation-score threshold: engine 70%, schema 85%
-- [ ] B.3.4 Add `stryker.yml` workflow on-demand + weekly
+- [x] B.3.1 `pnpm -D add -w stryker @stryker-mutator/core @stryker-mutator/vitest-runner` (Evaluated drift: used modern @stryker-mutator/core)
+- [x] B.3.2 Add `stryker.conf.mjs` scoped to `packages/engine` + `packages/schema`
+- [x] B.3.3 Set mutation-score threshold: engine 70%, schema 85%
+- [x] B.3.4 Add `stryker.yml` workflow on-demand + weekly
 
 ### B.4 Visual regression (Chromatic)
 
-- [ ] B.4.1 Bring up Storybook for `packages/registry` (see G.2)
-- [ ] B.4.2 Wire Chromatic in `ci.yml` as separate job
+- [x] B.4.1 Bring up Storybook for `packages/registry` (Added stories for Atoms, Molecules, Organisms)
+- [x] B.4.2 Wire Chromatic in `ci.yml` as separate job (Verified `chromatic.yml`)
 
 ### B.5 Contract tests for LLM providers (Pact)
 
-- [ ] B.5.1 Pact consumer tests capturing expected OpenAI/Anthropic/Google request shapes
-- [ ] B.5.2 Fixture replay against SDK versions matching `package.json`
+- [x] B.5.1 Pact consumer tests capturing expected OpenAI/Anthropic/Google request shapes
+- [x] B.5.2 Fixture replay against SDK versions matching `package.json`
 
 ### B.6 Chaos basics
 
-- [ ] B.6.1 Add Toxiproxy docker-compose for local chaos
-- [ ] B.6.2 Test: provider returns 429 → router failover verified
-- [ ] B.6.3 Test: Redis outage → in-memory fallback verified
-- [ ] B.6.4 Quarterly chaos drill doc template `docs/ops/chaos-drills/Q2-2026.md`
+- [x] B.6.1 Add Toxiproxy docker-compose for local chaos
+- [x] B.6.2 Test: provider returns 429 → router failover verified
+- [x] B.6.3 Test: Redis outage → in-memory fallback verified
+- [x] B.6.4 Quarterly chaos drill doc template `docs/ops/chaos-drills/Q2-2026.md`
 
 ### B.7 Accessibility E2E
 
-- [ ] B.7.1 Pa11y integration already scripted; wire into `ci.yml`
-- [ ] B.7.2 Playwright `@axe-core/playwright` across 5 representative layouts
-- [ ] B.7.3 Scripted NVDA narration capture (macOS skip; Windows runner only)
+- [x] B.7.1 Pa11y integration already scripted; wire into `ci.yml`
+- [x] B.7.2 Playwright `@axe-core/playwright` across 5 representative layouts
+- [x] B.7.3 Scripted NVDA narration capture (macOS skip; Windows runner only)
 
 ---
 
