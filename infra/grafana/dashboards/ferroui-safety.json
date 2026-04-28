@@ -1,0 +1,55 @@
+{
+  "description": "FerroUI Engine - Safety Metrics (C.3.3)",
+  "editable": true,
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "targets": [
+        {
+          "expr": "sum(rate(ferroui_safety_firewall_blocks_total[5m]))",
+          "legendFormat": "Firewall Blocks"
+        }
+      ],
+      "title": "Prompt Firewall Activity (Blocks/sec)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "targets": [
+        {
+          "expr": "sum(rate(ferroui_safety_pii_redactions_total[5m]))",
+          "legendFormat": "PII Redactions"
+        }
+      ],
+      "title": "PII Redaction Events",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 8 },
+      "id": 3,
+      "targets": [
+        {
+          "expr": "rate(ferroui_validation_hallucinations_total[5m])",
+          "legendFormat": "Hallucination Rate"
+        }
+      ],
+      "title": "Hallucination Rate",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "tags": ["ferroui", "safety"],
+  "templating": {
+    "list": [
+      { "name": "datasource", "query": "prometheus", "type": "datasource" }
+    ]
+  },
+  "title": "FerroUI Safety & Guardrails",
+  "uid": "ferroui-safety"
+}

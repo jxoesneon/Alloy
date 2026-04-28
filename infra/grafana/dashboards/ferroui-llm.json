@@ -1,0 +1,59 @@
+{
+  "description": "FerroUI Engine - LLM Metrics (C.3.2)",
+  "editable": true,
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "targets": [
+        {
+          "expr": "sum(rate(ferroui_llm_tokens_total{type=\"input\"}[5m]))",
+          "legendFormat": "Input Tokens"
+        },
+        {
+          "expr": "sum(rate(ferroui_llm_tokens_total{type=\"output\"}[5m]))",
+          "legendFormat": "Output Tokens"
+        }
+      ],
+      "title": "Token Throughput (Tokens/sec)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "targets": [
+        {
+          "expr": "sum(ferroui_llm_cost_total)",
+          "legendFormat": "Estimated Cost"
+        }
+      ],
+      "title": "Cumulative LLM Cost ($)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 8 },
+      "id": 3,
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, rate(ferroui_llm_duration_seconds_bucket[5m]))",
+          "legendFormat": "p95 Latency"
+        }
+      ],
+      "title": "LLM Latency (p95)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "tags": ["ferroui", "llm"],
+  "templating": {
+    "list": [
+      { "name": "datasource", "query": "prometheus", "type": "datasource" }
+    ]
+  },
+  "title": "FerroUI LLM Performance",
+  "uid": "ferroui-llm"
+}
