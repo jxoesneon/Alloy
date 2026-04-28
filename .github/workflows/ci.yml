@@ -251,9 +251,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Build engine Docker image
+      - name: Build Docker images
         run: |
           docker build -t ferroui-engine:test -f packages/engine/Dockerfile .
+          docker build -t ferroui-registry:test -f packages/registry/Dockerfile .
+          docker build -t ferroui-web:test -f apps/web/Dockerfile .
 
       - name: Run Trivy vulnerability scanner (image)
         uses: aquasecurity/trivy-action@master
@@ -262,7 +264,8 @@ jobs:
           format: 'sarif'
           output: 'trivy-image.sarif'
           severity: 'HIGH,CRITICAL'
-          exit-code: '0'  # Don't block, just report
+          exit-code: '1'  # Block on failures (CRITICAL/HIGH)
+          ignore-unfixed: true
 
       - name: Upload Trivy image scan to GitHub Security
         uses: github/codeql-action/upload-sarif@v3

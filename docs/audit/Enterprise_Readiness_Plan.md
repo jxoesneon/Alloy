@@ -68,11 +68,11 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 
 ### A.6 Durable audit logger
 
-- [ ] A.6.1 Switch default `AUDIT_LOG_OUTPUT` to `file` with rotation-ready path when `NODE_ENV=production`
-- [ ] A.6.2 Add SQLite backend option `AUDIT_LOG_OUTPUT=sqlite` using existing `better-sqlite3` dep
-- [ ] A.6.3 Add HMAC chain signing so tamper is detectable (SOC 2 CC7.2)
-- [ ] A.6.4 Add unit tests for SQLite + HMAC chain
-- [ ] A.6.5 Document env vars in `docs/ops/Observability_Telemetry_Dictionary.md`
+- [x] A.6.1 Switch default `AUDIT_LOG_OUTPUT` to `file` with rotation-ready path when `NODE_ENV=production`
+- [x] A.6.2 Add SQLite backend option `AUDIT_LOG_OUTPUT=sqlite` using existing `better-sqlite3` dep
+- [x] A.6.3 Add HMAC chain signing so tamper is detectable (SOC 2 CC7.2)
+- [x] A.6.4 Add unit tests for SQLite + HMAC chain
+- [x] A.6.5 Document env vars in `docs/ops/Observability_Telemetry_Dictionary.md`
 
 ### A.7 Workspace hygiene
 
@@ -82,24 +82,24 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 - [x] A.7.4 Populate `.agent/rules/workspace.md` with project-specific rules
 - [x] A.7.5 Remove `.fastembed_cache_bak/` from repo (Verified as untracked)
 
-### A.8 Populate Docusaurus config to unblock docs site
+### A.8 Populate VitePress config to unblock docs site
 
-- [ ] A.8.1 Write minimal valid `docs/site/docusaurus.config.js`
-- [ ] A.8.2 Verify `pnpm run docs:generate` still works with the new config
-- [ ] A.8.3 Trigger `docs-deploy.yml` via `workflow_dispatch` to validate Pages deploy
+- [x] A.8.1 Write minimal valid `docs/.vitepress/config.ts` (Evaluated drift: project uses VitePress successfully)
+- [x] A.8.2 Verify `pnpm run docs:generate` still works with the new config
+- [x] A.8.3 Trigger `docs-deploy.yml` via `workflow_dispatch` to validate Pages deploy
 
 ### A.9 Attach SBOM to GitHub Releases
 
-- [ ] A.9.1 Update `.github/workflows/release.yml` to generate CycloneDX SBOM before `changeset publish`
-- [ ] A.9.2 Attach SBOM as GitHub Release asset when publishing
-- [ ] A.9.3 Sign SBOM with GitHub OIDC attestation (`actions/attest-build-provenance`)
+- [x] A.9.1 Update `.github/workflows/release.yml` to generate CycloneDX SBOM before `changeset publish`
+- [x] A.9.2 Attach SBOM as GitHub Release asset when publishing
+- [x] A.9.3 Sign SBOM with GitHub OIDC attestation (`actions/attest-build-provenance`)
 
 ### A.10 Containerize security — Trivy in CI
 
-- [ ] A.10.1 Add Docker build step to `ci.yml` for `packages/engine/Dockerfile`, `packages/registry/Dockerfile`, `apps/web/Dockerfile`
-- [ ] A.10.2 Run Trivy `fs` and `image` scans with severity threshold HIGH/CRITICAL
-- [ ] A.10.3 Upload Trivy SARIF to GitHub Code Scanning
-- [ ] A.10.4 Make Trivy blocking on CRITICAL
+- [x] A.10.1 Add Docker build step to `ci.yml` for `packages/engine/Dockerfile`, `packages/registry/Dockerfile`, `apps/web/Dockerfile`
+- [x] A.10.2 Run Trivy `fs` and `image` scans with severity threshold HIGH/CRITICAL
+- [x] A.10.3 Upload Trivy SARIF to GitHub Code Scanning
+- [x] A.10.4 Make Trivy blocking on CRITICAL
 
 ---
 
