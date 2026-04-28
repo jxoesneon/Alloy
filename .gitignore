@@ -81,7 +81,6 @@ web_final_test.log
 web_v3.log
 
 # Agent rules
-.agent/
 superpowers/
 
 # Docs site build output

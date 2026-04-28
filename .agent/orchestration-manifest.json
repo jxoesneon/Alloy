@@ -1,0 +1,26 @@
+{
+  "project": "FerroUI",
+  "version": "1.0.0",
+  "type": "monorepo",
+  "packageManager": "pnpm",
+  "frameworks": ["React 19", "Express 5", "Tauri", "Vite 8"],
+  "standards": {
+    "node": ">=25",
+    "coverage_floor": 80,
+    "mutation_floor": 60,
+    "security": "blocking"
+  },
+  "structure": {
+    "apps": ["web", "desktop", "edge", "playground"],
+    "packages": [
+      "engine",
+      "registry",
+      "schema",
+      "shared",
+      "telemetry",
+      "tools",
+      "i18n",
+      "config"
+    ]
+  }
+}

@@ -4,13 +4,13 @@
 const config = {
   // Use Vitest test runner
   testRunner: 'vitest',
+  plugins: ['@stryker-mutator/vitest-runner'],
   
   // Target packages for mutation testing
   mutate: [
-    'packages/engine/src/**/*.ts',
-    '!packages/engine/src/**/*.test.ts',
-    'packages/schema/src/**/*.ts',
-    '!packages/schema/src/**/*.test.ts',
+    'src/**/*.ts',
+    '!src/**/*.test.ts',
+    '!src/**/__tests__/**/*.ts',
   ],
   
   // Thresholds (B.3.3)
