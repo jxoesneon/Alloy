@@ -23,13 +23,13 @@ COPY packages/i18n/package.json ./packages/i18n/
 COPY packages/registry/package.json ./packages/registry/
 COPY apps/web/package.json ./apps/web/
 
-# Install dependencies (only production for final stage, but need all for build)
+# Install dependencies
 RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the source
 COPY . .
 
-# Build all packages
+# Build engine and its dependencies
 RUN pnpm --filter=@ferroui/engine... build
 
 # Runtime stage
@@ -45,14 +45,14 @@ ENV NODE_ENV=production
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/pnpm-lock.yaml ./
 COPY --from=builder /app/pnpm-workspace.yaml ./
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/packages/engine/package.json ./packages/engine/
 COPY --from=builder /app/packages/engine/dist ./packages/engine/dist
-COPY --from=builder /app/packages/engine/node_modules ./packages/engine/node_modules
-COPY --from=builder /app/node_modules ./node_modules
-
-# Also copy dependent packages if not bundled
 COPY --from=builder /app/packages/schema/dist ./packages/schema/dist
 COPY --from=builder /app/packages/telemetry/dist ./packages/telemetry/dist
+COPY --from=builder /app/packages/registry/dist ./packages/registry/dist
+COPY --from=builder /app/packages/i18n/dist ./packages/i18n/dist
+COPY --from=builder /app/packages/tools/dist ./packages/tools/dist
 
 EXPOSE 4000
 

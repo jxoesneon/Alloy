@@ -27,7 +27,7 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the source
 COPY . .
 
-# Build all packages
+# Build registry and its dependencies
 RUN pnpm --filter=@ferroui/registry... build
 
 # Runtime stage
@@ -46,14 +46,11 @@ RUN npm install -g pnpm@10.33.0
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/pnpm-lock.yaml ./
 COPY --from=builder /app/pnpm-workspace.yaml ./
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/packages/registry/package.json ./packages/registry/
 COPY --from=builder /app/packages/registry/dist ./packages/registry/dist
-COPY --from=builder /app/packages/registry/node_modules ./packages/registry/node_modules
-COPY --from=builder /app/node_modules ./node_modules
-
-# Also copy dependent packages if not bundled
 COPY --from=builder /app/packages/schema/dist ./packages/schema/dist
-COPY --from=builder /app/packages/telemetry/dist ./packages/telemetry/dist
+COPY --from=builder /app/packages/i18n/dist ./packages/i18n/dist
 
 EXPOSE 3002
 
