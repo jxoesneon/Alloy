@@ -6,10 +6,8 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-# Enable pnpm
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+# Install pnpm
+RUN npm install -g pnpm@10.33.0
 
 # Copy root configurations
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc* ./
@@ -41,10 +39,8 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat
 ENV NODE_ENV=production
 
-# Enable pnpm
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+# Install pnpm
+RUN npm install -g pnpm@10.33.0
 
 # Copy built files and production dependencies from builder
 COPY --from=builder /app/package.json ./

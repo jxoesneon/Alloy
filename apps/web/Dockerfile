@@ -1,10 +1,18 @@
 # Build stage
-FROM node:22-alpine AS builder
+FROM node:25-alpine AS builder
+
+# Install build dependencies
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-# Copy root package.json and workspace package.json files
-COPY package.json package-lock.json* ./
+# Install pnpm
+RUN npm install -g pnpm@10.33.0
+
+# Copy root configurations
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc* ./
+
+# Copy all package.json files for workspace-aware install
 COPY packages/engine/package.json ./packages/engine/
 COPY packages/schema/package.json ./packages/schema/
 COPY packages/telemetry/package.json ./packages/telemetry/
@@ -14,13 +22,13 @@ COPY packages/registry/package.json ./packages/registry/
 COPY apps/web/package.json ./apps/web/
 
 # Install dependencies
-RUN npm install
+RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the source
 COPY . .
 
 # Build all packages and the web app
-RUN npm run build
+RUN pnpm -r run build --filter=web...
 
 # Runtime stage
 FROM nginx:alpine
