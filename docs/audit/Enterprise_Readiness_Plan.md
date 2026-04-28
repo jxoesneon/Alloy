@@ -306,13 +306,13 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 
 ### E.7 Trademark & commercial policy
 
-- [ ] E.7.1 `TRADEMARK.md` describing logo / name usage
+- [x] E.7.1 `TRADEMARK.md` describing logo / name usage (Implemented)
 - [ ] E.7.2 Public pricing page scaffold
 
 ### E.8 CLA bot
 
-- [ ] E.8.1 Add EasyCLA / CLA Assistant Lite action
-- [ ] E.8.2 Draft CLA text in `.github/CLA.md`
+- [x] E.8.1 Add EasyCLA / CLA Assistant Lite action (Implemented `cla.yml`)
+- [x] E.8.2 Draft CLA text in `.github/CLA.md` (Implemented)
 
 ---
 
