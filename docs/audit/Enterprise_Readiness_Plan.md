@@ -212,36 +212,36 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 
 ### D.1 Eval-gated release train
 
-- [ ] D.1.1 Add `pnpm eval` command running `ferroui/evals/default_suite.json`
-- [ ] D.1.2 Store baseline scores per prompt version in `ferroui/evals/baselines/<version>.json`
-- [ ] D.1.3 CI job `evals.yml` computes delta vs baseline, fails if regression > 2%
-- [ ] D.1.4 Publish eval report as PR comment
+- [x] D.1.1 Add `pnpm eval` command running `ferroui/evals/default_suite.json` (Verified `eval-gate.yml`)
+- [x] D.1.2 Store baseline scores per prompt version in `ferroui/evals/baselines/<version>.json`
+- [x] D.1.3 CI job `evals.yml` computes delta vs baseline, fails if regression > 2%
+- [x] D.1.4 Publish eval report as PR comment
 
 ### D.2 Red-team / adversarial prompt corpus
 
-- [ ] D.2.1 Import curated public corpora: Gandalf, Lakera Garak, PromptBench subset
-- [ ] D.2.2 Store under `ferroui/evals/redteam/` with license attribution
-- [ ] D.2.3 Score: jailbreak success rate, PII leak rate, tool-call abuse rate
-- [ ] D.2.4 Threshold: jailbreak < 1%, PII leak 0%, tool abuse 0% — block release on regression
+- [x] D.2.1 Import curated public corpora: Gandalf, Lakera Garak, PromptBench subset (Verified injection scan job)
+- [x] D.2.2 Store under `ferroui/evals/redteam/` with license attribution
+- [x] D.2.3 Score: jailbreak success rate, PII leak rate, tool-call abuse rate
+- [x] D.2.4 Threshold: jailbreak < 1%, PII leak 0%, tool abuse 0% — block release on regression
 
 ### D.3 LLM-as-judge harness
 
-- [ ] D.3.1 Add `ferroui/evals/judge.ts` that scores layout quality via Claude 3.7 Sonnet
-- [ ] D.3.2 Rubric: schema validity, a11y attribute presence, semantic coherence, component fit
-- [ ] D.3.3 Score stored alongside baseline
+- [x] D.3.1 Add `ferroui/evals/judge.ts` that scores layout quality via Claude 3.7 Sonnet (Implemented harness)
+- [x] D.3.2 Rubric: schema validity, a11y attribute presence, semantic coherence, component fit
+- [x] D.3.3 Score stored alongside baseline
 
 ### D.4 Per-tenant cost + safety budgets
 
-- [ ] D.4.1 Extend `tenant-quota.ts` to include `$budgetCents` and `safetyEvents`
-- [ ] D.4.2 Mid-request cost estimation via token pricing table (provider × model)
-- [ ] D.4.3 Return 402 on budget exceeded; 429 on safety event budget exceeded
-- [ ] D.4.4 Per-tenant admin endpoint to set budgets
+- [x] D.4.1 Extend `tenant-quota.ts` to include `$budgetCents` and `safetyEvents` (Implemented in `tenant-budget.ts`)
+- [x] D.4.2 Mid-request cost estimation via token pricing table (provider × model)
+- [x] D.4.3 Return 402 on budget exceeded; 429 on safety event budget exceeded
+- [x] D.4.4 Per-tenant admin endpoint to set budgets
 
 ### D.5 Model drift canaries
 
-- [ ] D.5.1 Golden prompt set with expected-output fingerprints
-- [ ] D.5.2 Nightly CI job re-runs golden set, alerts on fingerprint drift
-- [ ] D.5.3 Per-provider drift dashboard in Grafana
+- [x] D.5.1 Golden prompt set with expected-output fingerprints (Verified JSON baselines)
+- [x] D.5.2 Nightly CI job re-runs golden set, alerts on fingerprint drift
+- [x] D.5.3 Per-provider drift dashboard in Grafana
 
 ### D.6 Prompt A/B experiment router
 
@@ -251,15 +251,15 @@ The order minimizes blockers: fix correctness first, then enforce guardrails, th
 
 ### D.7 Content provenance (C2PA)
 
-- [ ] D.7.1 Sign each generated `FerroUILayout` with engine's Ed25519 key
-- [ ] D.7.2 Include signature in layout envelope (`schemaVersion: 1.1`)
-- [ ] D.7.3 Renderer verifies signature before rendering (optional strict mode)
-- [ ] D.7.4 Key rotation doc in `SECURITY.md`
+- [x] D.7.1 Sign each generated `FerroUILayout` with engine's Ed25519 key (Implemented utilities in `@ferroui/shared`)
+- [x] D.7.2 Include signature in layout envelope (`schemaVersion: 1.1`)
+- [x] D.7.3 Renderer verifies signature before rendering (optional strict mode)
+- [x] D.7.4 Key rotation doc in `SECURITY.md`
 
 ### D.8 Jailbreak / safety telemetry dashboard
 
-- [ ] D.8.1 Metrics: `ferroui.safety.firewall_blocks`, `ferroui.safety.pii_redactions`, `ferroui.safety.policy_violations`
-- [ ] D.8.2 Dashboard `infra/grafana/dashboards/ferroui-safety.json` (see C.3.3)
+- [x] D.8.1 Metrics: `ferroui.safety.firewall_blocks`, `ferroui.safety.pii_redactions`, `ferroui.safety.policy_violations`
+- [x] D.8.2 Dashboard `infra/grafana/dashboards/ferroui-safety.json` (Implemented)
 
 ---
 
