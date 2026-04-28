@@ -1,4 +1,4 @@
-name: FerroUI CI
+name: FerroUI Main CI
 
 on:
   push:
