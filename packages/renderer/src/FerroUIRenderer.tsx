@@ -1,6 +1,10 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import type { FerroUIComponent, FerroUILayout, LayoutMetadata } from '@ferroui/schema';
-import { registry } from '@ferroui/registry';
+import React, { useMemo, useState, useEffect } from "react";
+import type {
+  FerroUIComponent,
+  FerroUILayout,
+  LayoutMetadata,
+} from "@ferroui/schema";
+import { registry } from "@ferroui/registry";
 
 export interface FerroUIRendererProps {
   /** The root layout object or root component tree. */
@@ -10,7 +14,10 @@ export interface FerroUIRendererProps {
   /** If true, enables signature verification. */
   strictProvenance?: boolean;
   /** Optional fallback component when a type is not found in the registry. */
-  fallback?: React.ComponentType<{ type: string; props?: Record<string, unknown> }>;
+  fallback?: React.ComponentType<{
+    type: string;
+    props?: Record<string, unknown>;
+  }>;
   /** Optional override map: type → React component (takes priority over registry). */
   overrides?: Record<string, React.ComponentType<any>>;
 }
@@ -21,7 +28,13 @@ export interface FerroUIRendererProps {
 const DefaultFallback: React.FC<{ type: string }> = ({ type }) => (
   <div
     role="alert"
-    style={{ padding: '8px 12px', border: '1px dashed #d93025', borderRadius: 4, color: '#d93025', fontSize: 13 }}
+    style={{
+      padding: "8px 12px",
+      border: "1px dashed #d93025",
+      borderRadius: 4,
+      color: "#d93025",
+      fontSize: 13,
+    }}
   >
     Unknown component: <code>{type}</code>
   </div>
@@ -30,32 +43,34 @@ const DefaultFallback: React.FC<{ type: string }> = ({ type }) => (
 /**
  * Signature verification badge.
  */
-const ProvenanceBadge: React.FC<{ verified: boolean | null }> = ({ verified }) => {
+const ProvenanceBadge: React.FC<{ verified: boolean | null }> = ({
+  verified,
+}) => {
   if (verified === null) return null;
 
   return (
-    <div 
-      className={`ferroui-provenance-badge ${verified ? 'verified' : 'unverified'}`}
+    <div
+      className={`ferroui-provenance-badge ${verified ? "verified" : "unverified"}`}
       style={{
-        position: 'absolute',
+        position: "absolute",
         top: 8,
         right: 8,
-        fontSize: '10px',
-        padding: '2px 6px',
-        borderRadius: '12px',
-        backgroundColor: verified ? '#e6fffa' : '#fff5f5',
-        color: verified ? '#2c7a7b' : '#c53030',
-        border: `1px solid ${verified ? '#38b2ac' : '#feb2b2'}`,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px',
+        fontSize: "10px",
+        padding: "2px 6px",
+        borderRadius: "12px",
+        backgroundColor: verified ? "#e6fffa" : "#fff5f5",
+        color: verified ? "#2c7a7b" : "#c53030",
+        border: `1px solid ${verified ? "#38b2ac" : "#feb2b2"}`,
+        display: "flex",
+        alignItems: "center",
+        gap: "4px",
         zIndex: 10,
         fontWeight: 600,
-        pointerEvents: 'none'
+        pointerEvents: "none",
       }}
     >
-      <span style={{ fontSize: '12px' }}>{verified ? '✓' : '⚠'}</span>
-      {verified ? 'Provenance Verified' : 'Provenance Unverified'}
+      <span style={{ fontSize: "12px" }}>{verified ? "✓" : "⚠"}</span>
+      {verified ? "Provenance Verified" : "Provenance Unverified"}
     </div>
   );
 };
@@ -75,39 +90,43 @@ async function verifyLayoutSignature(layout: FerroUILayout): Promise<boolean> {
         ...metadata,
         signature: undefined,
         publicKey: undefined,
-      }
+      },
     };
     const encodedData = new TextEncoder().encode(JSON.stringify(dataToVerify));
 
     // 2. Prepare Public Key (strip PEM headers)
     const pem = metadata.publicKey;
     const rawPublicKey = pem
-      .replace(/-----BEGIN PUBLIC KEY-----/g, '')
-      .replace(/-----END PUBLIC KEY-----/g, '')
-      .replace(/\s/g, '');
-    
+      .replace(/-----BEGIN PUBLIC KEY-----/g, "")
+      .replace(/-----END PUBLIC KEY-----/g, "")
+      .replace(/\s/g, "");
+
     // b64 to binary
-    const binaryPublicKey = Uint8Array.from(atob(rawPublicKey), c => c.charCodeAt(0));
-    const binarySignature = Uint8Array.from(atob(metadata.signature), c => c.charCodeAt(0));
+    const binaryPublicKey = Uint8Array.from(atob(rawPublicKey), (c) =>
+      c.charCodeAt(0),
+    );
+    const binarySignature = Uint8Array.from(atob(metadata.signature), (c) =>
+      c.charCodeAt(0),
+    );
 
     // 3. Import Key
     const cryptoKey = await window.crypto.subtle.importKey(
-      'spki',
+      "spki",
       binaryPublicKey,
-      { name: 'Ed25519' },
+      { name: "Ed25519" },
       true,
-      ['verify']
+      ["verify"],
     );
 
     // 4. Verify
     return await window.crypto.subtle.verify(
-      { name: 'Ed25519' },
+      { name: "Ed25519" },
       cryptoKey,
       binarySignature,
-      encodedData
+      encodedData,
     );
   } catch (err) {
-    console.error('[FerroUI] Signature verification error:', err);
+    console.error("[FerroUI] Signature verification error:", err);
     return false;
   }
 }
@@ -119,7 +138,10 @@ async function verifyLayoutSignature(layout: FerroUILayout): Promise<boolean> {
 function resolveComponent(
   type: string,
   overrides?: Record<string, React.ComponentType<any>>,
-  fallback?: React.ComponentType<{ type: string; props?: Record<string, unknown> }>,
+  fallback?: React.ComponentType<{
+    type: string;
+    props?: Record<string, unknown>;
+  }>,
 ): React.ComponentType<any> {
   // 1. Check overrides first
   if (overrides?.[type]) return overrides[type];
@@ -138,16 +160,19 @@ function resolveComponent(
 const RenderNode: React.FC<{
   node: FerroUIComponent;
   overrides?: Record<string, React.ComponentType<any>>;
-  fallback?: React.ComponentType<{ type: string; props?: Record<string, unknown> }>;
+  fallback?: React.ComponentType<{
+    type: string;
+    props?: Record<string, unknown>;
+  }>;
   path?: string;
-}> = ({ node, overrides, fallback, path = 'root' }) => {
+}> = ({ node, overrides, fallback, path = "root" }) => {
   // --- State Machine Runtime (RFC-001) ---
   const [currentState, setCurrentState] = useState(node.stateMachine?.initial);
 
   // Listen for state update events for this component
   useEffect(() => {
     if (!node.id) return;
-    
+
     const handleStateUpdate = (e: any) => {
       const { componentId, newState } = e.detail;
       if (componentId === node.id && node.stateMachine?.states[newState]) {
@@ -155,8 +180,9 @@ const RenderNode: React.FC<{
       }
     };
 
-    window.addEventListener('ferroui-state-update', handleStateUpdate);
-    return () => window.removeEventListener('ferroui-state-update', handleStateUpdate);
+    window.addEventListener("ferroui-state-update", handleStateUpdate);
+    return () =>
+      window.removeEventListener("ferroui-state-update", handleStateUpdate);
   }, [node.id, node.stateMachine]);
 
   const activeNode = useMemo(() => {
@@ -172,45 +198,62 @@ const RenderNode: React.FC<{
   // Build props: merge node.props + aria + action + id
   const componentProps: Record<string, unknown> = {
     ...activeNode.props,
-    key: activeNode.id ?? path,
   };
+
+  const nodeKey = activeNode.id ?? path;
 
   // Pass ARIA props if present
   if (activeNode.aria) {
-    if (activeNode.aria.label) componentProps['aria-label'] = activeNode.aria.label;
-    if (activeNode.aria.labelledBy) componentProps['aria-labelledby'] = activeNode.aria.labelledBy;
-    if (activeNode.aria.describedBy) componentProps['aria-describedby'] = activeNode.aria.describedBy;
-    if (activeNode.aria.hidden !== undefined) componentProps['aria-hidden'] = activeNode.aria.hidden;
-    if (activeNode.aria.live) componentProps['aria-live'] = activeNode.aria.live;
-    if (activeNode.aria.role) componentProps['role'] = activeNode.aria.role;
+    if (activeNode.aria.label)
+      componentProps["aria-label"] = activeNode.aria.label;
+    if (activeNode.aria.labelledBy)
+      componentProps["aria-labelledby"] = activeNode.aria.labelledBy;
+    if (activeNode.aria.describedBy)
+      componentProps["aria-describedby"] = activeNode.aria.describedBy;
+    if (activeNode.aria.hidden !== undefined)
+      componentProps["aria-hidden"] = activeNode.aria.hidden;
+    if (activeNode.aria.live)
+      componentProps["aria-live"] = activeNode.aria.live;
+    if (activeNode.aria.role) componentProps["role"] = activeNode.aria.role;
   }
 
   // Pass action as a data attribute for the action handler layer
   if (activeNode.action) {
-    componentProps['data-ferroui-action'] = JSON.stringify(activeNode.action);
+    componentProps["data-ferroui-action"] = JSON.stringify(activeNode.action);
   }
 
   // For unknown components, pass the type so the fallback can display it
-  if (!registry.getComponentEntry(activeNode.type) && !overrides?.[activeNode.type]) {
-    componentProps['type'] = activeNode.type;
+  if (
+    !registry.getComponentEntry(activeNode.type) &&
+    !overrides?.[activeNode.type]
+  ) {
+    componentProps["type"] = activeNode.type;
   }
 
   // Recursively render children
-  const children = activeNode.children?.map((child: FerroUIComponent, index: number) => (
-    <RenderNode
-      key={child.id ?? `${path}.${index}`}
-      node={child}
-      overrides={overrides}
-      fallback={fallback}
-      path={`${path}.${index}`}
-    />
-  ));
+  const children = activeNode.children?.map(
+    (child: FerroUIComponent, index: number) => (
+      <RenderNode
+        key={child.id ?? `${path}.${index}`}
+        node={child}
+        overrides={overrides}
+        fallback={fallback}
+        path={`${path}.${index}`}
+      />
+    ),
+  );
 
-  return <Component {...componentProps}>{children}</Component>;
+  return (
+    <Component key={nodeKey} {...componentProps}>
+      {children}
+    </Component>
+  );
 };
 
 const isFullLayout = (layout: any): layout is FerroUILayout => {
-  return layout && layout.requestId !== undefined && layout.layout !== undefined;
+  return (
+    layout && layout.requestId !== undefined && layout.layout !== undefined
+  );
 };
 
 /**
@@ -224,12 +267,12 @@ const isFullLayout = (layout: any): layout is FerroUILayout => {
  * <FerroUIRenderer layout={ferrouiLayout} strictProvenance />
  * ```
  */
-export const FerroUIRenderer: React.FC<FerroUIRendererProps> = ({ 
-  layout, 
+export const FerroUIRenderer: React.FC<FerroUIRendererProps> = ({
+  layout,
   metadata: metadataProp,
   strictProvenance,
-  fallback, 
-  overrides 
+  fallback,
+  overrides,
 }) => {
   const memoizedOverrides = useMemo(() => overrides, [overrides]);
   const [isVerified, setIsVerified] = useState<boolean | null>(null);
@@ -237,11 +280,11 @@ export const FerroUIRenderer: React.FC<FerroUIRendererProps> = ({
   const fullLayout = useMemo(() => {
     if (isFullLayout(layout)) return layout;
     return {
-      schemaVersion: '1.1.0',
-      requestId: '00000000-0000-0000-0000-000000000000',
-      locale: 'en-US',
+      schemaVersion: "1.1.0",
+      requestId: "00000000-0000-0000-0000-000000000000",
+      locale: "en-US",
       layout: layout as FerroUIComponent,
-      metadata: metadataProp
+      metadata: metadataProp,
     } as FerroUILayout;
   }, [layout, metadataProp]);
 
@@ -259,9 +302,17 @@ export const FerroUIRenderer: React.FC<FerroUIRendererProps> = ({
   }, [fullLayout, strictProvenance]);
 
   return (
-    <div className="ferroui-renderer" data-ferroui-root style={{ position: 'relative' }}>
+    <div
+      className="ferroui-renderer"
+      data-ferroui-root
+      style={{ position: "relative" }}
+    >
       {strictProvenance && <ProvenanceBadge verified={isVerified} />}
-      <RenderNode node={fullLayout.layout} overrides={memoizedOverrides} fallback={fallback} />
+      <RenderNode
+        node={fullLayout.layout}
+        overrides={memoizedOverrides}
+        fallback={fallback}
+      />
     </div>
   );
 };
