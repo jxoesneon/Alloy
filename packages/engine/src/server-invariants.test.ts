@@ -25,15 +25,9 @@ describe("assertProductionInvariants", () => {
   it('throws in production when SKIP_AUTH is "true"', () => {
     expect(() =>
       assertProductionInvariants({
-<<<<<<< HEAD
-        NODE_ENV: 'production',
-        SKIP_AUTH: 'true',
-        JWT_SECRET: 'this-is-a-32-char-secret-padding-000', // gitleaks:allow
-=======
         NODE_ENV: "production",
         SKIP_AUTH: "true",
         JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }),
     ).toThrow(/SKIP_AUTH is enabled/);
   });
@@ -41,15 +35,9 @@ describe("assertProductionInvariants", () => {
   it('throws in production when SKIP_AUTH is "1"', () => {
     expect(() =>
       assertProductionInvariants({
-<<<<<<< HEAD
-        NODE_ENV: 'production',
-        SKIP_AUTH: '1',
-        JWT_SECRET: 'this-is-a-32-char-secret-padding-000', // gitleaks:allow
-=======
         NODE_ENV: "production",
         SKIP_AUTH: "1",
         JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }),
     ).toThrow(/SKIP_AUTH is enabled/);
   });
@@ -74,13 +62,8 @@ describe("assertProductionInvariants", () => {
   it("accepts a well-formed production configuration", () => {
     expect(() =>
       assertProductionInvariants({
-<<<<<<< HEAD
-        NODE_ENV: 'production',
-        JWT_SECRET: 'this-is-a-32-char-secret-padding-000', // gitleaks:allow
-=======
         NODE_ENV: "production",
         JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }),
     ).not.toThrow();
   });

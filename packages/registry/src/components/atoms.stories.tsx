@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Text, Icon, Badge, Button } from "./atoms.js";
+import { Text, Icon, Badge } from "./atoms.js";
 
 const meta: Meta<typeof Text> = {
   title: "Atoms/Text",

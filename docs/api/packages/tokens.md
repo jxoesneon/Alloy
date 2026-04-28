@@ -11,17 +11,9 @@ Design token pipeline with Style Dictionary outputs.
 
 ## Generated API
 
-<<<<<<< HEAD
-## Generated API
-
-**@ferroui/tokens**
-
-***
-=======
 **@ferroui/tokens**
 
 ---
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/tokens
 
@@ -62,11 +54,7 @@ Import tokens for use in CSS or JS.
 ### JavaScript/TypeScript
 
 ```typescript
-<<<<<<< HEAD
-import { tokens } from '@ferroui/tokens';
-=======
 import { tokens } from "@ferroui/tokens";
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 const style = {
   backgroundColor: tokens.semantic.bg.primary,
@@ -89,7 +77,3 @@ N/A
 ```css
 @import "@ferroui/tokens/dist/variables.css";
 ```
-<<<<<<< HEAD
-
-=======
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)

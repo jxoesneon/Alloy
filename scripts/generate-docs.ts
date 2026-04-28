@@ -328,11 +328,7 @@ async function writeToolsPage(): Promise<void> {
       },
       estimateTokens: () => 0,
     };
-<<<<<<< HEAD
-     
-=======
 
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     const _engine = new FerroUIEngine(stubProvider as never);
   } catch (err) {
     console.warn("Could not instantiate engine for tool discovery:", err);
@@ -586,20 +582,6 @@ const APP_METADATA: Array<{
   },
 ];
 
-<<<<<<< HEAD
-async function writePackageStub(pkg: typeof PACKAGE_METADATA[number]): Promise<void> {
-  const target = path.join(API_DIR, 'packages', `${pkg.pkg}.md`);
-  const generatedDir = path.join(API_DIR, 'packages', 'typedoc_api', pkg.pkg);
-  let typedocBlock: string;
-  try {
-    const readme = path.join(generatedDir, 'README.md');
-    let content = await fs.readFile(readme, 'utf-8');
-    
-    // Rewrite relative Markdown links to point to the subfolder
-    // [Text](path/file.md) -> [Text](typedoc_api/pkgname/path/file.md)
-    content = content.replace(/\[([^\]]+)\]\((?!https?:\/\/|\/)([^)]+)\)/g, `[$1](typedoc_api/${pkg.pkg}/$2)`);
-    
-=======
 async function writePackageStub(
   pkg: (typeof PACKAGE_METADATA)[number],
 ): Promise<void> {
@@ -617,7 +599,6 @@ async function writePackageStub(
       `[$1](typedoc_api/${pkg.pkg}/$2)`,
     );
 
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     typedocBlock = `\n\n## Generated API\n\n${content}\n`;
   } catch {
     typedocBlock =
@@ -662,15 +643,6 @@ ${app.description}
 /* -------------------------------------------------------------------------- */
 
 async function main(): Promise<void> {
-<<<<<<< HEAD
-  console.log('> Generating Component API reference...');
-  await writeComponentsPage();
-  console.log('> Generating Tool API reference...');
-  await writeToolsPage();
-  console.log('> Generating FerroUILayout schema page...');
-  await writeSchemaPage();
-  console.log('> Writing package and app stubs...');
-=======
   console.log("> Generating Component API reference...");
   await writeComponentsPage();
   console.log("> Generating Tool API reference...");
@@ -678,24 +650,15 @@ async function main(): Promise<void> {
   console.log("> Generating FerroUILayout schema page...");
   await writeSchemaPage();
   console.log("> Writing package and app stubs...");
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   await Promise.all([
     ...PACKAGE_METADATA.map((pkg) => writePackageStub(pkg)),
     ...APP_METADATA.map((app) => writeAppStub(app)),
   ]);
-<<<<<<< HEAD
-  console.log('OK Documentation generation complete.');
-}
-
-main().catch((err) => {
-  console.error('X Documentation generation failed.');
-=======
   console.log("OK Documentation generation complete.");
 }
 
 main().catch((err) => {
   console.error("X Documentation generation failed.");
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   console.error(err);
   process.exit(1);
 });

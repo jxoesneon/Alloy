@@ -50,13 +50,8 @@ export const server = new Server(
 // ── Provider selection ────────────────────────────────────────────────────────
 
 export function getProvider() {
-<<<<<<< HEAD
-  const p = process.env.LLM_PROVIDER ?? 'anthropic';
-  return p === 'openai' ? new OpenAIProvider() : new AnthropicProvider();
-=======
   const p = process.env.LLM_PROVIDER ?? "anthropic";
   return p === "openai" ? new OpenAIProvider() : new AnthropicProvider();
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 }
 
 // ── Tool definitions ──────────────────────────────────────────────────────────
@@ -234,12 +229,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       };
     }
 
-<<<<<<< HEAD
-    case 'ferroui_list_tools': {
-      const parsed = z.object({ permissions: z.array(z.string()).optional() }).safeParse(args ?? {});
-      /* v8 ignore next */
-      const permissions: string[] = parsed.success ? (parsed.data.permissions ?? []) : [];
-=======
     case "ferroui_list_tools": {
       const parsed = z
         .object({ permissions: z.array(z.string()).optional() })
@@ -248,7 +237,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const permissions: string[] = parsed.success
         ? (parsed.data.permissions ?? [])
         : [];
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       const tools = getToolsForUser(permissions);
       return {
         content: [{ type: "text", text: JSON.stringify(tools, null, 2) }],
@@ -300,13 +288,6 @@ server.setRequestHandler(ListResourcesRequestSchema, async () => ({
 server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
   const { uri } = request.params;
 
-<<<<<<< HEAD
-  if (uri === 'ferroui://schema') {
-    const { FerroUILayoutSchema } = await import('@ferroui/schema');
-    const { z } = await import('zod');
-    /* v8 ignore next 2 */
-    const jsonSchema = { title: 'FerroUILayout', ...z.toJSONSchema(FerroUILayoutSchema) };
-=======
   if (uri === "ferroui://schema") {
     const { FerroUILayoutSchema } = await import("@ferroui/schema");
     const { z } = await import("zod");
@@ -315,7 +296,6 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
       title: "FerroUILayout",
       ...z.toJSONSchema(FerroUILayoutSchema),
     };
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     return {
       contents: [
         {
@@ -359,15 +339,9 @@ export async function main() {
 }
 
 /* v8 ignore next 6 */
-<<<<<<< HEAD
-if (process.env.NODE_ENV !== 'test') {
-  main().catch((err) => {
-    console.error('[FerroUI MCP] Fatal error:', err);
-=======
 if (process.env.NODE_ENV !== "test") {
   main().catch((err) => {
     console.error("[FerroUI MCP] Fatal error:", err);
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     process.exit(1);
   });
 }

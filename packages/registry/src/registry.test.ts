@@ -25,24 +25,7 @@ describe("ComponentRegistry", () => {
     expect(entry?.tier).toBe(ComponentTier.ATOM);
   });
 
-<<<<<<< HEAD
-  it('silently ignores duplicate version registration without force', () => {
-    registry.registerComponent({ name: 'Dup', version: 1, tier: ComponentTier.ATOM, component: () => null, schema: z.object({}) });
-    registry.registerComponent({ name: 'Dup', version: 1, tier: ComponentTier.ATOM, component: () => null, schema: z.object({}) });
-    expect(registry.getComponentEntry('Dup')?.version).toBe(1);
-  });
-
-  it('updates latest version when the current latest is unregistered', () => {
-    registry.registerComponent({ name: 'Multi', version: 1, tier: ComponentTier.ATOM, component: () => null, schema: z.object({}) });
-    registry.registerComponent({ name: 'Multi', version: 2, tier: ComponentTier.ATOM, component: () => null, schema: z.object({}) });
-    registry.unregisterComponent('Multi@2');
-    expect((registry as any).latestVersions.get('Multi')).toBe(1);
-  });
-
-  it('should enforce Atomic Design rules during validation', () => {
-=======
   it("silently ignores duplicate version registration without force", () => {
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     registry.registerComponent({
       name: "Dup",
       version: 1,

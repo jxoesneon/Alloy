@@ -1,37 +1,20 @@
-<<<<<<< HEAD
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { AuditLogger, AuditEventType } from './audit-logger.js';
-
-vi.mock('better-sqlite3', () => {
-=======
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { AuditLogger, AuditEventType } from "./audit-logger.js";
 
 vi.mock("better-sqlite3", () => {
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   return {
     default: class MockDatabase {
       rows: any[] = [];
       id = 1;
-<<<<<<< HEAD
-      
-      constructor(path: string) {
-        if (path.includes('invalid')) throw new Error('Cannot open database');
-=======
 
       constructor(path: string) {
         if (path.includes("invalid")) throw new Error("Cannot open database");
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       }
 
       prepare(sql: string) {
         return {
           run: (...args: any[]) => {
-<<<<<<< HEAD
-            if (sql.includes('INSERT INTO audit_log')) {
-=======
             if (sql.includes("INSERT INTO audit_log")) {
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
               this.rows.push({
                 id: this.id++,
                 timestamp: args[0],
@@ -40,35 +23,17 @@ vi.mock("better-sqlite3", () => {
                 prev_hash: args[3],
                 entry_hash: args[4],
               });
-<<<<<<< HEAD
-            } else if (sql.includes('UPDATE')) {
-               if (sql.includes('event_json')) this.rows[0].event_json = 'tampered';
-               if (sql.includes('prev_hash')) this.rows[1].prev_hash = 'tampered';
-=======
             } else if (sql.includes("UPDATE")) {
               if (sql.includes("event_json"))
                 this.rows[0].event_json = "tampered";
               if (sql.includes("prev_hash"))
                 this.rows[1].prev_hash = "tampered";
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
             }
           },
           all: () => this.rows,
           get: () => this.rows[this.rows.length - 1],
         };
       }
-<<<<<<< HEAD
-      
-      exec() {}
-      close() {
-        this.prepare = () => { throw new Error('DB closed'); };
-      }
-    }
-  };
-});
-
-describe('AuditLogger', () => {
-=======
 
       exec() {}
       close() {
@@ -81,7 +46,6 @@ describe('AuditLogger', () => {
 });
 
 describe("AuditLogger", () => {
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   let logger: AuditLogger;
 
   beforeEach(() => {
@@ -183,19 +147,6 @@ describe("AuditLogger", () => {
     expect(logger.getEvents()).toHaveLength(0);
   });
 
-<<<<<<< HEAD
-  it('sqlite output logs to database and verifyChain works', () => {
-    const dbPath = ':memory:';
-    const sqliteLogger = new AuditLogger({ output: 'sqlite', sqlitePath: dbPath, hmacSecret: 'test-secret' });
-    
-    sqliteLogger.log({
-      type: AuditEventType.REQUEST_START,
-      requestId: 'r1',
-      userId: 'u1',
-      promptHash: 'abc',
-      permissions: [],
-      locale: 'en',
-=======
   it("sqlite output logs to database and verifyChain works", () => {
     const dbPath = ":memory:";
     const sqliteLogger = new AuditLogger({
@@ -211,40 +162,17 @@ describe("AuditLogger", () => {
       promptHash: "abc",
       permissions: [],
       locale: "en",
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     });
 
     sqliteLogger.log({
       type: AuditEventType.REQUEST_COMPLETE,
-<<<<<<< HEAD
-      requestId: 'r1',
-      userId: 'u1',
-=======
       requestId: "r1",
       userId: "u1",
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       success: true,
       durationMs: 100,
     });
 
     const verification = sqliteLogger.verifyChain();
-<<<<<<< HEAD
-    if (!verification.valid) console.log('Verification failed:', verification);
-    expect(verification.valid).toBe(true);
-  });
-
-  it('sqlite verifyChain detects tampering', () => {
-    const dbPath = ':memory:';
-    const sqliteLogger = new AuditLogger({ output: 'sqlite', sqlitePath: dbPath, hmacSecret: 'test-secret' });
-    
-    sqliteLogger.log({
-      type: AuditEventType.REQUEST_START,
-      requestId: 'r1',
-      userId: 'u1',
-      promptHash: 'abc',
-      permissions: [],
-      locale: 'en',
-=======
     if (!verification.valid) console.log("Verification failed:", verification);
     expect(verification.valid).toBe(true);
   });
@@ -264,44 +192,18 @@ describe("AuditLogger", () => {
       promptHash: "abc",
       permissions: [],
       locale: "en",
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     });
 
     sqliteLogger.log({
       type: AuditEventType.REQUEST_COMPLETE,
-<<<<<<< HEAD
-      requestId: 'r1',
-      userId: 'u1',
-=======
       requestId: "r1",
       userId: "u1",
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       success: true,
       durationMs: 100,
     });
 
     // Tamper with the database
     // @ts-expect-error accessing private db
-<<<<<<< HEAD
-    sqliteLogger.db.prepare("UPDATE audit_log SET event_json = 'tampered' WHERE id = 1").run();
-
-    const verification = sqliteLogger.verifyChain();
-    expect(verification.valid).toBe(false);
-    expect(verification.reason).toBe('Hash mismatch');
-  });
-
-  it('sqlite verifyChain detects broken chain', () => {
-    const dbPath = ':memory:';
-    const sqliteLogger = new AuditLogger({ output: 'sqlite', sqlitePath: dbPath, hmacSecret: 'test-secret' });
-    
-    sqliteLogger.log({
-      type: AuditEventType.REQUEST_START,
-      requestId: 'r1',
-      userId: 'u1',
-      promptHash: 'abc',
-      permissions: [],
-      locale: 'en',
-=======
     sqliteLogger.db
       .prepare("UPDATE audit_log SET event_json = 'tampered' WHERE id = 1")
       .run();
@@ -326,44 +228,18 @@ describe("AuditLogger", () => {
       promptHash: "abc",
       permissions: [],
       locale: "en",
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     });
 
     sqliteLogger.log({
       type: AuditEventType.REQUEST_COMPLETE,
-<<<<<<< HEAD
-      requestId: 'r1',
-      userId: 'u1',
-=======
       requestId: "r1",
       userId: "u1",
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       success: true,
       durationMs: 100,
     });
 
     // Tamper with the chain link
     // @ts-expect-error accessing private db
-<<<<<<< HEAD
-    sqliteLogger.db.prepare("UPDATE audit_log SET prev_hash = 'tampered' WHERE id = 2").run();
-
-    const verification = sqliteLogger.verifyChain();
-    expect(verification.valid).toBe(false);
-    expect(verification.reason).toBe('Chain link broken');
-  });
-
-  it('sqlite initialization fails gracefully', () => {
-    // A bad path that sqlite cannot open
-    const sqliteLogger = new AuditLogger({ output: 'sqlite', sqlitePath: '/invalid/path/that/does/not/exist/db.sqlite' });
-    // Should fallback to console
-    // @ts-expect-error private field
-    expect(sqliteLogger.output).toBe('console');
-  });
-
-  it('sqlite log fails gracefully if db throws', () => {
-    const sqliteLogger = new AuditLogger({ output: 'sqlite', sqlitePath: ':memory:', hmacSecret: 'test-secret' });
-    
-=======
     sqliteLogger.db
       .prepare("UPDATE audit_log SET prev_hash = 'tampered' WHERE id = 2")
       .run();
@@ -391,7 +267,6 @@ describe("AuditLogger", () => {
       hmacSecret: "test-secret",
     });
 
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     // Break the db
     // @ts-expect-error private field
     sqliteLogger.db.close();
@@ -399,18 +274,6 @@ describe("AuditLogger", () => {
     // Should not throw, should fallback to printing to console
     sqliteLogger.log({
       type: AuditEventType.REQUEST_START,
-<<<<<<< HEAD
-      requestId: 'r1',
-      userId: 'u1',
-      promptHash: 'abc',
-      permissions: [],
-      locale: 'en',
-    });
-  });
-
-  it('verifyChain returns false if not sqlite', () => {
-    const memoryLogger = new AuditLogger({ output: 'memory' });
-=======
       requestId: "r1",
       userId: "u1",
       promptHash: "abc",
@@ -421,7 +284,6 @@ describe("AuditLogger", () => {
 
   it("verifyChain returns false if not sqlite", () => {
     const memoryLogger = new AuditLogger({ output: "memory" });
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     expect(memoryLogger.verifyChain().valid).toBe(false);
   });
 });

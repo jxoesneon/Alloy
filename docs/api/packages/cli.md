@@ -11,17 +11,9 @@ Command-line tool for scaffolding, evaluation, dev, and doctor.
 
 ## Generated API
 
-<<<<<<< HEAD
-## Generated API
-
-**@ferroui/cli**
-
-***
-=======
 **@ferroui/cli**
 
 ---
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/cli
 
@@ -85,7 +77,3 @@ ferroui generate component MyOrganism
 ## API Reference
 
 The CLI is primarily used as a binary, but its internal command handlers are also available as modules.
-<<<<<<< HEAD
-
-=======
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)

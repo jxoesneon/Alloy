@@ -89,13 +89,6 @@ describe("FerroUIEngine", () => {
     const tool = ToolRegistry.getInstance().get("ferroui.setProvider");
     expect(tool).toBeDefined();
 
-<<<<<<< HEAD
-    const providers = ['openai', 'anthropic', 'google', 'ollama', 'llama-cpp'] as const;
-    for (const providerId of providers) {
-      const result = await (tool!.execute as (params: unknown) => Promise<{ success: boolean; currentProvider: string }>)({
-        providerId,
-        options: { apiKey: 'test' },
-=======
     const providers = [
       "openai",
       "anthropic",
@@ -111,7 +104,6 @@ describe("FerroUIEngine", () => {
       )({
         providerId,
         options: { apiKey: "test" },
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       });
 
       expect(result.success).toBe(true);
@@ -119,11 +111,6 @@ describe("FerroUIEngine", () => {
       // @ts-expect-error - private field read for assertion
       expect(engine.provider.id).toBe(providerId);
     }
-<<<<<<< HEAD
-    
-    // Also test an unknown provider to hit the default case, even though zod should catch it
-    await expect((tool!.execute as (params: unknown) => Promise<any>)({ providerId: 'unknown' })).rejects.toThrow('Unknown provider ID: unknown');
-=======
 
     // Also test an unknown provider to hit the default case, even though zod should catch it
     await expect(
@@ -131,7 +118,6 @@ describe("FerroUIEngine", () => {
         providerId: "unknown",
       }),
     ).rejects.toThrow("Unknown provider ID: unknown");
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   });
 
   it("ferroui.setProvider rejects unknown providerId via zod validation", async () => {

@@ -67,9 +67,9 @@ export const UserTable: StoryObj<typeof DataTable> = {
     caption: "Recent User Signups",
     aria: { label: "User Table" },
     columns: [
-      { key: "name", header: "Full Name" },
-      { key: "email", header: "Email Address" },
-      { key: "status", header: "Account Status" },
+      { key: "name", header: "Full Name", isSortable: false },
+      { key: "email", header: "Email Address", isSortable: false },
+      { key: "status", header: "Account Status", isSortable: false },
     ],
     rows: [
       { name: "John Doe", email: "john@example.com", status: "Active" },

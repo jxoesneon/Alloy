@@ -116,22 +116,6 @@ describe("AnthropicProvider", () => {
       expect(result.content).toBe('{"fallback":true}');
     });
 
-<<<<<<< HEAD
-    it('JSON mode returns empty string when neither tool_use nor text block exists', async () => {
-      mockCreate.mockResolvedValue({
-        content: [{ type: 'image' }],
-        usage: makeUsage(5, 3),
-      });
-      const p = new AnthropicProvider({ apiKey: 'k' });
-      const result = await p.completePrompt({ systemPrompt: 's', userPrompt: 'u', jsonMode: true });
-      expect(result.content).toBe('');
-    });
-
-    it('handles conversationContext', async () => {
-      mockCreate.mockResolvedValue({ content: [{ type: 'text', text: 'reply' }], usage: makeUsage() });
-      const p = new AnthropicProvider({ apiKey: 'k' });
-      await p.completePrompt({ systemPrompt: 's', userPrompt: 'u', conversationContext: ['prev msg'] });
-=======
     it("JSON mode returns empty string when neither tool_use nor text block exists", async () => {
       mockCreate.mockResolvedValue({
         content: [{ type: "image" }],
@@ -157,7 +141,6 @@ describe("AnthropicProvider", () => {
         userPrompt: "u",
         conversationContext: ["prev msg"],
       });
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       expect(mockCreate).toHaveBeenCalledWith(
         expect.objectContaining({
           messages: expect.arrayContaining([
@@ -187,12 +170,6 @@ describe("AnthropicProvider", () => {
   describe("processPrompt", () => {
     it("streams text chunks and returns final response", async () => {
       const events = [
-<<<<<<< HEAD
-        { type: 'content_block_delta', delta: { type: 'text_delta', text: 'Hello ' } },
-        { type: 'content_block_delta', delta: { type: 'image_delta' } }, // ignores non-text deltas
-        { type: 'content_block_delta', delta: { type: 'text_delta', text: 'World' } },
-        { type: 'message_stop' },
-=======
         {
           type: "content_block_delta",
           delta: { type: "text_delta", text: "Hello " },
@@ -203,7 +180,6 @@ describe("AnthropicProvider", () => {
           delta: { type: "text_delta", text: "World" },
         },
         { type: "message_stop" },
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       ];
       mockStream.mockReturnValue({
         [Symbol.asyncIterator]: async function* () {
@@ -230,11 +206,7 @@ describe("AnthropicProvider", () => {
       );
     });
 
-<<<<<<< HEAD
-    it('JSON mode processPrompt yields content and returns response with total tokens', async () => {
-=======
     it("JSON mode processPrompt yields content and returns response with total tokens", async () => {
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       mockCreate.mockResolvedValue({
         content: [
           {
@@ -261,20 +233,6 @@ describe("AnthropicProvider", () => {
         }
         chunks.push(value as string);
       }
-<<<<<<< HEAD
-      expect(chunks).toEqual(['{}']);
-      expect((finalResult as { tokens: { input: number, total: number } }).tokens.input).toBe(8);
-      expect((finalResult as { tokens: { total: number } }).tokens.total).toBe(10);
-    });
-
-    it('JSON mode processPrompt falls back when json field missing', async () => {
-      mockCreate.mockResolvedValue({
-        content: [{ type: 'tool_use', name: 'structured_json_output', input: { key: 'val' } }],
-        usage: makeUsage(8, 2),
-      });
-      const p = new AnthropicProvider({ apiKey: 'k' });
-      const gen = p.processPrompt({ systemPrompt: 's', userPrompt: 'u', jsonMode: true });
-=======
       expect(chunks).toEqual(["{}"]);
       expect(
         (finalResult as { tokens: { input: number; total: number } }).tokens
@@ -302,27 +260,10 @@ describe("AnthropicProvider", () => {
         userPrompt: "u",
         jsonMode: true,
       });
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       const chunks: string[] = [];
       let finalResult;
       while (true) {
         const { value, done } = await gen.next();
-<<<<<<< HEAD
-        if (done) { finalResult = value; break; }
-        chunks.push(value as string);
-      }
-      expect(chunks).toEqual(['{"key":"val"}']);
-      expect((finalResult as { tokens: { input: number, total: number } }).tokens.total).toBe(10);
-    });
-    
-    it('JSON mode processPrompt uses text block if no tool_use', async () => {
-      mockCreate.mockResolvedValue({
-        content: [{ type: 'text', text: '{"fallback":true}' }],
-        usage: makeUsage(8, 2),
-      });
-      const p = new AnthropicProvider({ apiKey: 'k' });
-      const gen = p.processPrompt({ systemPrompt: 's', userPrompt: 'u', jsonMode: true });
-=======
         if (done) {
           finalResult = value;
           break;
@@ -347,19 +288,14 @@ describe("AnthropicProvider", () => {
         userPrompt: "u",
         jsonMode: true,
       });
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       const chunks: string[] = [];
       let finalResult;
       while (true) {
         const { value, done } = await gen.next();
-<<<<<<< HEAD
-        if (done) { finalResult = value; break; }
-=======
         if (done) {
           finalResult = value;
           break;
         }
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
         chunks.push(value as string);
       }
       expect(chunks).toEqual(['{"fallback":true}']);

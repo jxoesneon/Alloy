@@ -21,13 +21,9 @@ describe("SemanticCache — dataClassification routing", () => {
   let cache: SemanticCache;
 
   beforeEach(async () => {
-<<<<<<< HEAD
-    (SemanticCache as unknown as { instance: SemanticCache | undefined }).instance = undefined;
-=======
     (
       SemanticCache as unknown as { instance: SemanticCache | undefined }
     ).instance = undefined;
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     cache = SemanticCache.getInstance();
     await cache.clear();
   });
@@ -62,12 +58,6 @@ describe("SemanticCache — dataClassification routing", () => {
     expect(miss).toBeUndefined();
   });
 
-<<<<<<< HEAD
-  it('evicts entry if HMAC verification fails', async () => {
-    const layout = makeLayout('hmac-layout');
-    await cache.set('hmac test', [], 'u1', {}, layout, 'PUBLIC');
-    
-=======
   it("PUBLIC cache is shared across users (same key)", async () => {
     const layout = makeLayout("shared-layout");
     const toolOutputs = {
@@ -110,60 +100,19 @@ describe("SemanticCache — dataClassification routing", () => {
     const layout = makeLayout("hmac-layout");
     await cache.set("hmac test", [], "u1", {}, layout, "PUBLIC");
 
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     // Tamper with the underlying backend directly
     const backend = (cache as any).backend;
     const keys = await backend.keys();
     const data = JSON.parse(await backend.get(keys[0]));
-<<<<<<< HEAD
-    data.hmac = 'tampered';
-    await backend.set(keys[0], JSON.stringify(data), 300000);
-
-    const hit = await cache.get('hmac test', [], 'u1', {});
-=======
     data.hmac = "tampered";
     await backend.set(keys[0], JSON.stringify(data), 300000);
 
     const hit = await cache.get("hmac test", [], "u1", {});
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     expect(hit).toBeUndefined();
     // The key should be removed
     expect(await backend.keys()).toHaveLength(0);
   });
 
-<<<<<<< HEAD
-  it('invalidate by toolName and params', async () => {
-    const layout = makeLayout('inv-layout');
-    const toolOutputs = { weather: { args: { city: 'London' }, result: 'sunny', classification: 'PUBLIC' } };
-    await cache.set('london weather', [], 'u1', toolOutputs, layout, 'PUBLIC');
-    
-    await cache.invalidate('weather', { city: 'Paris' }); // Should not invalidate
-    expect(await cache.get('london weather', [], 'u1', toolOutputs)).toBeDefined();
-    
-    await cache.invalidate('weather', { city: 'London' }); // Should invalidate
-    expect(await cache.get('london weather', [], 'u1', toolOutputs)).toBeUndefined();
-  });
-
-  it('invalidate by toolName without params', async () => {
-    const layout = makeLayout('inv-layout2');
-    const toolOutputs = { weather: { args: { city: 'London' }, result: 'sunny', classification: 'PUBLIC' } };
-    await cache.set('london weather', [], 'u1', toolOutputs, layout, 'PUBLIC');
-    
-    await cache.invalidate('weather'); // Should invalidate regardless of params
-    expect(await cache.get('london weather', [], 'u1', toolOutputs)).toBeUndefined();
-  });
-
-  it('invalidatePattern removes matching tools', async () => {
-    const layout = makeLayout('inv-pattern-layout');
-    const toolOutputs = { 'db.query.users': { result: 'data', classification: 'PUBLIC' } };
-    await cache.set('users', [], 'u1', toolOutputs, layout, 'PUBLIC');
-    
-    await cache.invalidatePattern('db.mutation.*'); // Should not invalidate
-    expect(await cache.get('users', [], 'u1', toolOutputs)).toBeDefined();
-
-    await cache.invalidatePattern('db.query.*'); // Should invalidate
-    expect(await cache.get('users', [], 'u1', toolOutputs)).toBeUndefined();
-=======
   it("invalidate by toolName and params", async () => {
     const layout = makeLayout("inv-layout");
     const toolOutputs = {
@@ -215,6 +164,5 @@ describe("SemanticCache — dataClassification routing", () => {
 
     await cache.invalidatePattern("db.query.*"); // Should invalidate
     expect(await cache.get("users", [], "u1", toolOutputs)).toBeUndefined();
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   });
 });

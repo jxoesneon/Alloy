@@ -25,13 +25,8 @@ async function synthesizeLayout(
   apiKey: string,
   logger: ReturnType<typeof makeLogger>,
 ) {
-<<<<<<< HEAD
-  logger('API_KEY', 'Validating API Key presence', 'set');
-  
-=======
   logger("API_KEY", "Validating API Key presence", "set");
 
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   const genAI = new GoogleGenerativeAI(apiKey);
   logger("MODEL_INIT", "Initializing model");
   const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });

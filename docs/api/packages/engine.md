@@ -11,17 +11,9 @@ Dual-phase LLM pipeline, partial streaming, tool orchestration, semantic cache.
 
 ## Generated API
 
-<<<<<<< HEAD
-## Generated API
-
-**@ferroui/engine**
-
-***
-=======
 **@ferroui/engine**
 
 ---
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/engine
 
@@ -58,13 +50,8 @@ pnpm add @ferroui/engine
 ### Creating an Engine Instance
 
 ```typescript
-<<<<<<< HEAD
-import { FerroUIEngine } from '@ferroui/engine';
-import { OpenAIProvider } from '@ferroui/engine/providers/openai';
-=======
 import { FerroUIEngine } from "@ferroui/engine";
 import { OpenAIProvider } from "@ferroui/engine/providers/openai";
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 const provider = new OpenAIProvider({ apiKey: process.env.OPENAI_API_KEY });
 const engine = new FerroUIEngine(provider);
@@ -74,19 +61,11 @@ const engine = new FerroUIEngine(provider);
 
 ```typescript
 const prompt = "Show me a sales dashboard";
-<<<<<<< HEAD
-const context = { userId: '123', requestId: 'req-456', locale: 'en-US' };
-
-for await (const chunk of engine.process(prompt, context)) {
-  if (chunk.type === 'layout_chunk') {
-    console.log('Received layout:', chunk.layout);
-=======
 const context = { userId: "123", requestId: "req-456", locale: "en-US" };
 
 for await (const chunk of engine.process(prompt, context)) {
   if (chunk.type === "layout_chunk") {
     console.log("Received layout:", chunk.layout);
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
   }
 }
 ```
@@ -102,7 +81,3 @@ for await (const chunk of engine.process(prompt, context)) {
 - `FerroUIEngine`: Main orchestration class.
 - `LlmProvider`: Abstract base class for LLM providers.
 - `runDualPhasePipeline`: The core processing function.
-<<<<<<< HEAD
-
-=======
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)

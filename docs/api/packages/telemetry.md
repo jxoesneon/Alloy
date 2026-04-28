@@ -11,17 +11,9 @@ OpenTelemetry tracing, metrics, and PII redaction pipelines.
 
 ## Generated API
 
-<<<<<<< HEAD
-## Generated API
-
-**@ferroui/telemetry**
-
-***
-=======
 **@ferroui/telemetry**
 
 ---
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
 # @ferroui/telemetry
 
@@ -47,18 +39,6 @@ pnpm add @ferroui/telemetry
 ## Usage
 
 ```typescript
-<<<<<<< HEAD
-import { tracer, ferrouiMetrics, withSpan } from '@ferroui/telemetry';
-
-// Tracing Example
-await withSpan('my-operation', async (span) => {
-  // perform logic
-  span.setAttribute('component', 'renderer');
-});
-
-// Metrics Example
-ferrouiMetrics.counter('my_counter', { description: 'Counts something' }).add(1);
-=======
 import { tracer, ferrouiMetrics, withSpan } from "@ferroui/telemetry";
 
 // Tracing Example
@@ -71,7 +51,6 @@ await withSpan("my-operation", async (span) => {
 ferrouiMetrics
   .counter("my_counter", { description: "Counts something" })
   .add(1);
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 ```
 
 ## API Reference
@@ -89,7 +68,3 @@ Configured via environment variables (e.g., `OTEL_EXPORTER_OTLP_ENDPOINT`).
 ```typescript
 await withSpan('my-task', async (span) => { ... });
 ```
-<<<<<<< HEAD
-
-=======
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)

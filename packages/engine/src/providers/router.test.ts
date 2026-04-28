@@ -130,21 +130,6 @@ describe("ProviderRouter", () => {
     );
   });
 
-<<<<<<< HEAD
-  it('auto-resets circuit breaker after CIRCUIT_RESET_MS', async () => {
-    vi.useFakeTimers();
-    try {
-      const p = makeProvider('auto-reset-provider');
-      vi.mocked(p.completePrompt).mockRejectedValue(new Error('down'));
-      const router = new ProviderRouter([makeRouted(p)]);
-      
-      // Trip circuit
-      for (let i = 0; i < 3; i++) await router.completePrompt(makeReq()).catch(() => {});
-      
-      // Verify it's open
-      await expect(router.completePrompt(makeReq())).rejects.toThrow(/All providers are unhealthy/);
-      expect(router.getHealthSnapshot()['auto-reset-provider'].circuitOpen).toBe(true);
-=======
   it("auto-resets circuit breaker after CIRCUIT_RESET_MS", async () => {
     vi.useFakeTimers();
     try {
@@ -163,19 +148,11 @@ describe("ProviderRouter", () => {
       expect(
         router.getHealthSnapshot()["auto-reset-provider"].circuitOpen,
       ).toBe(true);
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
       // Advance time by 61 seconds (CIRCUIT_RESET_MS is 60_000)
       vi.advanceTimersByTime(61000);
 
       // Make it work again
-<<<<<<< HEAD
-      vi.mocked(p.completePrompt).mockResolvedValue(makeResponse('recovered'));
-      
-      const result = await router.completePrompt(makeReq());
-      expect(result.content).toBe('recovered');
-      expect(router.getHealthSnapshot()['auto-reset-provider'].circuitOpen).toBe(false);
-=======
       vi.mocked(p.completePrompt).mockResolvedValue(makeResponse("recovered"));
 
       const result = await router.completePrompt(makeReq());
@@ -183,34 +160,11 @@ describe("ProviderRouter", () => {
       expect(
         router.getHealthSnapshot()["auto-reset-provider"].circuitOpen,
       ).toBe(false);
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     } finally {
       vi.useRealTimers();
     }
   });
 
-<<<<<<< HEAD
-  it('processPrompt auto-resets circuit breaker after CIRCUIT_RESET_MS', async () => {
-    vi.useFakeTimers();
-    try {
-      const p = makeProvider('auto-reset-provider-stream', {
-        processPrompt: async function* () {
-          throw new Error('stream down');
-          yield '';
-        },
-      });
-      const router = new ProviderRouter([makeRouted(p)]);
-      
-      // Trip circuit
-      for (let i = 0; i < 3; i++) {
-        const gen = router.processPrompt(makeReq());
-        await expect(async () => { for await (const _ of gen) { /* drain */ } }).rejects.toThrow();
-      }
-      
-      // Verify it's open (all unhealthy)
-      const genOpen = router.processPrompt(makeReq());
-      await expect(async () => { for await (const _ of genOpen) { /* drain */ } }).rejects.toThrow(/All providers are unhealthy/);
-=======
   it("processPrompt auto-resets circuit breaker after CIRCUIT_RESET_MS", async () => {
     vi.useFakeTimers();
     try {
@@ -239,46 +193,29 @@ describe("ProviderRouter", () => {
           /* drain */
         }
       }).rejects.toThrow(/All providers are unhealthy/);
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
       // Advance time
       vi.advanceTimersByTime(61000);
 
       // Change mock to working
       p.processPrompt = async function* () {
-<<<<<<< HEAD
-        yield 'recovered stream';
-        return makeResponse('recovered stream');
-      };
-      
-=======
         yield "recovered stream";
         return makeResponse("recovered stream");
       };
 
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
       const genRec = router.processPrompt(makeReq());
       const chunks: string[] = [];
       for await (const chunk of genRec) {
         chunks.push(chunk as string);
       }
-<<<<<<< HEAD
-      expect(chunks).toEqual(['recovered stream']);
-=======
       expect(chunks).toEqual(["recovered stream"]);
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     } finally {
       vi.useRealTimers();
     }
   });
 
-<<<<<<< HEAD
-  it('estimateTokens delegates to first provider', () => {
-    const p = makeProvider('p1');
-=======
   it("estimateTokens delegates to first provider", () => {
     const p = makeProvider("p1");
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
     p.estimateTokens = (t: string) => t.length;
     const router = new ProviderRouter([makeRouted(p)]);
     expect(router.estimateTokens("hello")).toBe(5);

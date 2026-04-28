@@ -156,13 +156,9 @@ async function migrateLayoutFile(
   };
   try {
     const content = await fs.readJson(filePath);
-<<<<<<< HEAD
-    const hasComponent = JSON.stringify(content).includes(`"type":"${from.split('@')[0]}"`);
-=======
     const hasComponent = JSON.stringify(content).includes(
       `"type":"${from.split("@")[0]}"`,
     );
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 
     if (!hasComponent) {
       result.changes.push("No matching components found");

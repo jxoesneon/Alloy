@@ -71,6 +71,7 @@ export const GhostAction: StoryObj<typeof ActionButton> = {
   args: {
     content: "Settings",
     variant: "ghost",
-    iconName: "settings",
+    icon: "settings",
+    aria: { label: "Settings" },
   },
 };
