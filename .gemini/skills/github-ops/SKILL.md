@@ -1,12 +1,12 @@
 ---
 name: github-ops
-description: GitHub repository operations, automation, and management. Issue triage, PR management, CI/CD operations, release management, and security monitoring using the gh CLI. Use when the user wants to manage GitHub issues, PRs, CI status, releases, contributors, stale items, or any GitHub operational task beyond simple git commands.
+description: GitHub repository operations, automation, and management using GitHub MCP tools. Issue triage, PR management, CI/CD operations, release management, and security monitoring. Use when the user wants to manage GitHub issues, PRs, releases, or any GitHub operational task.
 origin: ECC
 ---
 
-# GitHub Operations
+# GitHub Operations (MCP)
 
-Manage GitHub repositories with a focus on community health, CI reliability, and contributor experience.
+Manage GitHub repositories with a focus on community health, CI reliability, and contributor experience using structured MCP tools.
 
 ## When to Activate
 
@@ -14,14 +14,14 @@ Manage GitHub repositories with a focus on community health, CI reliability, and
 - Managing PRs (review status, CI checks, stale PRs, merge readiness)
 - Debugging CI/CD failures
 - Preparing releases and changelogs
-- Monitoring Dependabot and security alerts
+- Monitoring security alerts
 - Managing contributor experience on open-source projects
-- User says "check GitHub", "triage issues", "review PRs", "merge", "release", "CI is broken"
+- User says "check GitHub", "triage issues", "review PRs", "merge", "release"
 
 ## Tool Requirements
 
-- **gh CLI** for all GitHub API operations
-- Repository access configured via `gh auth login`
+- **GitHub MCP Server** tools (e.g., `mcp_github_list_issues`, `mcp_github_create_issue`, `mcp_github_get_pull_request`, etc.)
+- Configured repository owner and name in context.
 
 ## Issue Triage
 
@@ -33,31 +33,20 @@ Classify each issue by type and priority:
 
 ### Triage Workflow
 
-1. Read the issue title, body, and comments
-2. Check if it duplicates an existing issue (search by keywords)
-3. Apply appropriate labels via `gh issue edit --add-label`
-4. For questions: draft and post a helpful response
-5. For bugs needing more info: ask for reproduction steps
+1. Read the issue via `mcp_github_get_issue`
+2. Check if it duplicates an existing issue using `mcp_github_search_issues`
+3. Apply appropriate labels via `mcp_github_update_issue` (passing `labels` array)
+4. For questions: draft and post a response via `mcp_github_add_issue_comment`
+5. For bugs needing more info: ask for reproduction steps via comment
 6. For good first issues: add `good-first-issue` label
 7. For duplicates: comment with link to original, add `duplicate` label
-
-```bash
-# Search for potential duplicates
-gh issue list --search "keyword" --state all --limit 20
-
-# Add labels
-gh issue edit <number> --add-label "bug,high-priority"
-
-# Comment on issue
-gh issue comment <number> --body "Thanks for reporting. Could you share reproduction steps?"
-```
 
 ## PR Management
 
 ### Review Checklist
 
-1. Check CI status: `gh pr checks <number>`
-2. Check if mergeable: `gh pr view <number> --json mergeable`
+1. Check CI status: `mcp_github_get_pull_request_status`
+2. Check if mergeable: `mcp_github_get_pull_request`
 3. Check age and last activity
 4. Flag PRs >5 days with no review
 5. For community PRs: ensure they have tests and follow conventions
@@ -68,81 +57,33 @@ gh issue comment <number> --body "Thanks for reporting. Could you share reproduc
 - PRs with no activity in 7+ days: comment asking if still active
 - Auto-close stale issues after 30 days with no response (add `closed-stale` label)
 
-```bash
-# Find stale issues (no activity in 14+ days)
-gh issue list --label "stale" --state open
-
-# Find PRs with no recent activity
-gh pr list --json number,title,updatedAt --jq '.[] | select(.updatedAt < "2026-03-01")'
-```
-
 ## CI/CD Operations
 
 When CI fails:
 
-1. Check the workflow run: `gh run view <run-id> --log-failed`
-2. Identify the failing step
-3. Check if it is a flaky test vs real failure
-4. For real failures: identify the root cause and suggest a fix
-5. For flaky tests: note the pattern for future investigation
-
-```bash
-# List recent failed runs
-gh run list --status failure --limit 10
-
-# View failed run logs
-gh run view <run-id> --log-failed
-
-# Re-run a failed workflow
-gh run rerun <run-id> --failed
-```
+1. Identify the failing step by checking the PR status.
+2. Identify the root cause and suggest a fix.
+3. For flaky tests: note the pattern for future investigation.
 
 ## Release Management
 
 When preparing a release:
 
-1. Check all CI is green on main
-2. Review unreleased changes: `gh pr list --state merged --base main`
-3. Generate changelog from PR titles
-4. Create release: `gh release create`
-
-```bash
-# List merged PRs since last release
-gh pr list --state merged --base main --search "merged:>2026-03-01"
-
-# Create a release
-gh release create v1.2.0 --title "v1.2.0" --generate-notes
-
-# Create a pre-release
-gh release create v1.3.0-rc1 --prerelease --title "v1.3.0 Release Candidate 1"
-```
+1. Check all CI is green on main.
+2. Review unreleased changes by listing merged PRs.
+3. Generate changelog from PR titles.
+4. Create release via `gh` CLI (if MCP tool not available for releases) or manual step.
 
 ## Security Monitoring
 
-```bash
-# Check Dependabot alerts
-gh api repos/{owner}/{repo}/dependabot/alerts --jq '.[].security_advisory.summary'
-
-# Check secret scanning alerts
-gh api repos/{owner}/{repo}/secret-scanning/alerts --jq '.[].state'
-
-# Review and auto-merge safe dependency bumps
-gh pr list --label "dependencies" --json number,title
-```
-
-- Review and auto-merge safe dependency bumps
-- Flag any critical/high severity alerts immediately
-- Check for new Dependabot alerts weekly at minimum
+- Review and auto-merge safe dependency bumps.
+- Flag any critical/high severity alerts immediately.
+- Check for new Dependabot alerts weekly at minimum.
 
 ## Quality Gate
 
-Before completing any GitHub operations task:
-<<<<<<< HEAD
-=======
-
->>>>>>> 35868da (chore: final cleanup and enterprise alignment)
 - all issues triaged have appropriate labels
 - no PRs older than 7 days without a review or comment
-- CI failures have been investigated (not just re-run)
+- CI failures have been investigated
 - releases include accurate changelogs
 - security alerts are acknowledged and tracked

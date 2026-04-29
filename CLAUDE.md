@@ -1,9 +1,11 @@
 ﻿# FerroUI: AI-powered, server-driven UI meta-framework
 
 ## Project Overview
+
 FerroUI is an enterprise-grade meta-framework designed for building AI-native, server-driven user interfaces. It leverages a monorepo architecture to provide a seamless development experience across web, desktop, and edge platforms.
 
 ## Core Commands
+
 - **Install Dependencies**: `pnpm install`
 - **Build All**: `pnpm run build`
 - **Development Mode**: `pnpm run dev`
@@ -15,6 +17,7 @@ FerroUI is an enterprise-grade meta-framework designed for building AI-native, s
 - **Storybook**: `pnpm run storybook`
 
 ## Architecture & Project Structure
+
 - `apps/` — Deployment entry points
   - `web/`: React-based web renderer
   - `desktop/`: Tauri-based desktop shell
@@ -30,6 +33,8 @@ FerroUI is an enterprise-grade meta-framework designed for building AI-native, s
 - `infra/` — Infrastructure-as-Code (Terraform/Kubernetes)
 
 ## Development Conventions
+
+- **Foundational Mandates**: Reasoning-Before-Action and Research-Before-Strategy.
 - **Style**: kebab-case for files, PascalCase for React components.
 - **Types**: Strict TypeScript; avoid `any`.
 - **Commits**: Conventional Commits style.
@@ -37,6 +42,7 @@ FerroUI is an enterprise-grade meta-framework designed for building AI-native, s
 - **Sanitization**: All user input must be sanitized in `packages/engine/src/server.ts`.
 
 ## Tech Stack
+
 - **Monorepo**: pnpm Workspaces + Turbo
 - **Frontend**: React 19, Vite 8, Tailwind CSS 4, Framer Motion
 - **Backend**: Express 5 (Node.js >= 25)

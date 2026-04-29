@@ -8,6 +8,7 @@
     "declaration": true
   },
   "references": [
+    { "path": "../shared" },
     { "path": "../schema" },
     { "path": "../telemetry" },
     { "path": "../registry" },
@@ -15,5 +16,11 @@
     { "path": "../i18n" }
   ],
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "src/**/*.test.tsx", "src/**/__tests__/**"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/__tests__/**"
+  ]
 }

@@ -22,7 +22,9 @@
   ],
   "dependencies": {
     "@ferroui/registry": "workspace:*",
+    "@ferroui/renderer": "workspace:*",
     "@ferroui/schema": "workspace:*",
+    "@ferroui/shared": "workspace:*",
     "@tauri-apps/api": "^2.10.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { BLOCK_COMPONENTS } from "@ferroui/schema";
 
 export type Env = {
   GEMINI_API_KEY: string;
@@ -31,9 +32,10 @@ async function synthesizeLayout(
   logger("MODEL_INIT", "Initializing model");
   const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
+  const components = Array.from(BLOCK_COMPONENTS).join(", ");
   const systemInstruction = `You are a UI synthesizer for FerroUI. Generate a JSON response that conforms to the FerroUILayout schema. 
 Return ONLY valid JSON. No markdown.
-The schema consists of a type "Dashboard" with children components: [ProfileHeader, KPIBoard, ActivityFeed, ActionButton, TicketCard, DataTable, SearchBar, FormField].
+The schema consists of a type "Dashboard" with children components: [${components}].
 Dynamically select components and generate relevant data based on the user prompt: "${prompt}".`;
 
   try {

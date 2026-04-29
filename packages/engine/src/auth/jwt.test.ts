@@ -1,10 +1,17 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { createAuthMiddleware, signToken, JwtPayload } from './jwt.js';
-import type { Request, Response, NextFunction } from 'express';
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import {
+  createAuthMiddleware,
+  signToken,
+  JwtPayload,
+  isStrictEnvironment,
+} from "./jwt.js";
+import type { Request, Response, NextFunction } from "express";
 
-function makeReq(overrides: Partial<Request> = {}): Request & { auth?: JwtPayload } {
+function makeReq(
+  overrides: Partial<Request> = {},
+): Request & { auth?: JwtPayload } {
   return {
-    path: '/api/ferroui/process',
+    path: "/api/ferroui/process",
     headers: {},
     cookies: {},
     ...overrides,
@@ -16,28 +23,31 @@ function makeRes(): Response & { statusCode: number; body: unknown } {
     statusCode: 200,
     body: null,
     status: vi.fn().mockReturnThis(),
-    json: vi.fn().mockImplementation((b: unknown) => { res.body = b; return res as Response; }),
+    json: vi.fn().mockImplementation((b: unknown) => {
+      res.body = b;
+      return res as Response;
+    }),
   };
   return res as Response & { statusCode: number; body: unknown };
 }
 
-const SECRET = 'test-secret-123';
+const SECRET = "test-secret-123";
 
-describe('JWT auth middleware', () => {
+describe("JWT auth middleware", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('calls next() for skip paths (/healthz)', () => {
+  it("calls next() for skip paths (/healthz)", () => {
     const middleware = createAuthMiddleware({ secret: SECRET });
-    const req = makeReq({ path: '/healthz' });
+    const req = makeReq({ path: "/healthz" });
     const res = makeRes();
     const next = vi.fn() as NextFunction;
     middleware(req, res, next);
     expect(next).toHaveBeenCalledOnce();
   });
 
-  it('returns 401 when no token provided', () => {
+  it("returns 401 when no token provided", () => {
     const middleware = createAuthMiddleware({ secret: SECRET });
     const req = makeReq();
     const res = makeRes();
@@ -47,31 +57,44 @@ describe('JWT auth middleware', () => {
     expect(next).not.toHaveBeenCalled();
   });
 
-  it('attaches payload and calls next() for valid Bearer token', () => {
-    const token = signToken({ sub: 'u1', userId: 'u1', permissions: ['read'] }, { secret: SECRET });
+  it("attaches payload and calls next() for valid Bearer token", () => {
+    const token = signToken(
+      { sub: "u1", userId: "u1", permissions: ["read"] },
+      { secret: SECRET },
+    );
     const middleware = createAuthMiddleware({ secret: SECRET });
     const req = makeReq({ headers: { authorization: `Bearer ${token}` } });
     const res = makeRes();
     const next = vi.fn() as NextFunction;
     middleware(req as Request, res, next);
     expect(next).toHaveBeenCalledOnce();
-    expect((req as Request & { auth: JwtPayload }).auth?.userId).toBe('u1');
+    expect((req as Request & { auth: JwtPayload }).auth?.userId).toBe("u1");
   });
 
-  it('attaches payload from cookie', () => {
-    const token = signToken({ sub: 'u2', userId: 'u2', permissions: ['admin'] }, { secret: SECRET });
-    const middleware = createAuthMiddleware({ secret: SECRET, cookieName: 'ferroui_session' });
+  it("attaches payload from cookie", () => {
+    const token = signToken(
+      { sub: "u2", userId: "u2", permissions: ["admin"] },
+      { secret: SECRET },
+    );
+    const middleware = createAuthMiddleware({
+      secret: SECRET,
+      cookieName: "ferroui_session",
+    });
     const req = makeReq({ cookies: { ferroui_session: token } });
     const res = makeRes();
     const next = vi.fn() as NextFunction;
     middleware(req as Request, res, next);
     expect(next).toHaveBeenCalledOnce();
-    expect((req as Request & { auth: JwtPayload }).auth?.permissions).toContain('admin');
+    expect((req as Request & { auth: JwtPayload }).auth?.permissions).toContain(
+      "admin",
+    );
   });
 
-  it('returns 403 for tampered token', () => {
+  it("returns 403 for tampered token", () => {
     const middleware = createAuthMiddleware({ secret: SECRET });
-    const req = makeReq({ headers: { authorization: 'Bearer invalid.token.here' } });
+    const req = makeReq({
+      headers: { authorization: "Bearer invalid.token.here" },
+    });
     const res = makeRes();
     const next = vi.fn() as NextFunction;
     middleware(req as Request, res, next);
@@ -79,10 +102,10 @@ describe('JWT auth middleware', () => {
     expect(next).not.toHaveBeenCalled();
   });
 
-  it('returns 401 for expired token', async () => {
+  it("returns 401 for expired token", async () => {
     const token = signToken(
-      { sub: 'u3', userId: 'u3', permissions: [] },
-      { secret: SECRET, expiresIn: -1 }
+      { sub: "u3", userId: "u3", permissions: [] },
+      { secret: SECRET, expiresIn: -1 },
     );
     const middleware = createAuthMiddleware({ secret: SECRET });
     const req = makeReq({ headers: { authorization: `Bearer ${token}` } });
@@ -91,5 +114,30 @@ describe('JWT auth middleware', () => {
     middleware(req as Request, res, next);
     expect(res.status).toHaveBeenCalledWith(401);
     expect(next).not.toHaveBeenCalled();
+  });
+});
+
+describe("isStrictEnvironment", () => {
+  it('returns true for "production"', () => {
+    expect(isStrictEnvironment({ NODE_ENV: "production" })).toBe(true);
+  });
+
+  it('returns true for "staging"', () => {
+    expect(isStrictEnvironment({ NODE_ENV: "staging" })).toBe(true);
+  });
+
+  it('returns true for "prod"', () => {
+    expect(isStrictEnvironment({ NODE_ENV: "prod" })).toBe(true);
+  });
+
+  it("is case-insensitive", () => {
+    expect(isStrictEnvironment({ NODE_ENV: "PRODUCTION" })).toBe(true);
+    expect(isStrictEnvironment({ NODE_ENV: "Staging" })).toBe(true);
+  });
+
+  it('returns false for "development" or "test"', () => {
+    expect(isStrictEnvironment({ NODE_ENV: "development" })).toBe(false);
+    expect(isStrictEnvironment({ NODE_ENV: "test" })).toBe(false);
+    expect(isStrictEnvironment({})).toBe(false);
   });
 });

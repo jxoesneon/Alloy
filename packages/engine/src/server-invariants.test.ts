@@ -22,10 +22,18 @@ describe("assertProductionInvariants", () => {
     ).not.toThrow();
   });
 
-  it('throws in production when SKIP_AUTH is "true"', () => {
+  it('throws in strict environments when SKIP_AUTH is "true"', () => {
     expect(() =>
       assertProductionInvariants({
         NODE_ENV: "production",
+        SKIP_AUTH: "true",
+        JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
+      }),
+    ).toThrow(/SKIP_AUTH is enabled/);
+
+    expect(() =>
+      assertProductionInvariants({
+        NODE_ENV: "staging",
         SKIP_AUTH: "true",
         JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
       }),
@@ -35,7 +43,7 @@ describe("assertProductionInvariants", () => {
   it('throws in production when SKIP_AUTH is "1"', () => {
     expect(() =>
       assertProductionInvariants({
-        NODE_ENV: "production",
+        NODE_ENV: "prod",
         SKIP_AUTH: "1",
         JWT_SECRET: "this-is-a-32-char-secret-padding-000", // gitleaks:allow
       }),

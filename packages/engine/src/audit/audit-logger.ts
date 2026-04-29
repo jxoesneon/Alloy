@@ -1,19 +1,20 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import crypto from 'node:crypto';
-import Database from 'better-sqlite3';
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import Database from "better-sqlite3";
+import { isStrictEnvironment } from "../auth/jwt.js";
 
 export enum AuditEventType {
-  TOOL_CALL = 'tool_call',
-  REQUEST_START = 'request_start',
-  REQUEST_COMPLETE = 'request_complete',
-  REQUEST_ERROR = 'request_error',
-  CIRCUIT_OPEN = 'circuit_open',
-  CIRCUIT_RESET = 'circuit_reset',
-  RATE_LIMITED = 'rate_limited',
-  SESSION_UPDATED = 'session_updated',
-  COST_ESTIMATED = 'cost_estimated',
-  PROVENANCE_SIGNED = 'provenance_signed',
+  TOOL_CALL = "tool_call",
+  REQUEST_START = "request_start",
+  REQUEST_COMPLETE = "request_complete",
+  REQUEST_ERROR = "request_error",
+  CIRCUIT_OPEN = "circuit_open",
+  CIRCUIT_RESET = "circuit_reset",
+  RATE_LIMITED = "rate_limited",
+  SESSION_UPDATED = "session_updated",
+  COST_ESTIMATED = "cost_estimated",
+  PROVENANCE_SIGNED = "provenance_signed",
 }
 
 interface BaseAuditEvent {
@@ -101,7 +102,7 @@ export type AuditEvent =
   | ProvenanceSignedEvent;
 
 export interface AuditLoggerOptions {
-  output?: 'console' | 'memory' | 'file' | 'sqlite';
+  output?: "console" | "memory" | "file" | "sqlite";
   filePath?: string;
   sqlitePath?: string;
   hmacSecret?: string;
@@ -117,7 +118,7 @@ interface SqliteLogRow {
 }
 
 export class AuditLogger {
-  private output: 'console' | 'memory' | 'file' | 'sqlite';
+  private output: "console" | "memory" | "file" | "sqlite";
   private filePath?: string;
   private sqlitePath?: string;
   private hmacSecret?: string;
@@ -129,12 +130,12 @@ export class AuditLogger {
   private readonly ROTATE_AFTER_LINES = 10_000;
 
   constructor(options: AuditLoggerOptions = {}) {
-    this.output = options.output ?? 'console';
+    this.output = options.output ?? "console";
     this.filePath = options.filePath;
     this.sqlitePath = options.sqlitePath;
     this.hmacSecret = options.hmacSecret;
 
-    if (this.output === 'sqlite' && this.sqlitePath) {
+    if (this.output === "sqlite" && this.sqlitePath) {
       this.initSqlite();
     }
   }
@@ -155,11 +156,13 @@ export class AuditLogger {
         CREATE INDEX IF NOT EXISTS idx_audit_request ON audit_log(event_type, timestamp);
       `);
       // Load last hash for chain continuity
-      const row = this.db.prepare('SELECT entry_hash FROM audit_log ORDER BY id DESC LIMIT 1').get() as SqliteLogRow | undefined;
+      const row = this.db
+        .prepare("SELECT entry_hash FROM audit_log ORDER BY id DESC LIMIT 1")
+        .get() as SqliteLogRow | undefined;
       this.lastHash = row?.entry_hash ?? null;
     } catch {
       // Fallback to console if SQLite unavailable
-      this.output = 'console';
+      this.output = "console";
     }
   }
 
@@ -168,7 +171,10 @@ export class AuditLogger {
       // Generate ephemeral secret if not provided (production should always provide one)
       this.hmacSecret = process.env.AUDIT_HMAC_SECRET || crypto.randomUUID();
     }
-    return crypto.createHmac('sha256', this.hmacSecret).update(data).digest('hex');
+    return crypto
+      .createHmac("sha256", this.hmacSecret)
+      .update(data)
+      .digest("hex");
   }
 
   private rotateFileIfNeeded(): void {
@@ -177,7 +183,7 @@ export class AuditLogger {
     if (this.writeCount >= this.ROTATE_AFTER_LINES) {
       const ext = path.extname(this.filePath);
       const base = this.filePath.slice(0, -ext.length) || this.filePath;
-      const rotated = `${base}.${new Date().toISOString().replace(/[:.]/g, '-')}${ext || '.log'}`;
+      const rotated = `${base}.${new Date().toISOString().replace(/[:.]/g, "-")}${ext || ".log"}`;
       try {
         fs.renameSync(this.filePath, rotated);
         this.writeCount = 0;
@@ -190,10 +196,14 @@ export class AuditLogger {
 
   public static getInstance(): AuditLogger {
     if (!AuditLogger.instance) {
-      const isProd = process.env.NODE_ENV === 'production';
+      const isStrict = isStrictEnvironment();
       AuditLogger.instance = new AuditLogger({
-        output: (process.env.AUDIT_LOG_OUTPUT as AuditLoggerOptions['output']) ?? (isProd ? 'file' : 'console'),
-        filePath: process.env.AUDIT_LOG_FILE || (isProd ? '/var/log/ferroui/audit.log' : undefined),
+        output:
+          (process.env.AUDIT_LOG_OUTPUT as AuditLoggerOptions["output"]) ??
+          (isStrict ? "file" : "console"),
+        filePath:
+          process.env.AUDIT_LOG_FILE ||
+          (isStrict ? "/var/log/ferroui/audit.log" : undefined),
         sqlitePath: process.env.AUDIT_SQLITE_PATH,
         hmacSecret: process.env.AUDIT_HMAC_SECRET,
       });
@@ -206,35 +216,43 @@ export class AuditLogger {
   }
 
   public log(event: AuditEvent): void {
-    const stamped: AuditEvent = { ...event, timestamp: new Date().toISOString() };
+    const stamped: AuditEvent = {
+      ...event,
+      timestamp: new Date().toISOString(),
+    };
 
-    if (this.output === 'memory') {
+    if (this.output === "memory") {
       this.events.push(stamped);
       return;
     }
 
     const line = JSON.stringify(stamped);
     const prevHash = this.lastHash;
-    const entryHash = this.computeHmac(`${prevHash ?? ''}:${line}`);
+    const entryHash = this.computeHmac(`${prevHash ?? ""}:${line}`);
     this.lastHash = entryHash;
 
-    if (this.output === 'console') {
+    if (this.output === "console") {
       process.stdout.write(`[AUDIT] ${line}\n`);
       this.events.push(stamped);
-    } else if (this.output === 'file' && this.filePath) {
+    } else if (this.output === "file" && this.filePath) {
       this.rotateFileIfNeeded();
-      const chainLine = JSON.stringify({ ...stamped, _chain: { prev: prevHash, hash: entryHash } });
+      const chainLine = JSON.stringify({
+        ...stamped,
+        _chain: { prev: prevHash, hash: entryHash },
+      });
       try {
-        fs.appendFileSync(this.filePath, chainLine + '\n', 'utf-8');
+        fs.appendFileSync(this.filePath, chainLine + "\n", "utf-8");
       } catch {
         process.stdout.write(`[AUDIT] ${line}\n`);
       }
       this.events.push(stamped);
-    } else if (this.output === 'sqlite' && this.db) {
+    } else if (this.output === "sqlite" && this.db) {
       try {
-        this.db.prepare(
-          'INSERT INTO audit_log (timestamp, event_type, event_json, prev_hash, entry_hash) VALUES (?, ?, ?, ?, ?)'
-        ).run(stamped.timestamp, stamped.type, line, prevHash, entryHash);
+        this.db
+          .prepare(
+            "INSERT INTO audit_log (timestamp, event_type, event_json, prev_hash, entry_hash) VALUES (?, ?, ?, ?, ?)",
+          )
+          .run(stamped.timestamp, stamped.type, line, prevHash, entryHash);
       } catch {
         process.stdout.write(`[AUDIT] ${line}\n`);
       }
@@ -242,23 +260,38 @@ export class AuditLogger {
     }
   }
 
-  public verifyChain(): { valid: boolean; tamperedAt?: number; reason?: string } {
-    if (this.output === 'sqlite' && this.db) {
-      const rows = this.db.prepare('SELECT * FROM audit_log ORDER BY id ASC').all() as SqliteLogRow[];
+  public verifyChain(): {
+    valid: boolean;
+    tamperedAt?: number;
+    reason?: string;
+  } {
+    if (this.output === "sqlite" && this.db) {
+      const rows = this.db
+        .prepare("SELECT * FROM audit_log ORDER BY id ASC")
+        .all() as SqliteLogRow[];
       let prevHash: string | null = null;
       for (const row of rows) {
-        const computed = this.computeHmac(`${prevHash ?? ''}:${row.event_json}`);
+        const computed = this.computeHmac(
+          `${prevHash ?? ""}:${row.event_json}`,
+        );
         if (computed !== row.entry_hash) {
-          return { valid: false, tamperedAt: row.id, reason: 'Hash mismatch' };
+          return { valid: false, tamperedAt: row.id, reason: "Hash mismatch" };
         }
         if (row.prev_hash !== prevHash) {
-          return { valid: false, tamperedAt: row.id, reason: 'Chain link broken' };
+          return {
+            valid: false,
+            tamperedAt: row.id,
+            reason: "Chain link broken",
+          };
         }
         prevHash = row.entry_hash;
       }
       return { valid: true };
     }
-    return { valid: false, reason: 'Chain verification only supported for SQLite backend' };
+    return {
+      valid: false,
+      reason: "Chain verification only supported for SQLite backend",
+    };
   }
 
   public getEvents(limit?: number): AuditEvent[] {
@@ -267,7 +300,7 @@ export class AuditLogger {
   }
 
   public toJsonLines(): string[] {
-    return this.events.map(e => JSON.stringify(e));
+    return this.events.map((e) => JSON.stringify(e));
   }
 
   public clear(): void {
@@ -276,4 +309,3 @@ export class AuditLogger {
 }
 
 export const auditLogger = AuditLogger.getInstance();
-

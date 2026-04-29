@@ -358,4 +358,155 @@ describe("useFerroUIStream", () => {
     // Should process without crashing, phase is still null because chunk didn't parse (no \\n\\n)
     expect(result.current.phase).toBeNull();
   });
+
+  describe("Cryptographic Verification", () => {
+    const mockPublicKey =
+      "-----BEGIN PUBLIC KEY-----MCowBQYDK2VwAyEA79u5O5z4l9P3v9v9v9v9v9v9v9v9v9v9v9v9v9v9v9E=-----END PUBLIC KEY-----";
+    const mockSignature = "bW9jay1zaWduYXR1cmU=";
+
+    beforeEach(() => {
+      const mockCrypto = {
+        subtle: {
+          importKey: vi.fn().mockResolvedValue({}),
+          verify: vi.fn().mockResolvedValue(true),
+        },
+      };
+      vi.stubGlobal("crypto", mockCrypto);
+    });
+
+    it("verifies layout_chunk signature when publicKey is provided", async () => {
+      const chunks = [
+        `data: {"type": "layout_chunk", "layout": {"type": "button", "metadata": {"signature": "${mockSignature}"}}}\n\n`,
+      ];
+
+      vi.mocked(schema.validateLayout).mockReturnValueOnce({
+        valid: true,
+        data: { type: "button" },
+      } as any);
+
+      globalFetchMock.mockResolvedValueOnce({
+        ok: true,
+        body: {
+          getReader: () => createStreamReader(chunks),
+        },
+      });
+
+      const { result } = renderHook(() =>
+        useFerroUIStream({ publicKey: mockPublicKey }),
+      );
+
+      await act(async () => {
+        await result.current.send("test", {
+          userId: "1",
+          requestId: "1",
+          permissions: [],
+          locale: "en",
+        });
+      });
+
+      expect(globalThis.crypto.subtle.verify).toHaveBeenCalled();
+      expect(result.current.layout).toEqual({ type: "button" });
+      expect(result.current.error).toBeNull();
+    });
+
+    it("aborts and sets error if signature is missing when publicKey is provided", async () => {
+      const chunks = [
+        `data: {"type": "layout_chunk", "layout": {"type": "button"}}\n\n`,
+      ];
+
+      globalFetchMock.mockResolvedValueOnce({
+        ok: true,
+        body: {
+          getReader: () => createStreamReader(chunks),
+        },
+      });
+
+      const { result } = renderHook(() =>
+        useFerroUIStream({ publicKey: mockPublicKey }),
+      );
+
+      await act(async () => {
+        await result.current.send("test", {
+          userId: "1",
+          requestId: "1",
+          permissions: [],
+          locale: "en",
+        });
+      });
+
+      expect(abortSpy).toHaveBeenCalled();
+      expect(result.current.error).toBe("Invalid chunk signature detected");
+      expect(result.current.loading).toBe(false);
+    });
+
+    it("aborts and sets error if signature is invalid", async () => {
+      const chunks = [
+        `data: {"type": "layout_chunk", "layout": {"type": "button", "metadata": {"signature": "${mockSignature}"}}}\n\n`,
+      ];
+
+      vi.mocked(globalThis.crypto.subtle.verify).mockResolvedValueOnce(false);
+
+      globalFetchMock.mockResolvedValueOnce({
+        ok: true,
+        body: {
+          getReader: () => createStreamReader(chunks),
+        },
+      });
+
+      const { result } = renderHook(() =>
+        useFerroUIStream({ publicKey: mockPublicKey }),
+      );
+
+      await act(async () => {
+        await result.current.send("test", {
+          userId: "1",
+          requestId: "1",
+          permissions: [],
+          locale: "en",
+        });
+      });
+
+      expect(result.current.error).toBe("Invalid chunk signature detected");
+      expect(result.current.loading).toBe(false);
+    });
+
+    it("handles verification error and returns false", async () => {
+      const chunks = [
+        `data: {"type": "layout_chunk", "layout": {"type": "button", "metadata": {"signature": "${mockSignature}"}}}\n\n`,
+      ];
+
+      vi.mocked(globalThis.crypto.subtle.verify).mockRejectedValueOnce(
+        new Error("Verification failed"),
+      );
+      const consoleErrorSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+
+      globalFetchMock.mockResolvedValueOnce({
+        ok: true,
+        body: {
+          getReader: () => createStreamReader(chunks),
+        },
+      });
+
+      const { result } = renderHook(() =>
+        useFerroUIStream({ publicKey: mockPublicKey }),
+      );
+
+      await act(async () => {
+        await result.current.send("test", {
+          userId: "1",
+          requestId: "1",
+          permissions: [],
+          locale: "en",
+        });
+      });
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "[FerroUI] Verification failed:",
+        expect.any(Error),
+      );
+      expect(result.current.error).toBe("Invalid chunk signature detected");
+    });
+  });
 });

@@ -1,29 +1,22 @@
 /**
  * Shared utilities for FerroUI monorepo.
+ * Main entry point (Browser Safe).
  */
 import crypto from "node:crypto";
 
-/**
- * Validates if a string is a valid UUID v4.
- */
-export function isUuid(id: string): boolean {
-  const uuidRegex =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-  return uuidRegex.test(id);
-}
-
-/**
- * Deep clones an object.
- */
-export function deepClone<T>(obj: T): T {
-  return JSON.parse(JSON.stringify(obj));
-}
+export * from "./utils.js";
 
 /**
  * Returns a unique request ID.
+ * @deprecated Use crypto.randomUUID() directly or import from @ferroui/shared/node-crypto for server-side.
  */
 export function generateRequestId(): string {
+  // Use globalThis safely for modern environments
+  if (
+    typeof globalThis !== "undefined" &&
+    (globalThis as any).crypto?.randomUUID
+  ) {
+    return (globalThis as any).crypto.randomUUID();
+  }
   return crypto.randomUUID();
 }
-
-export * from "./crypto.js";

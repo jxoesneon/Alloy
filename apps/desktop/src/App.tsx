@@ -1,20 +1,30 @@
-import { useEffect, useState } from 'react';
-import { useFerroUILayout } from '../../web/src/hooks/useFerroUILayout.js';
-import { FerroUIRenderer } from '../../web/src/components/FerroUIRenderer.js';
-import { actionRouter, type ActionRouterContext } from '../../web/src/services/ActionRouter.js';
-import '../../web/src/components/components-registration.js';
-import '../../web/src/App.css';
+import { useEffect, useState } from "react";
+import { useFerroUIStream, FerroUIRenderer } from "@ferroui/renderer";
+import {
+  actionRouter,
+  type ActionRouterContext,
+} from "../../web/src/services/ActionRouter.js";
+import "../../web/src/components/components-registration.js";
+import "./index.css";
 
 interface Toast {
   id: string;
   message: string;
-  variant: 'info' | 'success' | 'warning' | 'error';
+  variant: "info" | "success" | "warning" | "error";
 }
 
 function App() {
-  const { layout, loading, error, refresh } = useFerroUILayout({
-    url: 'http://localhost:3001/api/layout', // Desktop app connects to local engine
+  const { layout, loading, error, send } = useFerroUIStream({
+    endpoint: "http://localhost:3001/api/layout", // Desktop app connects to local engine
   });
+
+  const refresh = () =>
+    send("Show standard diagnostic dashboard", {
+      userId: "desktop-user",
+      requestId: crypto.randomUUID(),
+      permissions: [],
+      locale: "en",
+    });
 
   const [toasts, setToasts] = useState<Toast[]>([]);
 
@@ -22,7 +32,10 @@ function App() {
   useEffect(() => {
     const context: ActionRouterContext = {
       refresh,
-      showToast: (message: string, variant: 'info' | 'success' | 'warning' | 'error') => {
+      showToast: (
+        message: string,
+        variant: "info" | "success" | "warning" | "error",
+      ) => {
         const id = Math.random().toString(36).substring(2, 9);
         setToasts((prev) => [...prev, { id, message, variant }]);
         setTimeout(() => {
@@ -30,7 +43,7 @@ function App() {
         }, 3000);
       },
       navigate: (path: string, params?: Record<string, unknown>) => {
-        window.history.pushState(params ?? null, '', path);
+        window.history.pushState(params ?? null, "", path);
       },
     };
 
@@ -38,11 +51,17 @@ function App() {
   }, [refresh]);
 
   if (error) {
+    const errorMsg =
+      typeof error === "string"
+        ? error
+        : (error as any).message || "Unknown error";
     return (
       <div className="min-h-screen bg-red-50 flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white shadow-xl rounded-lg p-6 border border-red-200">
-          <h1 className="text-2xl font-bold text-red-700 mb-4">Engine Connection Error</h1>
-          <p className="text-red-600 mb-6">{error.message}</p>
+          <h1 className="text-2xl font-bold text-red-700 mb-4">
+            Engine Connection Error
+          </h1>
+          <p className="text-red-600 mb-6">{errorMsg}</p>
           <button
             onClick={refresh}
             className="w-full py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
@@ -57,13 +76,15 @@ function App() {
   return (
     <div className="ferroui-app min-h-screen relative">
       {/* Main Layout Rendering */}
-      {layout?.layout != null && <FerroUIRenderer component={layout.layout} />}
+      {layout != null && <FerroUIRenderer layout={layout} />}
 
       {/* Loading Indicator */}
       {loading && (
         <div className="fixed bottom-4 right-4 bg-white shadow-lg rounded-full px-4 py-2 flex items-center space-x-2 border border-blue-200">
           <div className="animate-spin h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full"></div>
-          <span className="text-sm font-medium text-blue-800">Streaming Layout...</span>
+          <span className="text-sm font-medium text-blue-800">
+            Streaming Layout...
+          </span>
         </div>
       )}
 
@@ -73,10 +94,13 @@ function App() {
           <div
             key={toast.id}
             className={`px-6 py-3 rounded-lg shadow-xl text-white font-medium animate-bounce-in ${
-              toast.variant === 'error' ? 'bg-red-600' :
-              toast.variant === 'success' ? 'bg-green-600' :
-              toast.variant === 'warning' ? 'bg-yellow-600' :
-              'bg-blue-600'
+              toast.variant === "error"
+                ? "bg-red-600"
+                : toast.variant === "success"
+                  ? "bg-green-600"
+                  : toast.variant === "warning"
+                    ? "bg-yellow-600"
+                    : "bg-blue-600"
             }`}
           >
             {toast.message}

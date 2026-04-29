@@ -1,6 +1,6 @@
-import { useState, useCallback, useRef } from 'react';
-import { validateLayout } from '@ferroui/schema';
-import type { FerroUIComponent } from '@ferroui/schema';
+import { useState, useCallback, useRef } from "react";
+import { validateLayout } from "@ferroui/schema";
+import type { FerroUIComponent } from "@ferroui/schema";
 
 export interface FerroUIStreamState {
   /** Current layout tree (may be partial during streaming). */
@@ -22,6 +22,51 @@ export interface UseFerroUIStreamOptions {
   endpoint?: string;
   /** Additional headers (e.g., Authorization). */
   headers?: Record<string, string>;
+  /** Ed25519 public key for verifying chunk signatures. */
+  publicKey?: string;
+}
+
+/**
+ * Verifies an Ed25519 signature of a chunk using the Web Crypto API.
+ */
+async function verifyChunk(
+  content: string,
+  signature: string,
+  publicKeyPem: string,
+): Promise<boolean> {
+  try {
+    const pemContents = publicKeyPem
+      .replace(/-----BEGIN PUBLIC KEY-----/, "")
+      .replace(/-----END PUBLIC KEY-----/, "")
+      .replace(/\s/g, "");
+
+    const binaryDer = Uint8Array.from(atob(pemContents), (c) =>
+      c.charCodeAt(0),
+    );
+
+    const publicKey = await window.crypto.subtle.importKey(
+      "spki",
+      binaryDer,
+      { name: "Ed25519" },
+      false,
+      ["verify"],
+    );
+
+    const signatureBin = Uint8Array.from(atob(signature), (c) =>
+      c.charCodeAt(0),
+    );
+    const contentBin = new TextEncoder().encode(content);
+
+    return await window.crypto.subtle.verify(
+      { name: "Ed25519" },
+      publicKey,
+      signatureBin,
+      contentBin,
+    );
+  } catch (err) {
+    console.error("[FerroUI] Verification failed:", err);
+    return false;
+  }
 }
 
 /**
@@ -34,7 +79,7 @@ export interface UseFerroUIStreamOptions {
  * ```
  */
 export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
-  const endpoint = options.endpoint ?? '/api/ferroui/process';
+  const endpoint = options.endpoint ?? "/api/ferroui/process";
   const abortRef = useRef<AbortController | null>(null);
 
   const [state, setState] = useState<FerroUIStreamState>({
@@ -47,7 +92,15 @@ export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
   });
 
   const send = useCallback(
-    async (prompt: string, context: { userId: string; requestId: string; permissions: string[]; locale: string }) => {
+    async (
+      prompt: string,
+      context: {
+        userId: string;
+        requestId: string;
+        permissions: string[];
+        locale: string;
+      },
+    ) => {
       // Abort any in-flight request
       abortRef.current?.abort();
       const controller = new AbortController();
@@ -64,9 +117,9 @@ export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
 
       try {
         const response = await fetch(endpoint, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             ...options.headers,
           },
           body: JSON.stringify({ prompt, context }),
@@ -74,27 +127,37 @@ export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
         });
 
         if (!response.ok) {
-          const errBody = await response.json().catch(() => ({ error: response.statusText }));
-          setState(prev => ({ ...prev, loading: false, error: (errBody as { error: string }).error ?? 'Request failed' }));
+          const errBody = await response
+            .json()
+            .catch(() => ({ error: response.statusText }));
+          setState((prev) => ({
+            ...prev,
+            loading: false,
+            error: (errBody as { error: string }).error ?? "Request failed",
+          }));
           return;
         }
 
         const reader = response.body?.getReader();
         if (!reader) {
-          setState(prev => ({ ...prev, loading: false, error: 'No stream body' }));
+          setState((prev) => ({
+            ...prev,
+            loading: false,
+            error: "No stream body",
+          }));
           return;
         }
 
         const decoder = new TextDecoder();
-        let buffer = '';
+        let buffer = "";
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
           buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n\n');
-          buffer = lines.pop() ?? '';
+          const lines = buffer.split("\n\n");
+          buffer = lines.pop() ?? "";
 
           for (const line of lines) {
             const match = line.match(/^data:\s*(.+)$/);
@@ -104,28 +167,33 @@ export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
               const chunk = JSON.parse(match[1]);
 
               switch (chunk.type) {
-                case 'phase':
-                  setState(prev => ({ ...prev, phase: chunk.phase }));
+                case "phase":
+                  setState((prev) => ({ ...prev, phase: chunk.phase }));
                   break;
 
-                case 'tool_call':
-                  setState(prev => ({
+                case "tool_call":
+                  setState((prev) => ({
                     ...prev,
-                    toolCalls: [...prev.toolCalls, { name: chunk.toolCall.name, args: chunk.toolCall.args }],
+                    toolCalls: [
+                      ...prev.toolCalls,
+                      { name: chunk.toolCall.name, args: chunk.toolCall.args },
+                    ],
                   }));
                   break;
 
-                case 'tool_output':
-                  setState(prev => ({
+                case "tool_output":
+                  setState((prev) => ({
                     ...prev,
-                    toolCalls: prev.toolCalls.map(tc =>
-                      tc.name === chunk.toolOutput.name ? { ...tc, result: chunk.toolOutput.result } : tc,
+                    toolCalls: prev.toolCalls.map((tc) =>
+                      tc.name === chunk.toolOutput.name
+                        ? { ...tc, result: chunk.toolOutput.result }
+                        : tc,
                     ),
                   }));
                   break;
 
-                case 'complete':
-                  setState(prev => ({
+                case "complete":
+                  setState((prev) => ({
                     ...prev,
                     layout: chunk.layout ?? prev.layout,
                     loading: false,
@@ -133,23 +201,74 @@ export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
                   }));
                   break;
 
-                case 'layout_chunk':
+                case "layout_chunk":
                   // Strict client-side validation
                   if (chunk.layout) {
+                    // Intermediate Chunk Verification (Audit Phase 3)
+                    if (options.publicKey) {
+                      const signature =
+                        chunk.signature ?? chunk.layout.metadata?.signature;
+                      if (!signature) {
+                        controller.abort();
+                        setState((prev) => ({
+                          ...prev,
+                          loading: false,
+                          error: "Invalid chunk signature detected",
+                        }));
+                        return;
+                      }
+
+                      // The engine signs the layout WITHOUT the signature/publicKey metadata to avoid circularity
+                      const layoutToVerify = JSON.parse(
+                        JSON.stringify(chunk.layout),
+                      );
+                      if (layoutToVerify.metadata) {
+                        delete layoutToVerify.metadata.signature;
+                        delete layoutToVerify.metadata.publicKey;
+                      }
+
+                      const content = JSON.stringify(layoutToVerify);
+                      const isValid = await verifyChunk(
+                        content,
+                        signature,
+                        options.publicKey,
+                      );
+
+                      if (!isValid) {
+                        controller.abort();
+                        setState((prev) => ({
+                          ...prev,
+                          loading: false,
+                          error: "Invalid chunk signature detected",
+                        }));
+                        return;
+                      }
+                    }
+
                     const validationResult = validateLayout(chunk.layout);
                     if (validationResult.valid) {
-                      setState(prev => ({ ...prev, layout: validationResult.data as unknown as FerroUIComponent }));
+                      setState((prev) => ({
+                        ...prev,
+                        layout:
+                          validationResult.data as unknown as FerroUIComponent,
+                      }));
                     } else {
-                      console.error('[FerroUI] Client validation failed:', validationResult.errors);
-                      setState(prev => ({ ...prev, error: 'Received invalid layout structure from engine' }));
+                      console.error(
+                        "[FerroUI] Client validation failed:",
+                        validationResult.errors,
+                      );
+                      setState((prev) => ({
+                        ...prev,
+                        error: "Received invalid layout structure from engine",
+                      }));
                     }
                   }
                   break;
 
-                case 'error':
-                  setState(prev => ({
+                case "error":
+                  setState((prev) => ({
                     ...prev,
-                    error: chunk.error?.message ?? 'Unknown stream error',
+                    error: chunk.error?.message ?? "Unknown stream error",
                     loading: chunk.error?.retryable ? prev.loading : false,
                   }));
                   break;
@@ -161,10 +280,14 @@ export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
         }
 
         // If we exit the loop without a complete chunk, mark as done
-        setState(prev => (prev.loading ? { ...prev, loading: false } : prev));
+        setState((prev) => (prev.loading ? { ...prev, loading: false } : prev));
       } catch (err) {
-        if ((err as Error).name === 'AbortError') return;
-        setState(prev => ({ ...prev, loading: false, error: (err as Error).message }));
+        if ((err as Error).name === "AbortError") return;
+        setState((prev) => ({
+          ...prev,
+          loading: false,
+          error: (err as Error).message,
+        }));
       }
     },
     [endpoint, options.headers],
@@ -172,7 +295,7 @@ export function useFerroUIStream(options: UseFerroUIStreamOptions = {}) {
 
   const abort = useCallback(() => {
     abortRef.current?.abort();
-    setState(prev => ({ ...prev, loading: false }));
+    setState((prev) => ({ ...prev, loading: false }));
   }, []);
 
   return { ...state, send, abort };

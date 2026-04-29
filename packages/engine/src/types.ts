@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { z } from 'zod';
+import { z } from "zod";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FerroUILayout, FerroUIComponent } from '@ferroui/schema';
+import { FerroUILayout, FerroUIComponent } from "@ferroui/schema";
 
 export interface RequestContext {
   userId: string;
@@ -47,7 +47,13 @@ export interface LlmResponse {
 }
 
 export interface EngineChunk {
-  type: 'phase' | 'tool_call' | 'tool_output' | 'layout_chunk' | 'complete' | 'error';
+  type:
+    | "phase"
+    | "tool_call"
+    | "tool_output"
+    | "layout_chunk"
+    | "complete"
+    | "error";
   phase?: 1 | 2;
   content?: string;
   toolCall?: {
@@ -64,6 +70,10 @@ export interface EngineChunk {
     message: string;
     retryable: boolean;
   };
+  /** Ed25519 signature of the chunk content (for layout_chunks) */
+  signature?: string;
+  /** Public key used to verify the signature */
+  publicKey?: string;
 }
 
 export interface EngineConfig {

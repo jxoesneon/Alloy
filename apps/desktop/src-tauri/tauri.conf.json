@@ -12,10 +12,16 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true,
+      "all": false,
       "shell": {
         "all": false,
         "open": true
+      },
+      "dialog": {
+        "all": true
+      },
+      "path": {
+        "all": true
       }
     },
     "bundle": {
@@ -52,7 +58,7 @@
       }
     },
     "security": {
-      "csp": "default-src 'self'; connect-src 'self' http://localhost:* https://*"
+      "csp": "default-src 'self'; connect-src 'self' http://localhost:4000 http://localhost:3001"
     },
     "windows": [
       {

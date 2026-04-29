@@ -1,5 +1,6 @@
 # FerroUI Workspace Rules
 
+0. **Ciel's Foundational Mandates**: Reasoning-Before-Action and Research-Before-Strategy.
 1. **Strict Node Enforcer**: Always use Node 25+ for all commands.
 2. **Monorepo Awareness**: Use `pnpm -F <package>` for package-specific tasks.
 3. **Security First**: Never add `continue-on-error: true` to security steps in CI.
