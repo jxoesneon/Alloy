@@ -268,7 +268,7 @@ describe("Security headers", () => {
 describe("Admin endpoints", () => {
   it("GET /admin/logs → returns events array", async () => {
     const res = await fetch(`${baseUrl}/admin/logs`, {
-      headers: authHeader("admin-user", ["admin"]),
+      headers: authHeader("admin-user", ["system.admin"]),
     });
     expect(res.status).toBe(200);
     const body = (await res.json()) as Record<string, unknown>;
@@ -278,7 +278,7 @@ describe("Admin endpoints", () => {
   it("POST /admin/circuit-reset → resets circuit breaker", async () => {
     const res = await fetch(`${baseUrl}/admin/circuit-reset`, {
       method: "POST",
-      headers: authHeader("admin-user", ["admin"]),
+      headers: authHeader("admin-user", ["system.admin"]),
     });
     expect(res.status).toBe(200);
     const body = (await res.json()) as Record<string, unknown>;
@@ -290,7 +290,7 @@ describe("Admin endpoints", () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...authHeader("admin-user", ["admin"]),
+        ...authHeader("admin-user", ["system.admin"]),
       },
       body: JSON.stringify({}),
     });
@@ -302,7 +302,7 @@ describe("Admin endpoints", () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...authHeader("admin-user", ["admin"]),
+        ...authHeader("admin-user", ["system.admin"]),
       },
       body: JSON.stringify({ pattern: "test.*" }),
     });
