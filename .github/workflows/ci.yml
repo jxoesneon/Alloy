@@ -87,7 +87,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           queries: security-extended,security-and-quality
@@ -101,7 +101,7 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm -r --if-present run build
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: /language:${{ matrix.language }}
 
@@ -182,7 +182,7 @@ jobs:
           exit-code: '0'
           ignore-unfixed: true
       - name: Upload Trivy (image)
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-image.sarif'
@@ -197,7 +197,7 @@ jobs:
           severity: 'HIGH,CRITICAL'
           skip-dirs: 'node_modules,packages/*/node_modules,apps/*/node_modules'
       - name: Upload Trivy (fs)
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-fs.sarif'
