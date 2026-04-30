@@ -187,7 +187,8 @@ export function createServer(
   assertProductionInvariants();
 
   const app = express();
-  const port = options.port || process.env.PORT || 4000;
+  const port =
+    options.port !== undefined ? options.port : process.env.PORT || 4000;
   const provider = options.provider || new AnthropicProvider(); // Default to Anthropic
   const engine = new FerroUIEngine(provider);
 
@@ -347,12 +348,10 @@ export function createServer(
       });
     } catch (err) {
       console.error("[GDPR] Deletion failed for userId", userId, err);
-      res
-        .status(500)
-        .json({
-          error: "Data deletion failed",
-          detail: err instanceof Error ? err.message : String(err),
-        });
+      res.status(500).json({
+        error: "Data deletion failed",
+        detail: err instanceof Error ? err.message : String(err),
+      });
     }
   });
 
@@ -435,17 +434,15 @@ export function createServer(
     if (provider instanceof ProviderRouter) {
       res.status(200).json({ providers: provider.getHealthSnapshot() });
     } else {
-      res
-        .status(200)
-        .json({
-          providers: {
-            [provider.id]: {
-              failures: 0,
-              circuitOpen: false,
-              providerId: provider.id,
-            },
+      res.status(200).json({
+        providers: {
+          [provider.id]: {
+            failures: 0,
+            circuitOpen: false,
+            providerId: provider.id,
           },
-        });
+        },
+      });
     }
   });
 
@@ -538,11 +535,9 @@ export function createServer(
 
     // Strict Identity Verification (Phase 4): auth is mandatory for this route
     if (!auth) {
-      return res
-        .status(401)
-        .json({
-          error: "Unauthorized: Missing or invalid authentication token",
-        });
+      return res.status(401).json({
+        error: "Unauthorized: Missing or invalid authentication token",
+      });
     }
 
     const context: RequestContext = {
@@ -556,12 +551,9 @@ export function createServer(
     }
 
     if (!context || !context.userId || !context.requestId) {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Missing or invalid context (userId and requestId are required)",
-        });
+      return res.status(400).json({
+        error: "Missing or invalid context (userId and requestId are required)",
+      });
     }
 
     // Basic input sanitization
