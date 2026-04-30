@@ -87,18 +87,12 @@ export function redactPII(data: any): any {
     }
 
     return data
-      .replace(
-        /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
-        "[REDACTED_EMAIL]",
-      )
+      .replace(/[^\s@]+@[^\s@]+\.[^\s@]{2,}/g, "[REDACTED_EMAIL]")
       .replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[REDACTED_SSN]")
       .replace(/\b\d{4}-\d{4}-\d{4}-\d{4}\b/g, "[REDACTED_CARD]")
       .replace(/\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/g, "[REDACTED_IBAN]")
       .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g, "[REDACTED_IP]")
-      .replace(
-        /\b(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g,
-        "[REDACTED_PHONE]",
-      );
+      .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, "[REDACTED_PHONE]");
   }
 
   if (Array.isArray(data)) {
@@ -116,9 +110,15 @@ export function redactPII(data: any): any {
       return data;
     }
 
-    const redacted: Record<string, any> = {};
+    const redacted: Record<string, any> = Object.create(null);
     for (const [key, value] of Object.entries(data)) {
       const lowerKey = key.toLowerCase();
+
+      // Prevent prototype pollution via key name
+      if (lowerKey === "__proto__" || lowerKey === "constructor") {
+        continue;
+      }
+
       // Sensitivity based on keys + recursive redaction of values
       if (
         [
@@ -147,6 +147,7 @@ export function redactPII(data: any): any {
  * Escapes XML special characters to prevent prompt injection breakouts
  */
 function escapeXml(text: string): string {
+  if (typeof text !== "string") return "";
   return text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -180,7 +181,10 @@ export async function* runDualPhasePipeline(
   const isSuspicious = firewallResult.blocked;
   if (isSuspicious) {
     console.warn(
-      `[Security] Prompt blocked by ${firewallResult.provider} firewall in request ${context.requestId}: ${firewallResult.reason}`,
+      "[Security] Prompt blocked by %s firewall in request %s: %s",
+      firewallResult.provider,
+      String(context.requestId).replace(/[\r\n]/g, ""),
+      String(firewallResult.reason).replace(/[\r\n]/g, ""),
     );
     dailyBudgetStore.recordSafetyEvent(context.tenantId ?? "default");
     yield {

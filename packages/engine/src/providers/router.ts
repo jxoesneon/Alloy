@@ -81,7 +81,9 @@ export class ProviderRouter implements LlmProvider {
     if (h.failures >= CIRCUIT_OPEN_THRESHOLD) {
       h.circuitOpen = true;
       console.warn(
-        `[ProviderRouter] Circuit OPEN for provider "${providerId}" after ${h.failures} failures`,
+        "[ProviderRouter] Circuit OPEN for provider %s after %d failures",
+        providerId,
+        h.failures,
       );
     }
     this.health.set(providerId, h);

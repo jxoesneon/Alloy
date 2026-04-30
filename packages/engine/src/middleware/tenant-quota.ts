@@ -12,19 +12,22 @@
  * (falls back to "default" for backward compat).
  */
 
-import type { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from "express";
 
 export interface TenantBudget {
   dailyCostLimitCents: number;
   maxSafetyEventsPerDay: number;
 }
 
-export const PROVIDER_PRICING: Record<string, { input: number; output: number }> = {
-  'anthropic': { input: 0.003, output: 0.015 }, // per 1K tokens
-  'openai': { input: 0.005, output: 0.015 },
-  'google': { input: 0.0035, output: 0.0105 },
-  'ollama': { input: 0, output: 0 },
-  'llama-cpp': { input: 0, output: 0 },
+export const PROVIDER_PRICING: Record<
+  string,
+  { input: number; output: number }
+> = {
+  anthropic: { input: 0.003, output: 0.015 }, // per 1K tokens
+  openai: { input: 0.005, output: 0.015 },
+  google: { input: 0.0035, output: 0.0105 },
+  ollama: { input: 0, output: 0 },
+  "llama-cpp": { input: 0, output: 0 },
 };
 
 interface QuotaBucket {
@@ -67,16 +70,19 @@ export class DailyBudgetStore {
   checkBudget(tenantId: string, estimatedCents: number): boolean {
     const budget = getTenantBudget(tenantId);
     const usage = this.getUsage(tenantId);
-    return (usage.cents + estimatedCents) <= budget.dailyCostLimitCents;
+    return usage.cents + estimatedCents <= budget.dailyCostLimitCents;
   }
 
   recordSafetyEvent(tenantId: string): void {
     const usage = this.getUsage(tenantId);
     usage.safetyEvents += 1;
-    
+
     const budget = getTenantBudget(tenantId);
     if (usage.safetyEvents >= budget.maxSafetyEventsPerDay) {
-      console.error(`[Safety] Daily safety event limit exceeded for tenant ${tenantId}. Further requests will be blocked.`);
+      console.error(
+        "[Safety] Daily safety event limit exceeded for tenant %s. Further requests will be blocked.",
+        tenantId.replace(/[\r\n]/g, ""),
+      );
     }
   }
 
@@ -103,16 +109,28 @@ export const dailyBudgetStore = new DailyBudgetStore();
 function getTenantRpm(tenantId: string): number {
   const override = process.env[`TENANT_QUOTA_${tenantId.toUpperCase()}_RPM`];
   if (override) return parseInt(override, 10);
-  return parseInt(process.env.TENANT_QUOTA_DEFAULT_RPM ?? '60', 10);
+  return parseInt(process.env.TENANT_QUOTA_DEFAULT_RPM ?? "60", 10);
 }
 
 export function getTenantBudget(tenantId: string): TenantBudget {
-  const costLimit = process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_DAILY_COST_CENTS`];
-  const safetyLimit = process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_MAX_SAFETY_EVENTS`];
+  const costLimit =
+    process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_DAILY_COST_CENTS`];
+  const safetyLimit =
+    process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_MAX_SAFETY_EVENTS`];
 
   return {
-    dailyCostLimitCents: costLimit ? parseInt(costLimit, 10) : parseInt(process.env.TENANT_BUDGET_DEFAULT_DAILY_COST_CENTS ?? '1000', 10),
-    maxSafetyEventsPerDay: safetyLimit ? parseInt(safetyLimit, 10) : parseInt(process.env.TENANT_BUDGET_DEFAULT_MAX_SAFETY_EVENTS ?? '5', 10),
+    dailyCostLimitCents: costLimit
+      ? parseInt(costLimit, 10)
+      : parseInt(
+          process.env.TENANT_BUDGET_DEFAULT_DAILY_COST_CENTS ?? "1000",
+          10,
+        ),
+    maxSafetyEventsPerDay: safetyLimit
+      ? parseInt(safetyLimit, 10)
+      : parseInt(
+          process.env.TENANT_BUDGET_DEFAULT_MAX_SAFETY_EVENTS ?? "5",
+          10,
+        ),
   };
 }
 
@@ -137,13 +155,18 @@ function checkInMemory(tenantId: string, rpm: number): boolean {
  * Must be placed after JSON body parsing so `req.body.context.tenantId` is available.
  * Skips quota enforcement on non-API paths.
  */
-export function tenantQuotaMiddleware(req: Request, res: Response, next: NextFunction): void {
-  if (!req.path.startsWith('/api/')) {
+export function tenantQuotaMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void {
+  if (!req.path.startsWith("/api/")) {
     next();
     return;
   }
 
-  const tenantId: string = (req.body?.context?.tenantId as string | undefined) ?? 'default';
+  const tenantId: string =
+    (req.body?.context?.tenantId as string | undefined) ?? "default";
 
   // 1. Check Daily Cost Budget
   const budget = getTenantBudget(tenantId);
@@ -151,7 +174,7 @@ export function tenantQuotaMiddleware(req: Request, res: Response, next: NextFun
 
   if (usage.cents >= budget.dailyCostLimitCents) {
     res.status(402).json({
-      error: 'Daily cost budget exceeded',
+      error: "Daily cost budget exceeded",
       tenantId,
       limit: budget.dailyCostLimitCents,
       current: usage.cents,
@@ -161,9 +184,12 @@ export function tenantQuotaMiddleware(req: Request, res: Response, next: NextFun
 
   // 2. Check Daily Safety Event Limit
   if (dailyBudgetStore.isSafetyBlocked(tenantId)) {
-    console.warn(`[Metric] ferroui.safety.budget_exceeded tenant=${tenantId}`);
+    console.warn(
+      "[Metric] ferroui.safety.budget_exceeded tenant=%s",
+      tenantId.replace(/[\r\n]/g, ""),
+    );
     res.status(429).json({
-      error: 'Daily safety event limit exceeded',
+      error: "Daily safety event limit exceeded",
       tenantId,
       limit: budget.maxSafetyEventsPerDay,
     });
@@ -176,16 +202,16 @@ export function tenantQuotaMiddleware(req: Request, res: Response, next: NextFun
 
   if (!allowed) {
     res.status(429).json({
-      error: 'Tenant quota exceeded',
+      error: "Tenant quota exceeded",
       tenantId,
       retryAfter: 60,
     });
     return;
   }
 
-  res.setHeader('X-Tenant-Id', tenantId);
-  res.setHeader('X-Tenant-Quota-Limit', rpm);
-  res.setHeader('X-Tenant-Daily-Budget-Limit', budget.dailyCostLimitCents);
-  res.setHeader('X-Tenant-Daily-Budget-Usage', usage.cents);
+  res.setHeader("X-Tenant-Id", tenantId);
+  res.setHeader("X-Tenant-Quota-Limit", rpm);
+  res.setHeader("X-Tenant-Daily-Budget-Limit", budget.dailyCostLimitCents);
+  res.setHeader("X-Tenant-Daily-Budget-Usage", usage.cents);
   next();
 }

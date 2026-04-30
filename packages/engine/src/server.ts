@@ -558,11 +558,12 @@ export function createServer(
 
     // Basic input sanitization
     // 1. Trim whitespace
-    // 2. Remove potential script tags
-    // 3. Prevent prompt injection by neutralizing known delimiters
-    const sanitizedPrompt = prompt
-      .trim()
-      .replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gim, "");
+    // 2. Neutralize HTML tags completely (LLM prompts shouldn't need HTML)
+    const sanitizedPrompt = prompt.trim().replace(/<[^>]*>?/gm, "");
+
+    // Sanitize context fields for logging
+    const safeRequestId = String(context.requestId).replace(/[\r\n]/g, "");
+    const safeUserId = String(context.userId).replace(/[\r\n]/g, "");
 
     // Set up SSE headers
     res.setHeader("Content-Type", "text/event-stream");
@@ -575,7 +576,9 @@ export function createServer(
 
     try {
       console.log(
-        `[Engine] Starting process for prompt: "${sanitizedPrompt}" (RequestID: ${context.requestId})`,
+        "[Engine] Starting process for prompt: %s (RequestID: %s)",
+        sanitizedPrompt.replace(/[\r\n]/g, " "),
+        safeRequestId,
       );
 
       for await (const chunk of engine.process(sanitizedPrompt, context)) {
@@ -597,23 +600,25 @@ export function createServer(
       if (pipelineSucceeded) {
         recordSuccess();
         recordRequestCompletion(Date.now() - requestStart, true, {
-          "request.id": context.requestId,
-          "user.id": context.userId,
+          "request.id": safeRequestId,
+          "user.id": safeUserId,
         });
       }
 
       console.log(
-        `[Engine] Successfully completed process for RequestID: ${context.requestId}`,
+        "[Engine] Successfully completed process for RequestID: %s",
+        safeRequestId,
       );
     } catch (error) {
       console.error(
-        `[Engine] Error processing request ${context.requestId}:`,
+        "[Engine] Error processing request %s:",
+        safeRequestId,
         error,
       );
       recordFailure();
       recordRequestCompletion(Date.now() - requestStart, false, {
-        "request.id": context.requestId,
-        "user.id": context.userId,
+        "request.id": safeRequestId,
+        "user.id": safeUserId,
       });
 
       const errorChunk: EngineChunk = {

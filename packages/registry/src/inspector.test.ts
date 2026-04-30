@@ -97,18 +97,6 @@ describe("inspector", () => {
     );
   });
 
-  describe("isMainNodeProcess", () => {
-    it("returns true when process.argv[1] matches inspector.ts", () => {
-      const originalArgv = process.argv;
-      vi.stubGlobal("process", { ...process, argv: ["node", "inspector.ts"] });
-
-      // We need to re-import or use a way to test the internal function if possible,
-      // but since it's not exported, we might need to rely on the side effect if we can.
-      // Actually, it's easier to just mock the environment and see if startRegistryInspector was called.
-      // However, the side effect is at the top level.
-    });
-  });
-
   it("provides detailed JSON response", () => {
     startRegistryInspector(3001);
     const handler = (http.createServer as any).mock.results[0].value.handler;
