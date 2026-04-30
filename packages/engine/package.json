@@ -23,7 +23,7 @@
     "llm"
   ],
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.90.0",
+    "@anthropic-ai/sdk": "^0.91.1",
     "@ferroui/i18n": "workspace:*",
     "@ferroui/registry": "workspace:*",
     "@ferroui/schema": "workspace:*",
