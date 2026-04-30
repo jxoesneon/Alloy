@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 import * as playgroundHook from "./hooks/usePlaygroundStream";
+import React from "react";
 
 // Mock the renderer package
 vi.mock("@ferroui/renderer", () => ({
@@ -31,6 +32,8 @@ describe("Playground App", () => {
       isGenerating: false,
       error: null,
       generate: mockGenerate,
+      chunks: [],
+      publicKey: null,
     });
   });
 
@@ -69,11 +72,16 @@ describe("Playground App", () => {
       isGenerating: true,
       error: null,
       generate: mockGenerate,
+      chunks: [],
+      publicKey: null,
     });
 
     render(<App />);
     expect(screen.getByText("Generating...")).toBeDefined();
-    expect(screen.getByText("Phase 1: Drafting...")).toBeDefined();
+    // Use getAllByText because the status appears in both header and Command Center
+    expect(screen.getAllByText("Phase 1: Drafting...").length).toBeGreaterThan(
+      0,
+    );
   });
 
   it("displays error message", () => {
@@ -83,6 +91,8 @@ describe("Playground App", () => {
       isGenerating: false,
       error: "Engine connection failed",
       generate: mockGenerate,
+      chunks: [],
+      publicKey: null,
     });
 
     render(<App />);
@@ -97,9 +107,15 @@ describe("Playground App", () => {
       isGenerating: false,
       error: null,
       generate: mockGenerate,
+      chunks: [],
+      publicKey: null,
     });
 
+    // Toggle off Command Center to see Monaco
     render(<App />);
+    const ccButton = screen.getByRole("button", { name: /command center/i });
+    fireEvent.click(ccButton);
+
     expect(screen.getByTestId("renderer")).toBeDefined();
     expect(screen.getByTestId("monaco-editor")).toBeDefined();
 

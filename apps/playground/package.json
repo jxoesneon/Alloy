@@ -11,16 +11,18 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@ferroui/registry": "workspace:*",
     "@ferroui/renderer": "workspace:*",
     "@ferroui/schema": "workspace:*",
-    "@ferroui/registry": "workspace:*",
     "@monaco-editor/react": "^4.6.0",
+    "base64-arraybuffer": "^1.0.2",
     "clsx": "^2.1.1",
     "eventsource-parser": "^3.0.6",
     "lucide-react": "^0.460.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "tailwind-merge": "^3.0.0"
+    "tailwind-merge": "^3.0.0",
+    "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
