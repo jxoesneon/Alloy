@@ -1,8 +1,8 @@
-import { Command } from 'commander';
-import chalk from 'chalk';
-import ora from 'ora';
-import fs from 'fs-extra';
-import path from 'path';
+import { Command } from "commander";
+import chalk from "chalk";
+import ora from "ora";
+import fs from "fs-extra";
+import path from "path";
 
 const CI_PASS_THRESHOLD = 0.95; // 95% pass rate required
 
@@ -30,12 +30,17 @@ interface EvalResult {
 /**
  * Loads eval cases from ferroui/evals/ directory or returns built-in defaults.
  */
-async function loadEvalCases(evalsDir: string, singlePrompt?: string): Promise<EvalCase[]> {
+async function loadEvalCases(
+  evalsDir: string,
+  singlePrompt?: string,
+): Promise<EvalCase[]> {
   if (singlePrompt) {
-    return [{ prompt: singlePrompt, description: 'Ad-hoc prompt' }];
+    return [{ prompt: singlePrompt, description: "Ad-hoc prompt" }];
   }
   if (await fs.pathExists(evalsDir)) {
-    const files = (await fs.readdir(evalsDir)).filter(f => f.endsWith('.json'));
+    const files = (await fs.readdir(evalsDir)).filter((f) =>
+      f.endsWith(".json"),
+    );
     if (files.length > 0) {
       const cases: EvalCase[] = [];
       for (const file of files) {
@@ -51,10 +56,26 @@ async function loadEvalCases(evalsDir: string, singlePrompt?: string): Promise<E
   }
   // Built-in default suite
   return [
-    { prompt: 'Show me a dashboard with KPIs', description: 'KPI Dashboard', latencyThresholdMs: 5000 },
-    { prompt: 'Display user analytics for the last week', description: 'User Analytics', latencyThresholdMs: 5000 },
-    { prompt: 'Create a sales overview with revenue and conversions', description: 'Sales Overview', latencyThresholdMs: 5000 },
-    { prompt: 'Show a summary of active orders', description: 'Order Summary', latencyThresholdMs: 5000 },
+    {
+      prompt: "Show me a dashboard with KPIs",
+      description: "KPI Dashboard",
+      latencyThresholdMs: 5000,
+    },
+    {
+      prompt: "Display user analytics for the last week",
+      description: "User Analytics",
+      latencyThresholdMs: 5000,
+    },
+    {
+      prompt: "Create a sales overview with revenue and conversions",
+      description: "Sales Overview",
+      latencyThresholdMs: 5000,
+    },
+    {
+      prompt: "Show a summary of active orders",
+      description: "Order Summary",
+      latencyThresholdMs: 5000,
+    },
   ];
 }
 
@@ -64,7 +85,7 @@ async function loadEvalCases(evalsDir: string, singlePrompt?: string): Promise<E
 async function runEvalCase(
   evalCase: EvalCase,
   engineUrl: string,
-  options: { promptVersion?: string; provider?: string } = {}
+  options: { promptVersion?: string; provider?: string } = {},
 ): Promise<EvalResult> {
   const latencyThresholdMs = evalCase.latencyThresholdMs ?? 5000;
   const start = Date.now();
@@ -85,17 +106,17 @@ async function runEvalCase(
 
   try {
     const response = await fetch(`${engineUrl}/api/ferroui/process`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         prompt: evalCase.prompt,
         version: options.promptVersion,
         provider: options.provider,
         context: {
-          userId: 'eval-user',
+          userId: "eval-user",
           requestId: `eval-${Date.now()}`,
-          permissions: ['*'],
-          locale: 'en-US',
+          permissions: ["*"],
+          locale: "en-US",
         },
       }),
     });
@@ -109,17 +130,17 @@ async function runEvalCase(
 
     // Collect full SSE stream
     const text = await response.text();
-    const lines = text.split('\n').filter(l => l.startsWith('data:'));
+    const lines = text.split("\n").filter((l) => l.startsWith("data:"));
     let layoutJson: any = null;
     let hasError = false;
 
     for (const line of lines) {
       try {
-        const chunk = JSON.parse(line.replace(/^data:\s*/, ''));
-        if (chunk.type === 'layout_chunk' && chunk.layout) {
+        const chunk = JSON.parse(line.replace(/^data:\s*/, ""));
+        if (chunk.type === "layout_chunk" && chunk.layout) {
           layoutJson = chunk.layout;
         }
-        if (chunk.type === 'error') {
+        if (chunk.type === "error") {
           hasError = true;
           result.error = chunk.error?.message;
         }
@@ -129,20 +150,22 @@ async function runEvalCase(
     }
 
     if (hasError || !layoutJson) {
-      result.error = result.error ?? 'No layout received from engine';
+      result.error = result.error ?? "No layout received from engine";
       return result;
     }
 
     // ── Check 1: Schema validity ──────────────────────────────────────────
     result.checks.schemaValid =
-      typeof layoutJson === 'object' &&
-      typeof layoutJson.schemaVersion === 'string' &&
-      typeof layoutJson.layout === 'object' &&
-      typeof layoutJson.layout.type === 'string';
+      typeof layoutJson === "object" &&
+      typeof layoutJson.schemaVersion === "string" &&
+      typeof layoutJson.layout === "object" &&
+      typeof layoutJson.layout.type === "string";
 
     // ── Check 2: No hallucinations (root must be a known container type) ──
-    const knownRootTypes = ['Dashboard', 'Page', 'Container', 'Layout', 'View'];
-    result.checks.noHallucinations = knownRootTypes.includes(layoutJson.layout?.type ?? '');
+    const knownRootTypes = ["Dashboard", "Page", "Container", "Layout", "View"];
+    result.checks.noHallucinations = knownRootTypes.includes(
+      layoutJson.layout?.type ?? "",
+    );
 
     // ── Check 3: Data accuracy (layout contains at least one child) ───────
     result.checks.dataAccuracy =
@@ -152,7 +175,7 @@ async function runEvalCase(
     // ── Check 4: A11y compliance (aria props present on root) ─────────────
     const checkAriaRecursive = (node: any): boolean => {
       if (!node) return false;
-      if (node.aria && typeof node.aria === 'object') return true;
+      if (node.aria && typeof node.aria === "object") return true;
       if (Array.isArray(node.children)) {
         return node.children.some(checkAriaRecursive);
       }
@@ -175,28 +198,31 @@ async function runEvalCase(
 /**
  * Generates an HTML report of eval results.
  */
-async function generateHtmlReport(results: EvalResult[], outputPath: string): Promise<void> {
-  const passed = results.filter(r => r.passed).length;
+async function generateHtmlReport(
+  results: EvalResult[],
+  outputPath: string,
+): Promise<void> {
+  const passed = results.filter((r) => r.passed).length;
   const total = results.length;
   const passRate = total > 0 ? (passed / total) * 100 : 0;
   const now = new Date().toISOString();
 
   const rows = results
     .map(
-      r => `
-    <tr class="${r.passed ? 'pass' : 'fail'}">
+      (r) => `
+    <tr class="${r.passed ? "pass" : "fail"}">
       <td>${r.description}</td>
-      <td title="${r.prompt}">${r.prompt.length > 60 ? r.prompt.slice(0, 60) + '…' : r.prompt}</td>
-      <td>${r.checks.schemaValid ? '✔' : '✖'}</td>
-      <td>${r.checks.noHallucinations ? '✔' : '✖'}</td>
-      <td>${r.checks.dataAccuracy ? '✔' : '✖'}</td>
-      <td>${r.checks.a11yCompliant ? '✔' : '✖'}</td>
-      <td class="${r.checks.latencyOk ? '' : 'warn'}">${r.latencyMs}ms</td>
+      <td title="${r.prompt}">${r.prompt.length > 60 ? r.prompt.slice(0, 60) + "…" : r.prompt}</td>
+      <td>${r.checks.schemaValid ? "✔" : "✖"}</td>
+      <td>${r.checks.noHallucinations ? "✔" : "✖"}</td>
+      <td>${r.checks.dataAccuracy ? "✔" : "✖"}</td>
+      <td>${r.checks.a11yCompliant ? "✔" : "✖"}</td>
+      <td class="${r.checks.latencyOk ? "" : "warn"}">${r.latencyMs}ms</td>
       <td>${r.passed ? '<span class="badge pass">PASS</span>' : '<span class="badge fail">FAIL</span>'}</td>
-      ${r.error ? `<td class="error-cell">${r.error}</td>` : '<td>—</td>'}
-    </tr>`
+      ${r.error ? `<td class="error-cell">${r.error}</td>` : "<td>—</td>"}
+    </tr>`,
     )
-    .join('\n');
+    .join("\n");
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -236,7 +262,7 @@ async function generateHtmlReport(results: EvalResult[], outputPath: string): Pr
     <div class="stat neutral"><div class="label">Total</div><div class="value">${total}</div></div>
     <div class="stat pass"><div class="label">Passed</div><div class="value">${passed}</div></div>
     <div class="stat fail"><div class="label">Failed</div><div class="value">${total - passed}</div></div>
-    <div class="stat ${passRate >= 95 ? 'pass' : 'fail'}"><div class="label">Pass Rate</div><div class="value">${passRate.toFixed(1)}%</div></div>
+    <div class="stat ${passRate >= 95 ? "pass" : "fail"}"><div class="label">Pass Rate</div><div class="value">${passRate.toFixed(1)}%</div></div>
   </div>
 
   <table>
@@ -251,40 +277,64 @@ async function generateHtmlReport(results: EvalResult[], outputPath: string): Pr
 </body>
 </html>`;
 
-  await fs.ensureDir(path.dirname(outputPath));
-  await fs.writeFile(outputPath, html, 'utf-8');
+  const resolvedPath = path.resolve(process.cwd(), outputPath);
+  if (!resolvedPath.startsWith(process.cwd())) {
+    throw new Error(
+      `Invalid output path: ${outputPath}. Must be within the current working directory.`,
+    );
+  }
+
+  await fs.ensureDir(path.dirname(resolvedPath));
+  await fs.writeFile(resolvedPath, html, "utf-8");
 }
 
 /**
  * Eval Command — PRD-002 §3.3
  */
-export const evalCommand = new Command('eval')
-  .description('Run the prompt evaluation suite against the FerroUI engine.')
-  .option('-p, --prompt <prompt>', 'Evaluate a single prompt instead of the full suite')
-  .option('-u, --engine-url <url>', 'Engine base URL', 'http://localhost:3001')
-  .option('-o, --output <path>', 'HTML report output path', `ferroui/evals/report-${new Date().toISOString().slice(0, 10)}.html`)
-  .option('--prompt-version <version>', 'Specific prompt version to use (e.g., v1, v2)')
-  .option('--provider <name>', 'Specific LLM provider to use (e.g., openai, anthropic)')
-  .option('--no-report', 'Skip HTML report generation')
-  .option('--ci', 'Exit with code 1 if pass rate < 95% (for CI pipelines)')
+export const evalCommand = new Command("eval")
+  .description("Run the prompt evaluation suite against the FerroUI engine.")
+  .option(
+    "-p, --prompt <prompt>",
+    "Evaluate a single prompt instead of the full suite",
+  )
+  .option("-u, --engine-url <url>", "Engine base URL", "http://localhost:3001")
+  .option(
+    "-o, --output <path>",
+    "HTML report output path",
+    `ferroui/evals/report-${new Date().toISOString().slice(0, 10)}.html`,
+  )
+  .option(
+    "--prompt-version <version>",
+    "Specific prompt version to use (e.g., v1, v2)",
+  )
+  .option(
+    "--provider <name>",
+    "Specific LLM provider to use (e.g., openai, anthropic)",
+  )
+  .option("--no-report", "Skip HTML report generation")
+  .option("--ci", "Exit with code 1 if pass rate < 95% (for CI pipelines)")
   .action(async (options) => {
-    console.log(chalk.bold.blue('\n📊 FerroUI Evaluation Suite\n'));
+    console.log(chalk.bold.blue("\n📊 FerroUI Evaluation Suite\n"));
 
-    const evalsDir = path.resolve(process.cwd(), 'ferroui/evals');
+    const evalsDir = path.resolve(process.cwd(), "ferroui/evals");
     const evalCases = await loadEvalCases(evalsDir, options.prompt);
 
     console.log(chalk.dim(`Engine:     ${options.engineUrl}`));
     console.log(chalk.dim(`Prompts:    ${evalCases.length}`));
-    console.log(chalk.dim(`Threshold:  ${(CI_PASS_THRESHOLD * 100).toFixed(0)}%\n`));
+    console.log(
+      chalk.dim(`Threshold:  ${(CI_PASS_THRESHOLD * 100).toFixed(0)}%\n`),
+    );
 
     const results: EvalResult[] = [];
     let passed = 0;
 
     for (const evalCase of evalCases) {
-      const spinner = ora(`  ${evalCase.description ?? evalCase.prompt.slice(0, 50)}...`).start();
+      const spinner = ora(
+        `  ${evalCase.description ?? evalCase.prompt.slice(0, 50)}...`,
+      ).start();
       const result = await runEvalCase(evalCase, options.engineUrl, {
         promptVersion: options.promptVersion,
-        provider: options.provider
+        provider: options.provider,
       });
       results.push(result);
 
@@ -293,13 +343,17 @@ export const evalCommand = new Command('eval')
         const latencyLabel = result.checks.latencyOk
           ? chalk.dim(`${result.latencyMs}ms`)
           : chalk.yellow(`${result.latencyMs}ms ⚠`);
-        spinner.succeed(`${chalk.green('✔')} ${result.description} ${latencyLabel}`);
+        spinner.succeed(
+          `${chalk.green("✔")} ${result.description} ${latencyLabel}`,
+        );
       } else {
         const checks = Object.entries(result.checks)
           .filter(([, v]) => !v)
           .map(([k]) => k)
-          .join(', ');
-        spinner.fail(`${chalk.red('✖')} ${result.description} ${chalk.dim(`[failed: ${checks}]`)}`);
+          .join(", ");
+        spinner.fail(
+          `${chalk.red("✖")} ${result.description} ${chalk.dim(`[failed: ${checks}]`)}`,
+        );
         if (result.error) {
           console.log(chalk.dim(`    Error: ${result.error}`));
         }
@@ -310,7 +364,9 @@ export const evalCommand = new Command('eval')
     const passRate = total > 0 ? passed / total : 0;
     const passRatePct = (passRate * 100).toFixed(1);
 
-    console.log(`\n${chalk.bold('Results:')} ${passed}/${total} passed (${passRatePct}%)`);
+    console.log(
+      `\n${chalk.bold("Results:")} ${passed}/${total} passed (${passRatePct}%)`,
+    );
 
     // HTML report
     if (options.report !== false) {
@@ -320,9 +376,17 @@ export const evalCommand = new Command('eval')
     }
 
     if (passRate >= CI_PASS_THRESHOLD) {
-      console.log(chalk.green(`\n✅ Pass rate ${passRatePct}% meets the ${(CI_PASS_THRESHOLD * 100).toFixed(0)}% threshold.\n`));
+      console.log(
+        chalk.green(
+          `\n✅ Pass rate ${passRatePct}% meets the ${(CI_PASS_THRESHOLD * 100).toFixed(0)}% threshold.\n`,
+        ),
+      );
     } else {
-      console.log(chalk.red(`\n✖ Pass rate ${passRatePct}% is below the ${(CI_PASS_THRESHOLD * 100).toFixed(0)}% threshold.\n`));
+      console.log(
+        chalk.red(
+          `\n✖ Pass rate ${passRatePct}% is below the ${(CI_PASS_THRESHOLD * 100).toFixed(0)}% threshold.\n`,
+        ),
+      );
       if (options.ci) {
         process.exit(1);
       }

@@ -34,7 +34,12 @@ const API_DIR = path.join(DOCS_DIR, "api");
 /* -------------------------------------------------------------------------- */
 
 function esc(str: string): string {
-  return str.replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
+  if (typeof str !== "string") return "";
+  return str
+    .replace(/\|/g, "\\|")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\r?\n/g, " ");
 }
 
 function codeInline(value: string): string {

@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
 import { publishCommand } from "./publish.js";
 import * as fs from "fs";
-import * as path from "path";
 
 vi.mock("fs");
 vi.mock("node:fs");
@@ -35,7 +34,7 @@ describe("publishCommand", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        name: "Button",
+        name: "button",
         version: "1.0.0",
         schema: { type: "object" },
         examples: [{ name: "Default" }],
@@ -45,13 +44,13 @@ describe("publishCommand", () => {
     await publishCommand("/fake/path", { dryRun: true });
 
     expect(consoleLogMock).toHaveBeenCalledWith(
-      expect.stringContaining("📦 Publishing Button@1.0.0..."),
+      expect.stringContaining("📦 Publishing button@1.0.0..."),
     );
     expect(consoleLogMock).toHaveBeenCalledWith(
       "🔍 Dry run - validation only:",
     );
     expect(consoleLogMock).toHaveBeenCalledWith(
-      expect.stringContaining('"name": "Button"'),
+      expect.stringContaining('"name": "button"'),
     );
     expect(fetchMock).not.toHaveBeenCalled();
   });
@@ -60,7 +59,7 @@ describe("publishCommand", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        name: "Button",
+        name: "button",
         version: "1.0.0",
         schema: { type: "object" },
       }),
@@ -78,7 +77,7 @@ describe("publishCommand", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        name: "Button",
+        name: "button",
         version: "1.0.0",
         schema: { type: "object" },
       }),
@@ -104,7 +103,7 @@ describe("publishCommand", () => {
           Authorization: "Bearer fake-token",
         },
         body: JSON.stringify({
-          name: "Button",
+          name: "button",
           version: "1.0.0",
           schema: { type: "object" },
         }),
@@ -122,7 +121,7 @@ describe("publishCommand", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        name: "Button",
+        name: "button",
         version: "1.0.0",
         schema: { type: "object" },
       }),
@@ -156,7 +155,7 @@ describe("publishCommand", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        name: "Button",
+        name: "button",
         version: "1.0.0",
         schema: { type: "object" },
       }),

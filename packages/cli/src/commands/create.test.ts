@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
 import { createCommand } from "./create.js";
-import { execSync } from "child_process";
+import { spawnSync } from "child_process";
 import prompts from "prompts";
 import fs from "fs-extra";
 import ora from "ora";
@@ -44,7 +44,7 @@ describe("createCommand", () => {
     vi.mocked(fs.writeJson).mockResolvedValue(undefined as never);
     vi.mocked(fs.writeFile).mockResolvedValue(undefined as never);
 
-    vi.mocked(execSync).mockReturnValue(Buffer.from(""));
+    vi.mocked(spawnSync).mockReturnValue({ status: 0 } as any);
     vi.mocked(prompts).mockResolvedValue({}); // Default mock return
   });
 
@@ -102,8 +102,12 @@ describe("createCommand", () => {
     );
 
     // Check git and install
-    expect(execSync).toHaveBeenCalledWith("git init", expect.any(Object));
-    expect(execSync).toHaveBeenCalledWith("pnpm install", expect.any(Object));
+    expect(spawnSync).toHaveBeenCalledWith("git", ["init"], expect.any(Object));
+    expect(spawnSync).toHaveBeenCalledWith(
+      "pnpm",
+      ["install"],
+      expect.any(Object),
+    );
 
     expect(oraSucceedMock).toHaveBeenCalledWith(
       expect.stringContaining("created!"),
@@ -132,9 +136,14 @@ describe("createCommand", () => {
       expect.any(Object),
     );
 
-    expect(execSync).not.toHaveBeenCalledWith("git init", expect.any(Object));
-    expect(execSync).not.toHaveBeenCalledWith(
-      "yarn install",
+    expect(spawnSync).not.toHaveBeenCalledWith(
+      "git",
+      ["init"],
+      expect.any(Object),
+    );
+    expect(spawnSync).not.toHaveBeenCalledWith(
+      "yarn",
+      ["install"],
       expect.any(Object),
     );
   });
@@ -154,10 +163,9 @@ describe("createCommand", () => {
   });
 
   it("should handle git initialization failure gracefully", async () => {
-    vi.mocked(execSync).mockImplementation((cmd: any) => {
-      if (typeof cmd === "string" && cmd.includes("git"))
-        throw new Error("Git failed");
-      return Buffer.from("");
+    vi.mocked(spawnSync).mockImplementation((cmd: any) => {
+      if (cmd === "git") throw new Error("Git failed");
+      return { status: 0 } as any;
     });
 
     await createCommand.parseAsync([
@@ -174,10 +182,9 @@ describe("createCommand", () => {
   });
 
   it("should handle install failure gracefully", async () => {
-    vi.mocked(execSync).mockImplementation((cmd: any) => {
-      if (typeof cmd === "string" && cmd.includes("install"))
-        throw new Error("Install failed");
-      return Buffer.from("");
+    vi.mocked(spawnSync).mockImplementation((cmd: any) => {
+      if (cmd === "pnpm") throw new Error("Install failed");
+      return { status: 0 } as any;
     });
 
     await createCommand.parseAsync([

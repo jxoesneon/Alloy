@@ -289,11 +289,9 @@ describe("AnthropicProvider", () => {
         jsonMode: true,
       });
       const chunks: string[] = [];
-      let finalResult;
       while (true) {
         const { value, done } = await gen.next();
         if (done) {
-          finalResult = value;
           break;
         }
         chunks.push(value as string);

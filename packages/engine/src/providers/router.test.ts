@@ -169,9 +169,9 @@ describe("ProviderRouter", () => {
     vi.useFakeTimers();
     try {
       const p = makeProvider("auto-reset-provider-stream", {
+        // eslint-disable-next-line require-yield
         processPrompt: async function* () {
           throw new Error("stream down");
-          yield "";
         },
       });
       const router = new ProviderRouter([makeRouted(p)]);
@@ -261,9 +261,9 @@ describe("ProviderRouter", () => {
 
   it("processPrompt throws when all providers fail", async () => {
     const p = makeProvider("fail", {
+      // eslint-disable-next-line require-yield
       processPrompt: async function* () {
         throw new Error("stream error");
-        yield ""; // unreachable, satisfies TS
       },
     });
     const router = new ProviderRouter([makeRouted(p)]);

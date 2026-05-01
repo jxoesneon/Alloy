@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
+import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
 import { devCommand } from "./dev.js";
 import { execa } from "execa";
-import { execSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import fs from "fs-extra";
 import ora from "ora";
 
@@ -11,7 +11,6 @@ vi.mock("fs-extra");
 vi.mock("ora");
 
 describe("devCommand", () => {
-  let consoleLogMock: Mock;
   let consoleErrorMock: Mock;
   let processExitMock: Mock;
   let oraStartMock: Mock;
@@ -21,7 +20,7 @@ describe("devCommand", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    consoleLogMock = vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "log").mockImplementation(() => {});
     consoleErrorMock = vi.spyOn(console, "error").mockImplementation(() => {});
     processExitMock = vi
       .spyOn(process, "exit")
@@ -45,6 +44,8 @@ describe("devCommand", () => {
       (mockProcess as any).kill = vi.fn();
       return mockProcess as any;
     });
+
+    vi.mocked(spawnSync).mockReturnValue({ status: 0 } as any);
   });
 
   it("should start all services by default", async () => {
@@ -190,8 +191,9 @@ describe("devCommand", () => {
     let promise = devCommand.parseAsync(["node", "dev"]);
     await vi.runAllTimersAsync();
     await promise;
-    expect(execSync).toHaveBeenCalledWith(
-      expect.stringContaining("start http"),
+    expect(spawnSync).toHaveBeenCalledWith(
+      "cmd",
+      expect.arrayContaining(["/c", "start", expect.stringContaining("http")]),
       expect.any(Object),
     );
 
@@ -200,8 +202,9 @@ describe("devCommand", () => {
     promise = devCommand.parseAsync(["node", "dev"]);
     await vi.runAllTimersAsync();
     await promise;
-    expect(execSync).toHaveBeenCalledWith(
-      expect.stringContaining("open http"),
+    expect(spawnSync).toHaveBeenCalledWith(
+      "open",
+      [expect.stringContaining("http")],
       expect.any(Object),
     );
 
@@ -210,13 +213,14 @@ describe("devCommand", () => {
     promise = devCommand.parseAsync(["node", "dev"]);
     await vi.runAllTimersAsync();
     await promise;
-    expect(execSync).toHaveBeenCalledWith(
-      expect.stringContaining("xdg-open http"),
+    expect(spawnSync).toHaveBeenCalledWith(
+      "xdg-open",
+      [expect.stringContaining("http")],
       expect.any(Object),
     );
 
     // Error
-    vi.mocked(execSync).mockImplementationOnce(() => {
+    vi.mocked(spawnSync).mockImplementationOnce(() => {
       throw new Error("no browser");
     });
     promise = devCommand.parseAsync(["node", "dev"]);

@@ -1,0 +1,134 @@
+import { Signer } from "./signer.js";
+import { RequestContext } from "../types.js";
+
+/**
+ * SecurityManager centralizes all hardening logic for the FerroUI Engine.
+ * It manages the server's root-of-trust key pair, performs sanitization,
+ * and handles PII redaction to prevent data leaks.
+ */
+export class SecurityManager {
+  private static instance: SecurityManager;
+  private readonly serverKeyPair: { publicKey: string; privateKey: string };
+
+  private constructor() {
+    // Phase 4: Use a stable key pair for the lifetime of the process.
+    // In production, this would be loaded from a KMS.
+    this.serverKeyPair = Signer.generateKeyPair();
+  }
+
+  /**
+   * Overrides the default ephemeral key pair with a stable one (e.g. from env).
+   */
+  setKeyPair(publicKey: string, privateKey: string): void {
+    (this as any).serverKeyPair = { publicKey, privateKey };
+  }
+
+  static getInstance(): SecurityManager {
+    if (!SecurityManager.instance) {
+      SecurityManager.instance = new SecurityManager();
+    }
+    return SecurityManager.instance;
+  }
+
+  getPublicKey(): string {
+    return this.serverKeyPair.publicKey;
+  }
+
+  /**
+   * Signs a data chunk with the server's private key.
+   */
+  sign(data: string): string {
+    return Signer.sign(data, this.serverKeyPair.privateKey);
+  }
+
+  /**
+   * Neutralizes potential log injection vectors.
+   */
+  sanitizeForLog(text: string): string {
+    return String(text).replace(/[\r\n]/g, " ");
+  }
+
+  /**
+   * Strips all HTML tags from a string to prevent injection in LLM prompts.
+   */
+  stripHtml(text: string): string {
+    if (typeof text !== "string") return "";
+    return text.trim().replace(/<[^>]*>?/gm, "");
+  }
+
+  /**
+   * Redacts PII (Personally Identifiable Information) from data objects or strings.
+   * Handles recursive traversal of objects and stringified JSON.
+   */
+  redactPII(data: any): any {
+    if (!data) return data;
+
+    if (typeof data === "string") {
+      // Robustness: Attempt to parse stringified JSON first
+      try {
+        if (data.startsWith("{") || data.startsWith("[")) {
+          const parsed = JSON.parse(data);
+          return JSON.stringify(this.redactPII(parsed));
+        }
+      } catch {
+        // Not valid JSON, proceed to standard string redaction
+      }
+
+      // Non-backtracking, safer regexes for PII
+      return data
+        .replace(/[^\s@]+@[^\s@]+\.[^\s@]{2,}/g, "[REDACTED_EMAIL]")
+        .replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[REDACTED_SSN]")
+        .replace(/\b\d{4}-\d{4}-\d{4}-\d{4}\b/g, "[REDACTED_CARD]")
+        .replace(/\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/g, "[REDACTED_IBAN]")
+        .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g, "[REDACTED_IP]")
+        .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, "[REDACTED_PHONE]");
+    }
+
+    if (Array.isArray(data)) {
+      return data.map((item) => this.redactPII(item));
+    }
+
+    if (typeof data === "object") {
+      // Use Object.create(null) to prevent prototype pollution at the source
+      const redacted: Record<string, any> = Object.create(null);
+      for (const [key, value] of Object.entries(data)) {
+        const lowerKey = key.toLowerCase();
+
+        // Sensitivity based on keys + recursive redaction of values
+        if (
+          [
+            "ssn",
+            "email",
+            "password",
+            "secret",
+            "token",
+            "card",
+            "creditcard",
+            "iban",
+          ].some((k) => lowerKey.includes(k))
+        ) {
+          redacted[key] = "[REDACTED_SENSITIVE_KEY]";
+        } else {
+          redacted[key] = this.redactPII(value);
+        }
+      }
+      return redacted;
+    }
+
+    return data;
+  }
+
+  /**
+   * Strictly validates and constructs a RequestContext from a verified JWT payload.
+   */
+  createSecureContext(bodyContext: any, auth: any): RequestContext {
+    return {
+      ...bodyContext,
+      userId: auth.sub ?? auth.userId, // Strictly from JWT
+      tenantId: auth.tenantId ?? "default", // CRITICAL: Force from JWT, prevent spoofing
+      permissions: auth.permissions ?? [], // Strictly from JWT
+    };
+  }
+}
+
+export const securityManager = SecurityManager.getInstance();

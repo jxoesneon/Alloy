@@ -1,4 +1,4 @@
-import { execSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -47,20 +47,47 @@ async function main() {
       const entry = path.join(pkgPath, "src", "**", "*.{ts,tsx}");
 
       const tsconfig = path.join(pkgPath, "tsconfig.json");
-      const tsconfigArg = fs.existsSync(tsconfig)
-        ? `--tsconfig ${tsconfig.split(path.sep).join("/")}`
-        : "";
 
       const posixEntry = entry.split(path.sep).join("/");
       const posixOutDir = outDir.split(path.sep).join("/");
 
-      execSync(
-        `pnpm exec typedoc --out ${posixOutDir} --plugin typedoc-plugin-markdown "${posixEntry}" ${tsconfigArg} --hidePageTitle --hideBreadcrumbs --entryPointStrategy expand --cleanOutputDir true --excludeInternal false --excludePrivate false --excludeProtected false --excludeExternals false --exclude "**/*.test.ts" --exclude "**/__tests__/*"`,
-        {
-          stdio: "inherit",
-          cwd: ROOT,
-        },
-      );
+      const args = [
+        "exec",
+        "typedoc",
+        "--out",
+        posixOutDir,
+        "--plugin",
+        "typedoc-plugin-markdown",
+        posixEntry,
+        "--hidePageTitle",
+        "--hideBreadcrumbs",
+        "--entryPointStrategy",
+        "expand",
+        "--cleanOutputDir",
+        "true",
+        "--excludeInternal",
+        "false",
+        "--excludePrivate",
+        "false",
+        "--excludeProtected",
+        "false",
+        "--excludeExternals",
+        "false",
+        "--exclude",
+        "**/*.test.ts",
+        "--exclude",
+        "**/__tests__/*",
+      ];
+
+      if (fs.existsSync(tsconfig)) {
+        args.push("--tsconfig", tsconfig.split(path.sep).join("/"));
+      }
+
+      spawnSync("pnpm", args, {
+        stdio: "inherit",
+        cwd: ROOT,
+        shell: process.platform === "win32", // Required for .cmd files on Windows
+      });
     } catch (err) {
       console.error(`    x Failed to generate TypeDoc for ${pkg}:`, err);
     }

@@ -1,25 +1,29 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { z } from 'zod';
-import { FerroUILayout, validateLayout, ValidationIssue } from '@ferroui/schema';
-import { registry } from '@ferroui/registry';
-import { LlmProvider } from '../providers/base.js';
-import { LlmRequest, RequestContext } from '../types.js';
+import {
+  FerroUILayout,
+  validateLayout,
+  ValidationIssue,
+} from "@ferroui/schema";
+import { registry } from "@ferroui/registry";
+import { LlmProvider } from "../providers/base.js";
+import { LlmRequest, RequestContext } from "../types.js";
 
 /**
  * Fuzzy matches a component type against the registry
  */
 export function fuzzyMatchComponent(type: string): string | undefined {
   const allComponents = registry.getAllComponents().map((c: any) => c.name);
-  
+
   // Basic case-insensitive match
-  const exactMatch = allComponents.find((c: string) => c.toLowerCase() === type.toLowerCase());
+  const exactMatch = allComponents.find(
+    (c: string) => c.toLowerCase() === type.toLowerCase(),
+  );
   if (exactMatch) return exactMatch;
 
   // Simple edit distance (Levenshtein) or just prefix/contains
   const sortedMatches = allComponents
     .map((c: string) => ({
       name: c,
-      score: calculateSimilarity(c.toLowerCase(), type.toLowerCase())
+      score: calculateSimilarity(c.toLowerCase(), type.toLowerCase()),
     }))
     .filter((m: any) => m.score > 0.6)
     .sort((a: any, b: any) => b.score - a.score);
@@ -66,14 +70,16 @@ export async function repairLayout(
   errors: ValidationIssue[],
   context: RequestContext,
   attempt: number = 1,
-  maxAttempts: number = 3
+  maxAttempts: number = 3,
 ): Promise<FerroUILayout> {
   if (attempt > maxAttempts) {
     throw new Error(`Failed to repair layout after ${maxAttempts} attempts.`);
   }
 
-  const errorReport = errors.map((e: ValidationIssue) => `- ${e.path}: ${e.message}`).join('\n');
-  
+  const errorReport = errors
+    .map((e: ValidationIssue) => `- ${e.path}: ${e.message}`)
+    .join("\n");
+
   const repairSystemPrompt = `
 # FerroUI - Repair Mode
 
@@ -105,31 +111,44 @@ ${JSON.stringify(invalidLayout, null, 2)}
   };
 
   const response = await provider.completePrompt(repairRequest);
-  
+
   let fixedJson: any;
   try {
     // Attempt to extract JSON from the response
-    const firstBrace = response.content.indexOf('{');
-    const lastBrace = response.content.lastIndexOf('}');
-    
+    const firstBrace = response.content.indexOf("{");
+    const lastBrace = response.content.lastIndexOf("}");
+
     if (firstBrace !== -1 && lastBrace > firstBrace) {
-      const jsonCandidate = response.content.substring(firstBrace, lastBrace + 1);
+      const jsonCandidate = response.content.substring(
+        firstBrace,
+        lastBrace + 1,
+      );
       fixedJson = JSON.parse(jsonCandidate);
     } else {
       fixedJson = JSON.parse(response.content);
     }
   } catch {
     // Fix: Increment attempt in recursive call to prevent infinite loops
-    return repairLayout(provider, originalPrompt, response.content, [{
-      path: 'root',
-      message: 'Output was not valid JSON',
-      code: 'json_parse'
-    }], context, attempt + 1, maxAttempts);
+    return repairLayout(
+      provider,
+      originalPrompt,
+      response.content,
+      [
+        {
+          path: "root",
+          message: "Output was not valid JSON",
+          code: "json_parse",
+        },
+      ],
+      context,
+      attempt + 1,
+      maxAttempts,
+    );
   }
 
   // Validate the "fixed" JSON
   const validationResult = validateLayout(fixedJson);
-  
+
   if (!validationResult.valid) {
     return repairLayout(
       provider,
@@ -138,7 +157,7 @@ ${JSON.stringify(invalidLayout, null, 2)}
       validationResult.errors!,
       context,
       attempt + 1,
-      maxAttempts
+      maxAttempts,
     );
   }
 

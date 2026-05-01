@@ -34,18 +34,26 @@ describe("tenantQuotaMiddleware", () => {
     vi.useRealTimers();
   });
 
-  it("calls next() for non-API paths", () => {
+  it("calls next() for non-API paths", async () => {
     const req = makeReq("/health");
     const res = makeRes();
-    tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+    await tenantQuotaMiddleware(
+      req as Request,
+      res as unknown as Response,
+      next,
+    );
     expect(next).toHaveBeenCalled();
     expect(res.status).not.toHaveBeenCalled();
   });
 
-  it("allows request within quota", () => {
+  it("allows request within quota", async () => {
     const req = makeReq("/api/generate", "tenant-allow-test");
     const res = makeRes();
-    tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+    await tenantQuotaMiddleware(
+      req as Request,
+      res as unknown as Response,
+      next,
+    );
     expect(next).toHaveBeenCalled();
     expect(res.setHeader).toHaveBeenCalledWith(
       "X-Tenant-Id",
@@ -53,37 +61,57 @@ describe("tenantQuotaMiddleware", () => {
     );
   });
 
-  it('defaults tenantId to "default" when missing', () => {
+  it('defaults tenantId to "default" when missing', async () => {
     const req = makeReq("/api/generate");
     const res = makeRes();
-    tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+    await tenantQuotaMiddleware(
+      req as Request,
+      res as unknown as Response,
+      next,
+    );
     expect(res.setHeader).toHaveBeenCalledWith("X-Tenant-Id", "default");
   });
 
-  it("uses per-tenant RPM override from env", () => {
+  it("uses per-tenant RPM override from env", async () => {
     process.env.TENANT_QUOTA_ACME_RPM = "1";
     const req = makeReq("/api/generate", "acme");
     const res = makeRes();
     // First request: allowed
-    tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+    await tenantQuotaMiddleware(
+      req as Request,
+      res as unknown as Response,
+      next,
+    );
     expect(next).toHaveBeenCalledTimes(1);
     // Second request: quota exceeded (RPM=1)
     vi.clearAllMocks();
-    tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+    await tenantQuotaMiddleware(
+      req as Request,
+      res as unknown as Response,
+      next,
+    );
     expect(res.status).toHaveBeenCalledWith(429);
     expect(next).not.toHaveBeenCalled();
     delete process.env.TENANT_QUOTA_ACME_RPM;
   });
 
-  it("returns 429 with correct body when quota exceeded", () => {
+  it("returns 429 with correct body when quota exceeded", async () => {
     process.env["TENANT_QUOTA_QUOTA429TEST_RPM"] = "1";
     const req = makeReq("/api/generate", "quota429test");
     const res1 = makeRes();
     // First request: allowed
-    tenantQuotaMiddleware(req as Request, res1 as unknown as Response, next);
+    await tenantQuotaMiddleware(
+      req as Request,
+      res1 as unknown as Response,
+      next,
+    );
     // Second request: 429
     const res2 = makeRes();
-    tenantQuotaMiddleware(req as Request, res2 as unknown as Response, next);
+    await tenantQuotaMiddleware(
+      req as Request,
+      res2 as unknown as Response,
+      next,
+    );
     expect(res2.status).toHaveBeenCalledWith(429);
     expect(res2.json).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -95,17 +123,21 @@ describe("tenantQuotaMiddleware", () => {
   });
 
   describe("Daily Budget Enforcements", () => {
-    it("returns 402 when daily cost budget exceeded", () => {
+    it("returns 402 when daily cost budget exceeded", async () => {
       const tenantId = "budget-exceeded-tenant";
       process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_DAILY_COST_CENTS`] =
         "100";
 
       // Manually set usage to 100
-      dailyBudgetStore.incrementCents(tenantId, 100);
+      await dailyBudgetStore.incrementCents(tenantId, 100);
 
       const req = makeReq("/api/generate", tenantId);
       const res = makeRes();
-      tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+      await tenantQuotaMiddleware(
+        req as Request,
+        res as unknown as Response,
+        next,
+      );
 
       expect(res.status).toHaveBeenCalledWith(402);
       expect(res.json).toHaveBeenCalledWith(
@@ -121,7 +153,7 @@ describe("tenantQuotaMiddleware", () => {
       ];
     });
 
-    it("returns 429 when daily safety event limit exceeded", () => {
+    it("returns 429 when daily safety event limit exceeded", async () => {
       const tenantId = "safety-exceeded-tenant";
       process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_MAX_SAFETY_EVENTS`] =
         "2";
@@ -129,12 +161,16 @@ describe("tenantQuotaMiddleware", () => {
       const spy = vi.spyOn(console, "warn");
 
       // Manually set usage to 2 safety events
-      dailyBudgetStore.recordSafetyEvent(tenantId);
-      dailyBudgetStore.recordSafetyEvent(tenantId);
+      await dailyBudgetStore.recordSafetyEvent(tenantId);
+      await dailyBudgetStore.recordSafetyEvent(tenantId);
 
       const req = makeReq("/api/generate", tenantId);
       const res = makeRes();
-      tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+      await tenantQuotaMiddleware(
+        req as Request,
+        res as unknown as Response,
+        next,
+      );
 
       expect(res.status).toHaveBeenCalledWith(429);
       expect(res.json).toHaveBeenCalledWith(
@@ -153,43 +189,47 @@ describe("tenantQuotaMiddleware", () => {
       ];
     });
 
-    it("checkBudget returns false if budget is exceeded with estimation", () => {
+    it("checkBudget returns false if budget is exceeded with estimation", async () => {
       const tenantId = "check-budget-tenant";
       process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_DAILY_COST_CENTS`] =
         "100";
-      dailyBudgetStore.incrementCents(tenantId, 80);
+      await dailyBudgetStore.incrementCents(tenantId, 80);
 
-      expect(dailyBudgetStore.checkBudget(tenantId, 10)).toBe(true);
-      expect(dailyBudgetStore.checkBudget(tenantId, 30)).toBe(false);
+      expect(await dailyBudgetStore.checkBudget(tenantId, 10)).toBe(true);
+      expect(await dailyBudgetStore.checkBudget(tenantId, 30)).toBe(false);
 
       delete process.env[
         `TENANT_BUDGET_${tenantId.toUpperCase()}_DAILY_COST_CENTS`
       ];
     });
 
-    it("isSafetyBlocked returns true when limit reached", () => {
+    it("isSafetyBlocked returns true when limit reached", async () => {
       const tenantId = "is-safety-blocked-tenant";
       process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_MAX_SAFETY_EVENTS`] =
         "1";
 
-      expect(dailyBudgetStore.isSafetyBlocked(tenantId)).toBe(false);
-      dailyBudgetStore.recordSafetyEvent(tenantId);
-      expect(dailyBudgetStore.isSafetyBlocked(tenantId)).toBe(true);
+      expect(await dailyBudgetStore.isSafetyBlocked(tenantId)).toBe(false);
+      await dailyBudgetStore.recordSafetyEvent(tenantId);
+      expect(await dailyBudgetStore.isSafetyBlocked(tenantId)).toBe(true);
 
       delete process.env[
         `TENANT_BUDGET_${tenantId.toUpperCase()}_MAX_SAFETY_EVENTS`
       ];
     });
 
-    it("allows request when within budgets and sets headers", () => {
+    it("allows request when within budgets and sets headers", async () => {
       const tenantId = "within-budget-tenant";
       process.env[`TENANT_BUDGET_${tenantId.toUpperCase()}_DAILY_COST_CENTS`] =
         "1000";
-      dailyBudgetStore.incrementCents(tenantId, 500);
+      await dailyBudgetStore.incrementCents(tenantId, 500);
 
       const req = makeReq("/api/generate", tenantId);
       const res = makeRes();
-      tenantQuotaMiddleware(req as Request, res as unknown as Response, next);
+      await tenantQuotaMiddleware(
+        req as Request,
+        res as unknown as Response,
+        next,
+      );
 
       expect(next).toHaveBeenCalled();
       expect(res.setHeader).toHaveBeenCalledWith(
@@ -206,7 +246,7 @@ describe("tenantQuotaMiddleware", () => {
       ];
     });
 
-    it("resets budget when a new day starts", () => {
+    it("resets budget when a new day starts", async () => {
       const tenantId = "reset-test-tenant";
       vi.useFakeTimers();
 
@@ -214,14 +254,14 @@ describe("tenantQuotaMiddleware", () => {
       const today = new Date(2026, 3, 20, 10, 0, 0);
       vi.setSystemTime(today);
 
-      dailyBudgetStore.incrementCents(tenantId, 500);
-      expect(dailyBudgetStore.getUsage(tenantId).cents).toBe(500);
+      await dailyBudgetStore.incrementCents(tenantId, 500);
+      expect((await dailyBudgetStore.getUsage(tenantId)).cents).toBe(500);
 
       // Move to next day 01:00 AM
       const tomorrow = new Date(2026, 3, 21, 1, 0, 0);
       vi.setSystemTime(tomorrow);
 
-      expect(dailyBudgetStore.getUsage(tenantId).cents).toBe(0);
+      expect((await dailyBudgetStore.getUsage(tenantId)).cents).toBe(0);
     });
   });
 });

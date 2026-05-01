@@ -13,6 +13,7 @@
  */
 
 import type { Request, Response, NextFunction } from "express";
+import { securityManager } from "../security/manager.js";
 
 export interface TenantBudget {
   dailyCostLimitCents: number;
@@ -41,66 +42,95 @@ interface BudgetUsage {
   lastReset: number;
 }
 
+// TTL-aware in-memory storage to prevent leaks (Efficiency Fix)
 const inMemoryBuckets = new Map<string, QuotaBucket>();
+const inMemoryUsage = new Map<string, BudgetUsage>();
+
+// Optional Redis client for horizontal scaling
+let _redisClient: any = undefined;
+
+export function setQuotaRedisClient(client: any): void {
+  _redisClient = client;
+}
 
 /**
  * DailyBudgetStore tracks per-tenant cost (in cents) and safety events.
  * Reset is triggered when a request comes in on a new calendar day.
  */
 export class DailyBudgetStore {
-  private usage = new Map<string, BudgetUsage>();
-
-  getUsage(tenantId: string): BudgetUsage {
-    const now = Date.now();
+  async getUsage(tenantId: string): Promise<BudgetUsage> {
     const startOfDay = new Date().setHours(0, 0, 0, 0);
-    let current = this.usage.get(tenantId);
+    const redisKey = `ferroui:budget:${tenantId}:${startOfDay}`;
 
+    if (_redisClient) {
+      const cached = await _redisClient.get(redisKey);
+      if (cached) return JSON.parse(cached);
+    }
+
+    let current = inMemoryUsage.get(tenantId);
     if (!current || current.lastReset < startOfDay) {
-      current = { cents: 0, safetyEvents: 0, lastReset: now };
-      this.usage.set(tenantId, current);
+      current = { cents: 0, safetyEvents: 0, lastReset: Date.now() };
+      inMemoryUsage.set(tenantId, current);
     }
     return current;
   }
 
-  incrementCents(tenantId: string, cents: number): void {
-    const usage = this.getUsage(tenantId);
+  async incrementCents(tenantId: string, cents: number): Promise<void> {
+    const usage = await this.getUsage(tenantId);
     usage.cents += cents;
+    await this.saveUsage(tenantId, usage);
   }
 
-  checkBudget(tenantId: string, estimatedCents: number): boolean {
+  async checkBudget(
+    tenantId: string,
+    estimatedCents: number,
+  ): Promise<boolean> {
     const budget = getTenantBudget(tenantId);
-    const usage = this.getUsage(tenantId);
+    const usage = await this.getUsage(tenantId);
     return usage.cents + estimatedCents <= budget.dailyCostLimitCents;
   }
 
-  recordSafetyEvent(tenantId: string): void {
-    const usage = this.getUsage(tenantId);
+  async recordSafetyEvent(tenantId: string): Promise<void> {
+    const usage = await this.getUsage(tenantId);
     usage.safetyEvents += 1;
+    await this.saveUsage(tenantId, usage);
 
     const budget = getTenantBudget(tenantId);
     if (usage.safetyEvents >= budget.maxSafetyEventsPerDay) {
       console.error(
-        "[Safety] Daily safety event limit exceeded for tenant %s. Further requests will be blocked.",
-        tenantId.replace(/[\r\n]/g, ""),
+        "[Safety] Daily safety event limit exceeded for tenant %s.",
+        securityManager.sanitizeForLog(tenantId),
       );
     }
   }
 
-  isSafetyBlocked(tenantId: string): boolean {
+  async isSafetyBlocked(tenantId: string): Promise<boolean> {
     const budget = getTenantBudget(tenantId);
-    const usage = this.getUsage(tenantId);
+    const usage = await this.getUsage(tenantId);
     return usage.safetyEvents >= budget.maxSafetyEventsPerDay;
   }
 
-  incrementSafetyEvents(tenantId: string): void {
-    this.recordSafetyEvent(tenantId);
+  private async saveUsage(tenantId: string, usage: BudgetUsage): Promise<void> {
+    const startOfDay = new Date().setHours(0, 0, 0, 0);
+    const redisKey = `ferroui:budget:${tenantId}:${startOfDay}`;
+
+    if (_redisClient) {
+      // TTL: 2 days (to allow for timezone overlaps)
+      await _redisClient.set(redisKey, JSON.stringify(usage), "EX", 172800);
+    } else {
+      inMemoryUsage.set(tenantId, usage);
+      // Periodic cleanup of in-memory maps
+      if (inMemoryUsage.size > 1000) {
+        const now = Date.now();
+        for (const [key, val] of inMemoryUsage.entries()) {
+          if (now - val.lastReset > 86400000) inMemoryUsage.delete(key);
+        }
+      }
+    }
   }
 
-  /**
-   * Clears all usage data. Primarily for testing.
-   */
   resetAll(): void {
-    this.usage.clear();
+    inMemoryUsage.clear();
   }
 }
 
@@ -134,11 +164,20 @@ export function getTenantBudget(tenantId: string): TenantBudget {
   };
 }
 
-function checkInMemory(tenantId: string, rpm: number): boolean {
+async function checkRpm(tenantId: string, rpm: number): Promise<boolean> {
   const now = Date.now();
   const windowMs = 60_000;
-  const existing = inMemoryBuckets.get(tenantId);
 
+  if (_redisClient) {
+    const redisKey = `ferroui:rpm:${tenantId}:${Math.floor(now / windowMs)}`;
+    const count = await _redisClient.incr(redisKey);
+    if (count === 1) {
+      await _redisClient.expire(redisKey, 65); // Just over 1 min
+    }
+    return count <= rpm;
+  }
+
+  const existing = inMemoryBuckets.get(tenantId);
   if (!existing || now - existing.windowStart >= windowMs) {
     inMemoryBuckets.set(tenantId, { count: 1, windowStart: now });
     return true;
@@ -155,22 +194,25 @@ function checkInMemory(tenantId: string, rpm: number): boolean {
  * Must be placed after JSON body parsing so `req.body.context.tenantId` is available.
  * Skips quota enforcement on non-API paths.
  */
-export function tenantQuotaMiddleware(
+export async function tenantQuotaMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
-): void {
+): Promise<void> {
   if (!req.path.startsWith("/api/")) {
     next();
     return;
   }
 
+  const auth = (req as any).auth;
   const tenantId: string =
-    (req.body?.context?.tenantId as string | undefined) ?? "default";
+    auth?.tenantId ??
+    (req.body?.context?.tenantId as string | undefined) ??
+    "default";
 
   // 1. Check Daily Cost Budget
   const budget = getTenantBudget(tenantId);
-  const usage = dailyBudgetStore.getUsage(tenantId);
+  const usage = await dailyBudgetStore.getUsage(tenantId);
 
   if (usage.cents >= budget.dailyCostLimitCents) {
     res.status(402).json({
@@ -183,10 +225,10 @@ export function tenantQuotaMiddleware(
   }
 
   // 2. Check Daily Safety Event Limit
-  if (dailyBudgetStore.isSafetyBlocked(tenantId)) {
+  if (await dailyBudgetStore.isSafetyBlocked(tenantId)) {
     console.warn(
       "[Metric] ferroui.safety.budget_exceeded tenant=%s",
-      tenantId.replace(/[\r\n]/g, ""),
+      securityManager.sanitizeForLog(tenantId),
     );
     res.status(429).json({
       error: "Daily safety event limit exceeded",
@@ -198,7 +240,7 @@ export function tenantQuotaMiddleware(
 
   // 3. Check Request Rate (RPM)
   const rpm = getTenantRpm(tenantId);
-  const allowed = checkInMemory(tenantId, rpm);
+  const allowed = await checkRpm(tenantId, rpm);
 
   if (!allowed) {
     res.status(429).json({

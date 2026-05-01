@@ -161,6 +161,24 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       const { prompt, userId, permissions, locale } = parsed.data;
+
+      // Security: Verify permissions (Blocker — Issue 2)
+      // Any caller requesting system.admin must provide a valid system secret
+      if (permissions.includes("system.admin")) {
+        const systemSecret = process.env.FERROUI_SYSTEM_SECRET;
+        if (!systemSecret || args.systemSecret !== systemSecret) {
+          return {
+            content: [
+              {
+                type: "text",
+                text: "Unauthorized: system.admin permissions require a valid systemSecret.",
+              },
+            ],
+            isError: true,
+          };
+        }
+      }
+
       const context: RequestContext = {
         userId,
         permissions,

@@ -104,7 +104,7 @@ describe("deployCommand", () => {
 
     it("should fail if no provider is found", async () => {
       vi.mocked(execa).mockImplementation(
-        ((() => Promise.reject) as any)(new Error()),
+        () => Promise.reject(new Error()) as any,
       );
 
       await deployCommand.parseAsync(["node", "deploy", "web"]);
@@ -135,7 +135,7 @@ describe("deployCommand", () => {
   describe("Edge Target", () => {
     it("should fail if wrangler is not found", async () => {
       vi.mocked(execa).mockImplementation(
-        ((() => Promise.reject) as any)(new Error()),
+        () => Promise.reject(new Error()) as any,
       );
 
       await deployCommand.parseAsync(["node", "deploy", "edge"]);
@@ -175,7 +175,7 @@ describe("deployCommand", () => {
   describe("Desktop Target", () => {
     it("should fail if pnpm is not found", async () => {
       vi.mocked(execa).mockImplementation(
-        ((() => Promise.reject) as any)(new Error()),
+        () => Promise.reject(new Error()) as any,
       );
 
       await deployCommand.parseAsync(["node", "deploy", "desktop"]);

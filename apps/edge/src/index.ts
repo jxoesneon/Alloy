@@ -30,7 +30,7 @@ async function synthesizeLayout(
 
   const genAI = new GoogleGenerativeAI(apiKey);
   logger("MODEL_INIT", "Initializing model");
-  const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const components = Array.from(BLOCK_COMPONENTS).join(", ");
   const systemInstruction = `You are a UI synthesizer for FerroUI. Generate a JSON response that conforms to the FerroUILayout schema. 

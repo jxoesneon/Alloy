@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
+import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
 import { buildCommand } from "./build.js";
 import { spawnSync, execSync } from "node:child_process";
 import fs from "fs-extra";

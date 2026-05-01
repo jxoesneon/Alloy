@@ -260,8 +260,12 @@ function migrateComponentInLayout(layout: any, from: string, to: string) {
   const fromName = from.split("@")[0];
   const toName = to.split("@")[0];
   const jsonStr = JSON.stringify(layout);
+
+  // Escape special characters for regex
+  const escapedFromName = fromName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
   const migrated = jsonStr.replace(
-    new RegExp(`"type":\\s*"${fromName}"`, "g"),
+    new RegExp(`"type":\\s*"${escapedFromName}"`, "g"),
     `"type": "${toName}"`,
   );
   return JSON.parse(migrated);

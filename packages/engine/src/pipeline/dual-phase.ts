@@ -33,8 +33,8 @@ import {
   getTenantBudget,
 } from "../middleware/tenant-quota.js";
 import { PromptLoader } from "../prompts/loader.js";
-import { Signer } from "../security/signer.js";
 import { getTextDirection } from "@ferroui/i18n";
+import { securityManager } from "../security/manager.js";
 import CryptoJS from "crypto-js";
 
 const MAX_TOOL_CALLS_PER_REQUEST = 8;
@@ -49,13 +49,30 @@ interface ToolCall {
 }
 
 /**
- * Adapter for console to match ToolLogger interface
+ * Adapter for console to match ToolLogger interface.
+ * Hardened with log injection protection.
  */
 const toolLogger: ToolLogger = {
-  debug: (msg, ctx) => console.debug(msg, ctx ?? ""),
-  info: (msg, ctx) => console.info(msg, ctx ?? ""),
-  warn: (msg, ctx) => console.warn(msg, ctx ?? ""),
-  error: (msg, ctx) => console.error(msg, ctx ?? ""),
+  debug: (msg, ctx) =>
+    console.debug(
+      securityManager.sanitizeForLog(msg),
+      securityManager.redactPII(ctx) ?? "",
+    ),
+  info: (msg, ctx) =>
+    console.info(
+      securityManager.sanitizeForLog(msg),
+      securityManager.redactPII(ctx) ?? "",
+    ),
+  warn: (msg, ctx) =>
+    console.warn(
+      securityManager.sanitizeForLog(msg),
+      securityManager.redactPII(ctx) ?? "",
+    ),
+  error: (msg, ctx) =>
+    console.error(
+      securityManager.sanitizeForLog(msg),
+      securityManager.redactPII(ctx) ?? "",
+    ),
 };
 
 // Link semantic cache to tool registry for invalidation
@@ -63,85 +80,6 @@ registerCacheHandler({
   invalidate: (toolName, params) => semanticCache.invalidate(toolName, params),
   invalidatePattern: (pattern) => semanticCache.invalidatePattern(pattern),
 });
-
-/**
- * Redacts common PII (email, SSN, Credit Card, IBAN, IP, Phone) from tool outputs.
- * Object-aware strategy prevents bypasses via JSON encoding.
- */
-export function redactPII(data: any): any {
-  if (data === null || data === undefined) return data;
-
-  if (typeof data === "string") {
-    // Recursive parsing for stringified JSON (Phase 4)
-    try {
-      if (
-        (data.trim().startsWith("{") && data.trim().endsWith("}")) ||
-        (data.trim().startsWith("[") && data.trim().endsWith("]"))
-      ) {
-        const parsed = JSON.parse(data);
-        const redacted = redactPII(parsed);
-        return JSON.stringify(redacted);
-      }
-    } catch {
-      // Not valid JSON, proceed to standard string redaction
-    }
-
-    return data
-      .replace(/[^\s@]+@[^\s@]+\.[^\s@]{2,}/g, "[REDACTED_EMAIL]")
-      .replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[REDACTED_SSN]")
-      .replace(/\b\d{4}-\d{4}-\d{4}-\d{4}\b/g, "[REDACTED_CARD]")
-      .replace(/\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/g, "[REDACTED_IBAN]")
-      .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g, "[REDACTED_IP]")
-      .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, "[REDACTED_PHONE]");
-  }
-
-  if (Array.isArray(data)) {
-    return data.map((item) => redactPII(item));
-  }
-
-  if (typeof data === "object") {
-    // Robustness (Phase 4): Skip non-plain objects to prevent them from being collapsed into {}
-    if (
-      data instanceof Date ||
-      data instanceof Buffer ||
-      data instanceof Error ||
-      (data.constructor && data.constructor.name !== "Object")
-    ) {
-      return data;
-    }
-
-    const redacted: Record<string, any> = Object.create(null);
-    for (const [key, value] of Object.entries(data)) {
-      const lowerKey = key.toLowerCase();
-
-      // Prevent prototype pollution via key name
-      if (lowerKey === "__proto__" || lowerKey === "constructor") {
-        continue;
-      }
-
-      // Sensitivity based on keys + recursive redaction of values
-      if (
-        [
-          "ssn",
-          "email",
-          "password",
-          "secret",
-          "token",
-          "card",
-          "creditcard",
-          "iban",
-        ].some((k) => lowerKey.includes(k))
-      ) {
-        redacted[key] = "[REDACTED_SENSITIVE_KEY]";
-      } else {
-        redacted[key] = redactPII(value);
-      }
-    }
-    return redacted;
-  }
-
-  return data;
-}
 
 /**
  * Escapes XML special characters to prevent prompt injection breakouts
@@ -166,7 +104,7 @@ export async function* runDualPhasePipeline(
   const providerRef = { current: initialProvider };
 
   // Security: Redact PII from initial user prompt before any processing
-  const prompt = redactPII(inputPrompt);
+  const prompt = securityManager.redactPII(inputPrompt);
 
   // 1. CONTEXT RESOLUTION (Already passed in context)
   const pipelineStart = Date.now();
@@ -183,8 +121,8 @@ export async function* runDualPhasePipeline(
     console.warn(
       "[Security] Prompt blocked by %s firewall in request %s: %s",
       firewallResult.provider,
-      String(context.requestId).replace(/[\r\n]/g, ""),
-      String(firewallResult.reason).replace(/[\r\n]/g, ""),
+      securityManager.sanitizeForLog(context.requestId),
+      securityManager.sanitizeForLog(firewallResult.reason || "blocked"),
     );
     dailyBudgetStore.recordSafetyEvent(context.tenantId ?? "default");
     yield {
@@ -254,8 +192,8 @@ export async function* runDualPhasePipeline(
     // If phase 1 fails to return valid JSON, we'll try to proceed without tool data
   }
 
-  const toolOutputs: Record<string, any> = {};
-  const cacheToolOutputs: Record<string, any> = {};
+  const toolOutputs: Record<string, any> = Object.create(null);
+  const cacheToolOutputs: Record<string, any> = Object.create(null);
   let hasSensitiveData = false;
 
   // Enforce tool call budget — Security spec §2.1
@@ -305,7 +243,11 @@ export async function* runDualPhasePipeline(
         });
       });
       toolOutputs[call.name] = result;
-      cacheToolOutputs[call.name] = { result, args: call.args };
+      // CRITICAL: Redact tool output before storing in cache to prevent data leaks.
+      cacheToolOutputs[call.name] = {
+        result: securityManager.redactPII(result),
+        args: call.args,
+      };
       yield { type: "tool_output", toolOutput: { name: call.name, result } };
       auditLogger.log({
         type: AuditEventType.TOOL_CALL,
@@ -362,12 +304,6 @@ export async function* runDualPhasePipeline(
       return;
     }
     recordCacheMiss();
-  } else if (config.cacheEnabled && shouldBypassCache) {
-    if (process.env.FERROUI_DEBUG === "true") {
-      console.log(
-        `[Cache] Bypassing cache for request ${context.requestId} (Sensitive: ${hasSensitiveData}, Suspicious: ${isSuspicious})`,
-      );
-    }
   }
 
   phase1Span.end();
@@ -383,7 +319,7 @@ export async function* runDualPhasePipeline(
     cacheStatus: shouldBypassCache ? "BYPASS" : "MISS",
   });
 
-  const processedOutputs = redactPII(toolOutputs);
+  const processedOutputs = securityManager.redactPII(toolOutputs);
   const escapedOutputs = escapeXml(JSON.stringify(processedOutputs, null, 2));
 
   // Build component registry manifest for the LLM
@@ -517,9 +453,9 @@ export async function* runDualPhasePipeline(
   }
 
   // 6. CONTENT PROVENANCE (C2PA)
-  const { privateKey, publicKey } = Signer.generateKeyPair();
-  // Sign the layout WITHOUT the signature/publicKey metadata to avoid circularity
-  const signature = Signer.sign(JSON.stringify(finalLayout), privateKey);
+  // Phase 4 Root of Trust: Use stable key from securityManager.
+  const signature = securityManager.sign(JSON.stringify(finalLayout));
+  const publicKey = securityManager.getPublicKey();
 
   finalLayout.metadata = {
     generatedAt: finalLayout.metadata?.generatedAt ?? new Date().toISOString(),

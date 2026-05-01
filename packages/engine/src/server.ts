@@ -27,15 +27,14 @@ import {
 import type { JwtPayload } from "./auth/jwt.js";
 import { semanticCache } from "./cache/semantic-cache.js";
 import { RedisCacheBackend } from "./cache/cache-backend.js";
-import { ProviderRouter } from "./providers/router.js";
-import { tenantQuotaMiddleware } from "./middleware/tenant-quota.js";
-import { Signer } from "./security/signer.js";
+import {
+  tenantQuotaMiddleware,
+  setQuotaRedisClient,
+} from "./middleware/tenant-quota.js";
+import { securityManager } from "./security/manager.js";
 
 /** Express Request augmented with the verified JWT payload (set by createAuthMiddleware). */
 type AuthenticatedRequest = express.Request & { auth?: JwtPayload };
-
-/** Module-level Ed25519 key pair for session signing (C2PA) */
-const serverKeyPair = Signer.generateKeyPair();
 
 /** Module-level Redis client reference, set by bootstrapRedis() */
 let _activeRedisClient: Redis | undefined;
@@ -74,6 +73,9 @@ async function bootstrapRedis(): Promise<Redis | undefined> {
 
     // Wire semantic cache backend
     semanticCache.setBackend(new RedisCacheBackend(client));
+
+    // Wire quota store for persistent budgets
+    setQuotaRedisClient(client);
 
     _activeRedisClient = client;
     return client;
@@ -192,7 +194,22 @@ export function createServer(
   const provider = options.provider || new AnthropicProvider(); // Default to Anthropic
   const engine = new FerroUIEngine(provider);
 
-  app.use(cors());
+  // Load stable signing keys if provided (Blocker 1)
+  if (process.env.SIGNING_PUBLIC_KEY && process.env.SIGNING_PRIVATE_KEY) {
+    securityManager.setKeyPair(
+      process.env.SIGNING_PUBLIC_KEY,
+      process.env.SIGNING_PRIVATE_KEY,
+    );
+  }
+
+  app.use(
+    cors({
+      origin: process.env.CORS_ORIGIN
+        ? process.env.CORS_ORIGIN.split(",")
+        : false,
+      credentials: true,
+    }),
+  );
   app.use(express.json({ limit: "64kb" })); // Limit payload size
   app.use(cookieParser());
   app.use(securityHeaders);
@@ -239,15 +256,18 @@ export function createServer(
   });
   app.use(limiter);
 
-  // Per-tenant quota enforcement on /api/* routes
-  app.use(tenantQuotaMiddleware);
-
-  // JWT auth — skip health probes, enforce on API and admin routes
+  // JWT auth — must run BEFORE quota/budget to provide verified identity (F-026)
   app.use(
     createAuthMiddleware({
       skipPaths: ["/healthz", "/readyz", "/health", "/health/*"],
     }),
   );
+
+  // Per-tenant quota and budget enforcement (D1)
+  // Wrapped in a handler to safely support async budget checks in Express 4.
+  app.use((req, res, next) => {
+    tenantQuotaMiddleware(req, res, next).catch(next);
+  });
 
   /**
    * Liveness probe (k8s: is the process alive?)  — F-023
@@ -347,7 +367,8 @@ export function createServer(
         message: "User data deleted from session store and semantic cache.",
       });
     } catch (err) {
-      console.error("[GDPR] Deletion failed for userId", userId, err);
+      const safeUserId = securityManager.sanitizeForLog(userId);
+      console.error("[GDPR] Deletion failed for userId: %s", safeUserId, err);
       res.status(500).json({
         error: "Data deletion failed",
         detail: err instanceof Error ? err.message : String(err),
@@ -472,8 +493,18 @@ export function createServer(
       return res.status(400).json({ error: "Missing or invalid context" });
     }
 
-    if (!componentId || !newState) {
+    if (!componentId || typeof componentId !== "string" || !newState) {
       return res.status(400).json({ error: "Missing componentId or newState" });
+    }
+
+    // Security: Block prototype pollution attempts via componentId
+    const lowerKey = componentId.toLowerCase();
+    if (
+      lowerKey === "__proto__" ||
+      lowerKey === "constructor" ||
+      lowerKey === "prototype"
+    ) {
+      return res.status(400).json({ error: "Invalid componentId" });
     }
 
     try {
@@ -530,46 +561,36 @@ export function createServer(
       context: RequestContext;
     };
 
-    // Security: Override context with verified JWT payload set by createAuthMiddleware
+    // Security: Override context with verified JWT payload
     const auth = (req as AuthenticatedRequest).auth;
-
-    // Strict Identity Verification (Phase 4): auth is mandatory for this route
     if (!auth) {
       return res.status(401).json({
         error: "Unauthorized: Missing or invalid authentication token",
       });
     }
 
-    const context: RequestContext = {
-      ...bodyContext,
-      userId: auth.sub ?? auth.userId, // Strictly from verified payload
-      permissions: auth.permissions ?? [], // Strictly from verified payload
-    };
+    const context = securityManager.createSecureContext(bodyContext, auth);
 
     if (!prompt) {
       return res.status(400).json({ error: "Missing prompt" });
     }
 
-    if (!context || !context.userId || !context.requestId) {
+    if (!context.userId || !context.requestId) {
       return res.status(400).json({
         error: "Missing or invalid context (userId and requestId are required)",
       });
     }
 
-    // Basic input sanitization
-    // 1. Trim whitespace
-    // 2. Neutralize HTML tags completely (LLM prompts shouldn't need HTML)
-    const sanitizedPrompt = prompt.trim().replace(/<[^>]*>?/gm, "");
-
-    // Sanitize context fields for logging
-    const safeRequestId = String(context.requestId).replace(/[\r\n]/g, "");
-    const safeUserId = String(context.userId).replace(/[\r\n]/g, "");
+    // Input sanitization (Centralized via SecurityManager)
+    const sanitizedPrompt = securityManager.stripHtml(prompt);
+    const safeRequestId = securityManager.sanitizeForLog(context.requestId);
+    const safeUserId = securityManager.sanitizeForLog(context.userId);
 
     // Set up SSE headers
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
-    res.flushHeaders(); // Ensure headers are sent immediately
+    res.flushHeaders();
 
     const requestStart = Date.now();
     let pipelineSucceeded = false;
@@ -577,19 +598,16 @@ export function createServer(
     try {
       console.log(
         "[Engine] Starting process for prompt: %s (RequestID: %s)",
-        sanitizedPrompt.replace(/[\r\n]/g, " "),
+        securityManager.sanitizeForLog(sanitizedPrompt),
         safeRequestId,
       );
 
       for await (const chunk of engine.process(sanitizedPrompt, context)) {
         // Universal Stream Signing (Phase 4)
-        // Sign EVERY chunk type to ensure full stream provenance.
-        const signature = Signer.sign(
-          JSON.stringify(chunk),
-          serverKeyPair.privateKey,
-        );
+        // Use singleton key pair from securityManager to avoid CPU bottleneck.
+        const signature = securityManager.sign(JSON.stringify(chunk));
         chunk.signature = signature;
-        chunk.publicKey = serverKeyPair.publicKey;
+        chunk.publicKey = securityManager.getPublicKey();
 
         res.write(`data: ${JSON.stringify(chunk)}\n\n`);
         if ((chunk as EngineChunk).type === "complete") {
@@ -610,10 +628,11 @@ export function createServer(
         safeRequestId,
       );
     } catch (error) {
+      const safeError = securityManager.sanitizeForLog(String(error));
       console.error(
-        "[Engine] Error processing request %s:",
+        "[Engine] Error processing request %s: %s",
         safeRequestId,
-        error,
+        safeError,
       );
       recordFailure();
       recordRequestCompletion(Date.now() - requestStart, false, {

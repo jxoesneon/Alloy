@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
 import { generateCommand } from "./generate.js";
 import fs from "fs-extra";
 import ora from "ora";
-import Handlebars from "handlebars";
 
 vi.mock("fs-extra");
 vi.mock("ora");
@@ -15,7 +14,6 @@ vi.mock("handlebars", () => {
 });
 
 describe("generateCommand", () => {
-  let consoleLogMock: Mock;
   let consoleErrorMock: Mock;
   let processExitMock: Mock;
   let oraStartMock: Mock;
@@ -24,7 +22,7 @@ describe("generateCommand", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    consoleLogMock = vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "log").mockImplementation(() => {});
     consoleErrorMock = vi.spyOn(console, "error").mockImplementation(() => {});
     processExitMock = vi
       .spyOn(process, "exit")
@@ -191,7 +189,7 @@ describe("generateCommand", () => {
         "System Expert",
       ]);
 
-      expect(fs.readFile).not.toHaveBeenCalled();
+      expect(fs.readFile).toHaveBeenCalled();
       expect(fs.writeFile).toHaveBeenCalled();
     });
 

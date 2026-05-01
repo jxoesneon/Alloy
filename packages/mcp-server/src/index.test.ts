@@ -96,6 +96,46 @@ describe("MCP Server", () => {
       expect(response.content[0].text).toContain("Invalid arguments");
     });
 
+    it("fails if requesting system.admin without secret", async () => {
+      const handler = handlers["tools/call"];
+      const response = await handler({
+        params: {
+          name: "ferroui_generate_layout",
+          arguments: { prompt: "test", permissions: ["system.admin"] },
+        },
+      });
+      expect(response.isError).toBe(true);
+      expect(response.content[0].text).toContain(
+        "system.admin permissions require a valid systemSecret",
+      );
+    });
+
+    it("succeeds if requesting system.admin with correct secret", async () => {
+      process.env.FERROUI_SYSTEM_SECRET = "topsecret";
+      async function* mockGenerator() {
+        yield { type: "complete", layout: { type: "Dashboard" } };
+      }
+      vi.mocked(engineModule.runDualPhasePipeline).mockReturnValue(
+        mockGenerator() as any,
+      );
+
+      const handler = handlers["tools/call"];
+      const response = await handler({
+        params: {
+          name: "ferroui_generate_layout",
+          arguments: {
+            prompt: "test",
+            permissions: ["system.admin"],
+            systemSecret: "topsecret",
+          },
+        },
+      });
+
+      expect(response.isError).toBeUndefined();
+      expect(response.content[0].text).toContain('"type": "Dashboard"');
+      delete process.env.FERROUI_SYSTEM_SECRET;
+    });
+
     it("generates layout with layout_chunk and complete", async () => {
       async function* mockGenerator() {
         yield { type: "layout_chunk", content: '{"a":' };
