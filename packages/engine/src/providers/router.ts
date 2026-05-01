@@ -89,6 +89,10 @@ export class ProviderRouter implements LlmProvider {
     this.health.set(providerId, h);
   }
 
+  getHealthSnapshot(): Record<string, ProviderHealth> {
+    return Object.fromEntries(this.health);
+  }
+
   private isHealthy(providerId: string): boolean {
     const h = this.getHealth(providerId);
     if (!h.circuitOpen) return true;

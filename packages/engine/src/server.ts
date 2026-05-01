@@ -9,6 +9,7 @@ import type { RedisReply } from "rate-limit-redis";
 import Redis from "ioredis";
 import { FerroUIEngine } from "./engine.js";
 import { RequestContext, EngineChunk } from "./types.js";
+import { ProviderRouter } from "./providers/router.js";
 import { AnthropicProvider } from "./providers/anthropic.js";
 import { OpenAIProvider } from "./providers/openai.js";
 import { LlmProvider } from "./providers/base.js";
@@ -458,8 +459,10 @@ export function createServer(
       res.status(200).json({
         providers: {
           [provider.id]: {
-            failures: 0,
-            circuitOpen: false,
+            ...(provider.getHealthSnapshot?.() ?? {
+              failures: 0,
+              circuitOpen: false,
+            }),
             providerId: provider.id,
           },
         },

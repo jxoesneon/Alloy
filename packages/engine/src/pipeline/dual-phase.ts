@@ -351,7 +351,7 @@ export async function* runDualPhasePipeline(
   });
 
   const budget = getTenantBudget(tenantId);
-  const currentUsage = dailyBudgetStore.getUsage(tenantId);
+  const currentUsage = await dailyBudgetStore.getUsage(tenantId);
 
   auditLogger.log({
     type: AuditEventType.COST_ESTIMATED,
