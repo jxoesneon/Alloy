@@ -96,4 +96,69 @@ export class ProviderRouter implements LlmProvider {
     }
     return out;
   }
+
+  private isHealthy(providerId: string): boolean {
+    const h = this.getHealth(providerId);
+    if (!h.circuitOpen) return true;
+    if (Date.now() - h.lastFailureAt > CIRCUIT_RESET_MS) {
+      h.circuitOpen = false;
+      h.failures = 0;
+      this.health.set(providerId, h);
+      return true;
+    }
+    return false;
+  }
+
+  private selectCandidates(): RoutedProvider[] {
+    return this.providers
+      .filter((p) => this.isHealthy(p.provider.id))
+      .sort((a, b) => a.costPerKToken - b.costPerKToken);
+  }
+
+  async *processPrompt(
+    req: LlmRequest,
+  ): AsyncGenerator<string, LlmResponse, undefined> {
+    const candidates = this.selectCandidates();
+    if (candidates.length === 0)
+      throw new Error("[ProviderRouter] All providers are unhealthy");
+    for (const candidate of candidates) {
+      try {
+        const result = yield* candidate.provider.processPrompt(req);
+        this.recordSuccess(candidate.provider.id);
+        return result;
+      } catch (err) {
+        this.recordFailure(candidate.provider.id);
+      }
+    }
+    throw new Error(
+      "[ProviderRouter] All providers failed during processPrompt",
+    );
+  }
+
+  async completePrompt(req: LlmRequest): Promise<LlmResponse> {
+    const candidates = this.selectCandidates();
+    if (candidates.length === 0)
+      throw new Error("[ProviderRouter] All providers are unhealthy");
+    for (const candidate of candidates) {
+      try {
+        const result = await candidate.provider.completePrompt(req);
+        this.recordSuccess(candidate.provider.id);
+        return result;
+      } catch (err) {
+        this.recordFailure(candidate.provider.id);
+      }
+    }
+    throw new Error("[ProviderRouter] All providers failed");
+  }
+
+  estimateTokens(text: string): number {
+    return (
+      this.providers[0]?.provider.estimateTokens(text) ??
+      Math.ceil(text.length / 4)
+    );
+  }
+
+  estimateCost(tokens: { input: number; output: number }): number {
+    return this.providers[0]?.provider.estimateCost(tokens) ?? 0;
+  }
 }
