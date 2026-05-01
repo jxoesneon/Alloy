@@ -166,7 +166,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       // Any caller requesting system.admin must provide a valid system secret
       if (permissions.includes("system.admin")) {
         const systemSecret = process.env.FERROUI_SYSTEM_SECRET;
-        if (!systemSecret || args.systemSecret !== systemSecret) {
+        if (!systemSecret || (args as any)?.systemSecret !== systemSecret) {
           return {
             content: [
               {
