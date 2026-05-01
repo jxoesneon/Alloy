@@ -23,10 +23,6 @@ overrides:
 importers:
 
   .:
-    dependencies:
-      puppeteer:
-        specifier: ^24.42.0
-        version: 24.42.0(typescript@6.0.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: ^4.11.2
@@ -127,6 +123,9 @@ importers:
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
+      puppeteer:
+        specifier: ^24.42.0
+        version: 24.42.0(typescript@6.0.3)
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
