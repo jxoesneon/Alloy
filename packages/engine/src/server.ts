@@ -459,10 +459,12 @@ export function createServer(
       res.status(200).json({
         providers: {
           [provider.id]: {
-            ...(provider.getHealthSnapshot?.() ?? {
-              failures: 0,
-              circuitOpen: false,
-            }),
+            ...(provider.getHealthSnapshot
+              ? provider.getHealthSnapshot()
+              : {
+                  failures: 0,
+                  circuitOpen: false,
+                }),
             providerId: provider.id,
           },
         },
