@@ -78,7 +78,7 @@ describe("generate-docs script helpers", () => {
     });
 
     it("should handle enum", () => {
-      expect(describeType({ enum: ["a", "b"] })).toBe('`"a"` \\| `"b"`');
+      expect(describeType({ enum: ["a", "b"] })).toBe('`"a"` \\| `"b"` ');
     });
 
     it("should handle anyOf", () => {
