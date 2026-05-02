@@ -85,11 +85,11 @@ export class SecurityManager {
       // Non-backtracking, safer regexes for PII
       return data
         .replace(/[^\s@]+@[^\s@]+\.[^\s@]{2,}/g, "[REDACTED_EMAIL]")
-        .replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[REDACTED_SSN]")
-        .replace(/\b(?:\d{4}-){3}\d{4}\b/g, "[REDACTED_CARD]")
-        .replace(/\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/g, "[REDACTED_IBAN]")
-        .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g, "[REDACTED_IP]")
-        .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, "[REDACTED_PHONE]");
+        .replace(/\d{3}-\d{2}-\d{4}/g, "[REDACTED_SSN]")
+        .replace(/(?:\d{4}-){3}\d{4}/g, "[REDACTED_CARD]")
+        .replace(/[A-Z]{2}\d{2}[A-Z0-9]{11,30}/g, "[REDACTED_IBAN]")
+        .replace(/\d{1,3}(?:\.\d{1,3}){3}/g, "[REDACTED_IP]")
+        .replace(/\d{3}[-.\s]?\d{3}[-.\s]?\d{4}/g, "[REDACTED_PHONE]");
     }
 
     if (Array.isArray(data)) {

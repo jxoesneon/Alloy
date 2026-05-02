@@ -59,7 +59,9 @@ async function bootstrapRedis(): Promise<Redis | undefined> {
     await client.connect();
     await client.ping();
     console.log(
-      "[FerroUI] Redis connected — using Redis-backed session store, semantic cache, and rate limiter",
+      securityManager.sanitizeForLog(
+        "[FerroUI] Redis connected — using Redis-backed session store, semantic cache, and rate limiter",
+      ),
     );
 
     // Wire session store — bridge ioredis API to RedisSessionClientLike interface
