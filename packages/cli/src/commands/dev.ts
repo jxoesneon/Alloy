@@ -84,11 +84,7 @@ export const devCommand = new Command("dev")
       console.error(chalk.red(`Invalid engine port: ${options.enginePort}`));
       process.exit(1);
     }
-    if (
-      isNaN(inspectorPort) ||
-      inspectorPort <= 0 ||
-      inspectorPort > 65535
-    ) {
+    if (isNaN(inspectorPort) || inspectorPort <= 0 || inspectorPort > 65535) {
       console.error(
         chalk.red(`Invalid inspector port: ${options.inspectorPort}`),
       );

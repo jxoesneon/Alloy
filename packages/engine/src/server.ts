@@ -83,7 +83,9 @@ async function bootstrapRedis(): Promise<Redis | undefined> {
   } catch (err) {
     console.warn(
       "[FerroUI] Redis connection failed, falling back to in-memory stores:",
-      securityManager.sanitizeForLog(err instanceof Error ? err.message : String(err)),
+      securityManager.sanitizeForLog(
+        err instanceof Error ? err.message : String(err),
+      ),
     );
     client.disconnect();
     return undefined;

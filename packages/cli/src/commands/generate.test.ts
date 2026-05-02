@@ -260,7 +260,9 @@ describe("generateCommand", () => {
     });
 
     it("should handle generic errors in prompt generation", async () => {
-      vi.mocked(fs.writeFile).mockRejectedValue(new Error("Generic Write Error"));
+      vi.mocked(fs.writeFile).mockRejectedValue(
+        new Error("Generic Write Error"),
+      );
 
       await generateCommand.parseAsync([
         "node",

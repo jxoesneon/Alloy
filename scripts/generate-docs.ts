@@ -36,12 +36,12 @@ const API_DIR = path.join(DOCS_DIR, "api");
 export function esc(str: string): string {
   if (typeof str !== "string") return "";
   return str
-    .replace(/\\/g, "\\\\")   
-    .replace(/\|/g, "\\|")    
-    .replace(/</g, "&lt;")    
-    .replace(/>/g, "&gt;")    
-    .replace(/`/g, "\\`")     
-    .replace(/\r?\n/g, " ");   
+    .replace(/\\/g, "\\\\")
+    .replace(/\|/g, "\\|")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/`/g, "\\`")
+    .replace(/\r?\n/g, " ");
 }
 
 export function codeInline(value: string): string {

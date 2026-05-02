@@ -65,18 +65,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
           "type": "string"
         }
       },
-      "required": [
-        "generatedAt"
-      ],
+      "required": ["generatedAt"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "schemaVersion",
-    "requestId",
-    "locale",
-    "layout"
-  ],
+  "required": ["schemaVersion", "requestId", "locale", "layout"],
   "additionalProperties": false,
   "$defs": {
     "__schema0": {
@@ -126,16 +119,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                       "additionalProperties": {}
                     }
                   },
-                  "required": [
-                    "path"
-                  ],
+                  "required": ["path"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "type",
-                "payload"
-              ],
+              "required": ["type", "payload"],
               "additionalProperties": false
             },
             {
@@ -154,29 +142,18 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                     },
                     "variant": {
                       "type": "string",
-                      "enum": [
-                        "info",
-                        "success",
-                        "warning",
-                        "error"
-                      ]
+                      "enum": ["info", "success", "warning", "error"]
                     },
                     "duration": {
                       "type": "number",
                       "exclusiveMinimum": 0
                     }
                   },
-                  "required": [
-                    "message",
-                    "variant"
-                  ],
+                  "required": ["message", "variant"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "type",
-                "payload"
-              ],
+              "required": ["type", "payload"],
               "additionalProperties": false
             },
             {
@@ -194,9 +171,7 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                   "additionalProperties": {}
                 }
               },
-              "required": [
-                "type"
-              ],
+              "required": ["type"],
               "additionalProperties": false
             },
             {
@@ -221,17 +196,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                       "additionalProperties": {}
                     }
                   },
-                  "required": [
-                    "tool",
-                    "args"
-                  ],
+                  "required": ["tool", "args"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "type",
-                "payload"
-              ],
+              "required": ["type", "payload"],
               "additionalProperties": false
             },
             {
@@ -256,17 +225,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                       "additionalProperties": {}
                     }
                   },
-                  "required": [
-                    "id",
-                    "state"
-                  ],
+                  "required": ["id", "state"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "type",
-                "payload"
-              ],
+              "required": ["type", "payload"],
               "additionalProperties": false
             }
           ]
@@ -288,11 +251,7 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
             },
             "live": {
               "type": "string",
-              "enum": [
-                "off",
-                "polite",
-                "assertive"
-              ]
+              "enum": ["off", "polite", "assertive"]
             },
             "role": {
               "type": "string"
@@ -352,16 +311,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                       "additionalProperties": {}
                                     }
                                   },
-                                  "required": [
-                                    "path"
-                                  ],
+                                  "required": ["path"],
                                   "additionalProperties": false
                                 }
                               },
-                              "required": [
-                                "type",
-                                "payload"
-                              ],
+                              "required": ["type", "payload"],
                               "additionalProperties": false
                             },
                             {
@@ -392,17 +346,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                       "exclusiveMinimum": 0
                                     }
                                   },
-                                  "required": [
-                                    "message",
-                                    "variant"
-                                  ],
+                                  "required": ["message", "variant"],
                                   "additionalProperties": false
                                 }
                               },
-                              "required": [
-                                "type",
-                                "payload"
-                              ],
+                              "required": ["type", "payload"],
                               "additionalProperties": false
                             },
                             {
@@ -420,9 +368,7 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                   "additionalProperties": {}
                                 }
                               },
-                              "required": [
-                                "type"
-                              ],
+                              "required": ["type"],
                               "additionalProperties": false
                             },
                             {
@@ -447,17 +393,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                       "additionalProperties": {}
                                     }
                                   },
-                                  "required": [
-                                    "tool",
-                                    "args"
-                                  ],
+                                  "required": ["tool", "args"],
                                   "additionalProperties": false
                                 }
                               },
-                              "required": [
-                                "type",
-                                "payload"
-                              ],
+                              "required": ["type", "payload"],
                               "additionalProperties": false
                             },
                             {
@@ -482,25 +422,17 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                       "additionalProperties": {}
                                     }
                                   },
-                                  "required": [
-                                    "id",
-                                    "state"
-                                  ],
+                                  "required": ["id", "state"],
                                   "additionalProperties": false
                                 }
                               },
-                              "required": [
-                                "type",
-                                "payload"
-                              ],
+                              "required": ["type", "payload"],
                               "additionalProperties": false
                             }
                           ]
                         }
                       },
-                      "required": [
-                        "target"
-                      ],
+                      "required": ["target"],
                       "additionalProperties": false
                     }
                   },
@@ -528,16 +460,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                 "additionalProperties": {}
                               }
                             },
-                            "required": [
-                              "path"
-                            ],
+                            "required": ["path"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       },
                       {
@@ -556,29 +483,18 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                               },
                               "variant": {
                                 "type": "string",
-                                "enum": [
-                                  "info",
-                                  "success",
-                                  "warning",
-                                  "error"
-                                ]
+                                "enum": ["info", "success", "warning", "error"]
                               },
                               "duration": {
                                 "type": "number",
                                 "exclusiveMinimum": 0
                               }
                             },
-                            "required": [
-                              "message",
-                              "variant"
-                            ],
+                            "required": ["message", "variant"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       },
                       {
@@ -596,9 +512,7 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                             "additionalProperties": {}
                           }
                         },
-                        "required": [
-                          "type"
-                        ],
+                        "required": ["type"],
                         "additionalProperties": false
                       },
                       {
@@ -623,17 +537,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                 "additionalProperties": {}
                               }
                             },
-                            "required": [
-                              "tool",
-                              "args"
-                            ],
+                            "required": ["tool", "args"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       },
                       {
@@ -658,17 +566,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                 "additionalProperties": {}
                               }
                             },
-                            "required": [
-                              "id",
-                              "state"
-                            ],
+                            "required": ["id", "state"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       }
                     ]
@@ -697,16 +599,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                 "additionalProperties": {}
                               }
                             },
-                            "required": [
-                              "path"
-                            ],
+                            "required": ["path"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       },
                       {
@@ -725,29 +622,18 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                               },
                               "variant": {
                                 "type": "string",
-                                "enum": [
-                                  "info",
-                                  "success",
-                                  "warning",
-                                  "error"
-                                ]
+                                "enum": ["info", "success", "warning", "error"]
                               },
                               "duration": {
                                 "type": "number",
                                 "exclusiveMinimum": 0
                               }
                             },
-                            "required": [
-                              "message",
-                              "variant"
-                            ],
+                            "required": ["message", "variant"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       },
                       {
@@ -765,9 +651,7 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                             "additionalProperties": {}
                           }
                         },
-                        "required": [
-                          "type"
-                        ],
+                        "required": ["type"],
                         "additionalProperties": false
                       },
                       {
@@ -792,17 +676,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                 "additionalProperties": {}
                               }
                             },
-                            "required": [
-                              "tool",
-                              "args"
-                            ],
+                            "required": ["tool", "args"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       },
                       {
@@ -827,17 +705,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
                                 "additionalProperties": {}
                               }
                             },
-                            "required": [
-                              "id",
-                              "state"
-                            ],
+                            "required": ["id", "state"],
                             "additionalProperties": false
                           }
                         },
-                        "required": [
-                          "type",
-                          "payload"
-                        ],
+                        "required": ["type", "payload"],
                         "additionalProperties": false
                       }
                     ]
@@ -858,17 +730,11 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
               "additionalProperties": {}
             }
           },
-          "required": [
-            "initial",
-            "states"
-          ],
+          "required": ["initial", "states"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "type",
-        "aria"
-      ],
+      "required": ["type", "aria"],
       "additionalProperties": false
     }
   }

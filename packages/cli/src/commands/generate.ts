@@ -123,7 +123,9 @@ generateCommand
         await fs.mkdir(outputDir);
       } catch (error: any) {
         if (error.code === "EEXIST") {
-          spinner.fail(chalk.red(`Tool directory already exists: ${outputDir}`));
+          spinner.fail(
+            chalk.red(`Tool directory already exists: ${outputDir}`),
+          );
           process.exit(1);
         }
         throw error;

@@ -13,9 +13,7 @@ describe("evalCommand", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     consoleLogMock = vi.spyOn(console, "log").mockImplementation(() => {});
-    vi.spyOn(process, "exit").mockImplementation(((
-      code: any,
-    ) => {
+    vi.spyOn(process, "exit").mockImplementation(((code: any) => {
       throw new Error(`Exit ${code}`);
     }) as any);
 

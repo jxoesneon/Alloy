@@ -101,7 +101,7 @@ export class SecurityManager {
       const redacted: Record<string, any> = Object.create(null);
       for (const [key, value] of Object.entries(data)) {
         if (key === "__proto__" || key === "constructor") continue;
-        
+
         const lowerKey = key.toLowerCase();
 
         // Sensitivity based on keys + recursive redaction of values

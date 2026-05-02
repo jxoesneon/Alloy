@@ -221,8 +221,8 @@ describe("devCommand", () => {
 
     // Protocol validation (should not call spawnSync for non-http/https)
     vi.clearAllMocks();
-    // We can't easily test the inner openBrowser filtering without exposing it or 
-    // triggering it via an option that we can control. 
+    // We can't easily test the inner openBrowser filtering without exposing it or
+    // triggering it via an option that we can control.
     // But we can test that a valid URL is sanitized.
 
     // Error
@@ -236,32 +236,36 @@ describe("devCommand", () => {
     vi.useRealTimers();
   });
 
-  it("should fail if invalid ports are provided", { timeout: 10000 }, async () => {
-    const invalidPorts = ["-1", "65536", "abc"];
-    
-    for (const port of invalidPorts) {
+  it(
+    "should fail if invalid ports are provided",
+    { timeout: 10000 },
+    async () => {
+      const invalidPorts = ["-1", "65536", "abc"];
+
+      for (const port of invalidPorts) {
+        vi.clearAllMocks();
+        await devCommand.parseAsync(["node", "dev", "-p", port]);
+        expect(consoleErrorMock).toHaveBeenCalledWith(
+          expect.stringContaining(`Invalid playground port: ${port}`),
+        );
+        expect(processExitMock).toHaveBeenCalledWith(1);
+      }
+
       vi.clearAllMocks();
-      await devCommand.parseAsync(["node", "dev", "-p", port]);
+      await devCommand.parseAsync(["node", "dev", "--engine-port", "abc"]);
       expect(consoleErrorMock).toHaveBeenCalledWith(
-        expect.stringContaining(`Invalid playground port: ${port}`),
+        expect.stringContaining("Invalid engine port: abc"),
       );
       expect(processExitMock).toHaveBeenCalledWith(1);
-    }
 
-    vi.clearAllMocks();
-    await devCommand.parseAsync(["node", "dev", "--engine-port", "abc"]);
-    expect(consoleErrorMock).toHaveBeenCalledWith(
-      expect.stringContaining("Invalid engine port: abc"),
-    );
-    expect(processExitMock).toHaveBeenCalledWith(1);
-
-    vi.clearAllMocks();
-    await devCommand.parseAsync(["node", "dev", "--inspector-port", "abc"]);
-    expect(consoleErrorMock).toHaveBeenCalledWith(
-      expect.stringContaining("Invalid inspector port: abc"),
-    );
-    expect(processExitMock).toHaveBeenCalledWith(1);
-  });
+      vi.clearAllMocks();
+      await devCommand.parseAsync(["node", "dev", "--inspector-port", "abc"]);
+      expect(consoleErrorMock).toHaveBeenCalledWith(
+        expect.stringContaining("Invalid inspector port: abc"),
+      );
+      expect(processExitMock).toHaveBeenCalledWith(1);
+    },
+  );
 
   it("should handle process failure and ignore errors when killing processes", async () => {
     let callCount = 0;

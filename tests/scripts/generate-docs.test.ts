@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { z } from "zod";
-import { 
-  esc, 
-  codeInline, 
-  describeType, 
-  toSchema 
+import {
+  esc,
+  codeInline,
+  describeType,
+  toSchema,
 } from "../../scripts/generate-docs.js";
 
 describe("generate-docs script helpers", () => {
@@ -40,7 +40,9 @@ describe("generate-docs script helpers", () => {
     });
 
     it("should handle mixed inputs", () => {
-      expect(esc("foo | <bar> `baz` \\qux\nline 2")).toBe("foo \\| &lt;bar&gt; \\`baz\\` \\\\qux line 2");
+      expect(esc("foo | <bar> `baz` \\qux\nline 2")).toBe(
+        "foo \\| &lt;bar&gt; \\`baz\\` \\\\qux line 2",
+      );
     });
   });
 
@@ -72,27 +74,35 @@ describe("generate-docs script helpers", () => {
     });
 
     it("should handle const", () => {
-      expect(describeType({ const: "foo" })).toBe("`\"foo\"`");
+      expect(describeType({ const: "foo" })).toBe('`"foo"`');
     });
 
     it("should handle enum", () => {
-      expect(describeType({ enum: ["a", "b"] })).toBe("`\"a\"` \\| `\"b\"` ");
+      expect(describeType({ enum: ["a", "b"] })).toBe('`"a"` \\| `"b"` ');
     });
 
     it("should handle anyOf", () => {
-      expect(describeType({ anyOf: [{ type: "string" }, { type: "number" }] })).toBe("string \\| number");
+      expect(
+        describeType({ anyOf: [{ type: "string" }, { type: "number" }] }),
+      ).toBe("string \\| number");
     });
 
     it("should handle oneOf", () => {
-      expect(describeType({ oneOf: [{ type: "string" }, { type: "number" }] })).toBe("string \\| number");
+      expect(
+        describeType({ oneOf: [{ type: "string" }, { type: "number" }] }),
+      ).toBe("string \\| number");
     });
 
     it("should handle allOf", () => {
-      expect(describeType({ allOf: [{ type: "string" }, { type: "number" }] })).toBe("string & number");
+      expect(
+        describeType({ allOf: [{ type: "string" }, { type: "number" }] }),
+      ).toBe("string & number");
     });
 
     it("should handle arrays", () => {
-      expect(describeType({ type: "array", items: { type: "string" } })).toBe("string[]");
+      expect(describeType({ type: "array", items: { type: "string" } })).toBe(
+        "string[]",
+      );
     });
 
     it("should handle simple types", () => {
@@ -100,11 +110,18 @@ describe("generate-docs script helpers", () => {
     });
 
     it("should handle mixed types", () => {
-      expect(describeType({ type: ["string", "number"] })).toBe("string \\| number");
+      expect(describeType({ type: ["string", "number"] })).toBe(
+        "string \\| number",
+      );
     });
 
     it("should handle object with properties", () => {
-      expect(describeType({ type: "object", properties: { foo: { type: "string" } } })).toBe("object");
+      expect(
+        describeType({
+          type: "object",
+          properties: { foo: { type: "string" } },
+        }),
+      ).toBe("object");
     });
   });
 });
