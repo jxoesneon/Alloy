@@ -4,7 +4,7 @@
 
 > **signToken**(`payload`, `opts?`): `string`
 
-Defined in: [engine/src/auth/jwt.ts:70](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L70)
+Defined in: [engine/src/auth/jwt.ts:118](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L118)
 
 ## Parameters
 

@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [packages/tools/src/types.ts:56](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L56)
+Defined in: [packages/tools/src/types.ts:56](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L56)
 
 Configuration options for tool registration
 
@@ -22,7 +22,7 @@ Configuration options for tool registration
 
 > `optional` **dataClassification?**: `"shared"` \| `"user-specific"`
 
-Defined in: [packages/tools/src/types.ts:64](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L64)
+Defined in: [packages/tools/src/types.ts:64](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L64)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/tools/src/types.ts:64](https://github.com/jxoesneon/FerroU
 
 > **description**: `string`
 
-Defined in: [packages/tools/src/types.ts:58](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L58)
+Defined in: [packages/tools/src/types.ts:58](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L58)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/tools/src/types.ts:58](https://github.com/jxoesneon/FerroU
 
 > **execute**: (`params`, `context`) => `Promise`\<`output`\<`TResult`\>\>
 
-Defined in: [packages/tools/src/types.ts:68](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L68)
+Defined in: [packages/tools/src/types.ts:68](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L68)
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: [packages/tools/src/types.ts:68](https://github.com/jxoesneon/FerroU
 
 > **name**: `string`
 
-Defined in: [packages/tools/src/types.ts:57](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L57)
+Defined in: [packages/tools/src/types.ts:57](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L57)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [packages/tools/src/types.ts:57](https://github.com/jxoesneon/FerroU
 
 > **parameters**: `TParams`
 
-Defined in: [packages/tools/src/types.ts:59](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L59)
+Defined in: [packages/tools/src/types.ts:59](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L59)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [packages/tools/src/types.ts:59](https://github.com/jxoesneon/FerroU
 
 > `optional` **public?**: `boolean`
 
-Defined in: [packages/tools/src/types.ts:67](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L67)
+Defined in: [packages/tools/src/types.ts:67](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L67)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [packages/tools/src/types.ts:67](https://github.com/jxoesneon/FerroU
 
 > `optional` **requiredPermissions?**: `string`[]
 
-Defined in: [packages/tools/src/types.ts:63](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L63)
+Defined in: [packages/tools/src/types.ts:63](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L63)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [packages/tools/src/types.ts:63](https://github.com/jxoesneon/FerroU
 
 > **returns**: `TResult`
 
-Defined in: [packages/tools/src/types.ts:60](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L60)
+Defined in: [packages/tools/src/types.ts:60](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L60)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [packages/tools/src/types.ts:60](https://github.com/jxoesneon/FerroU
 
 > `optional` **sensitive?**: `boolean`
 
-Defined in: [packages/tools/src/types.ts:62](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L62)
+Defined in: [packages/tools/src/types.ts:62](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L62)
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [packages/tools/src/types.ts:62](https://github.com/jxoesneon/FerroU
 
 > `optional` **tags?**: `string`[]
 
-Defined in: [packages/tools/src/types.ts:66](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L66)
+Defined in: [packages/tools/src/types.ts:66](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L66)
 
 ***
 
@@ -116,7 +116,7 @@ Defined in: [packages/tools/src/types.ts:66](https://github.com/jxoesneon/FerroU
 
 > `optional` **timeout?**: `number`
 
-Defined in: [packages/tools/src/types.ts:65](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L65)
+Defined in: [packages/tools/src/types.ts:65](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L65)
 
 ***
 
@@ -124,4 +124,4 @@ Defined in: [packages/tools/src/types.ts:65](https://github.com/jxoesneon/FerroU
 
 > `optional` **ttl?**: `number`
 
-Defined in: [packages/tools/src/types.ts:61](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L61)
+Defined in: [packages/tools/src/types.ts:61](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L61)

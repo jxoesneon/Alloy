@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/middleware/tenant-budget.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L9)
+Defined in: [engine/src/middleware/tenant-budget.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L9)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/middleware/tenant-budget.ts:9](https://github.com/jxoesn
 
 > **maxCostPerDay**: `number`
 
-Defined in: [engine/src/middleware/tenant-budget.ts:12](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L12)
+Defined in: [engine/src/middleware/tenant-budget.ts:12](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L12)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/middleware/tenant-budget.ts:12](https://github.com/jxoes
 
 > **maxRequestsPerDay**: `number`
 
-Defined in: [engine/src/middleware/tenant-budget.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L11)
+Defined in: [engine/src/middleware/tenant-budget.ts:11](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L11)
 
 ***
 
@@ -26,4 +26,4 @@ Defined in: [engine/src/middleware/tenant-budget.ts:11](https://github.com/jxoes
 
 > **maxTokensPerDay**: `number`
 
-Defined in: [engine/src/middleware/tenant-budget.ts:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L10)
+Defined in: [engine/src/middleware/tenant-budget.ts:10](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L10)

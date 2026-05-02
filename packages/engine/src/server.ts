@@ -83,7 +83,7 @@ async function bootstrapRedis(): Promise<Redis | undefined> {
   } catch (err) {
     console.warn(
       "[FerroUI] Redis connection failed, falling back to in-memory stores:",
-      err instanceof Error ? err.message : err,
+      securityManager.sanitizeForLog(err instanceof Error ? err.message : String(err)),
     );
     client.disconnect();
     return undefined;
@@ -356,8 +356,8 @@ export function createServer(
 
       auditLogger.log({
         type: AuditEventType.REQUEST_COMPLETE,
-        requestId: `gdpr-deletion-${userId}`,
-        userId,
+        requestId: securityManager.sanitizeForLog(`gdpr-deletion-${userId}`),
+        userId: securityManager.sanitizeForLog(userId),
         success: true,
         durationMs: 0,
       });
@@ -369,7 +369,11 @@ export function createServer(
       });
     } catch (err) {
       const safeUserId = securityManager.sanitizeForLog(userId);
-      console.error("[GDPR] Deletion failed for userId: %s", safeUserId, err);
+      console.error(
+        "[GDPR] Deletion failed for userId: %s",
+        safeUserId,
+        securityManager.sanitizeForLog(String(err)),
+      );
       res.status(500).json({
         error: "Data deletion failed",
         detail: err instanceof Error ? err.message : String(err),
@@ -527,10 +531,10 @@ export function createServer(
 
       auditLogger.log({
         type: AuditEventType.SESSION_UPDATED,
-        requestId: context.requestId,
-        userId: context.userId,
-        componentId,
-        newState,
+        requestId: securityManager.sanitizeForLog(context.requestId),
+        userId: securityManager.sanitizeForLog(context.userId),
+        componentId: securityManager.sanitizeForLog(componentId),
+        newState: securityManager.sanitizeForLog(newState),
       });
 
       res.status(200).json({ status: "success", state: updatedState });
@@ -663,7 +667,7 @@ export function createServer(
 
   const server = app.listen(port, () => {
     console.log(
-      `[FerroUI] Engine Server listening on port ${port} (Provider: ${provider.id})`,
+      `[FerroUI] Engine Server listening on port ${port} (Provider: ${securityManager.sanitizeForLog(provider.id)})`,
     );
   });
 

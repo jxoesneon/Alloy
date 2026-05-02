@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [logger.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L23)
+Defined in: [logger.ts:21](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L21)
 
 ## Indexable
 
@@ -14,7 +14,7 @@ Defined in: [logger.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **cacheHit?**: `boolean`
 
-Defined in: [logger.ts:32](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L32)
+Defined in: [logger.ts:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L30)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [logger.ts:32](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **componentCount?**: `number`
 
-Defined in: [logger.ts:33](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L33)
+Defined in: [logger.ts:31](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L31)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [logger.ts:33](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **latencyMs?**: `number`
 
-Defined in: [logger.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L30)
+Defined in: [logger.ts:28](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L28)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [logger.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **promptHash?**: `string`
 
-Defined in: [logger.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L26)
+Defined in: [logger.ts:24](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L24)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [logger.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **providerId?**: `string`
 
-Defined in: [logger.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L28)
+Defined in: [logger.ts:26](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L26)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [logger.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **providerModel?**: `string`
 
-Defined in: [logger.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L29)
+Defined in: [logger.ts:27](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L27)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [logger.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **repairAttempts?**: `number`
 
-Defined in: [logger.ts:31](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L31)
+Defined in: [logger.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L29)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [logger.ts:31](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **requestId?**: `string`
 
-Defined in: [logger.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L24)
+Defined in: [logger.ts:22](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L22)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [logger.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **schemaVersion?**: `string`
 
-Defined in: [logger.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L27)
+Defined in: [logger.ts:25](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L25)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [logger.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **tokenInput?**: `number`
 
-Defined in: [logger.ts:34](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L34)
+Defined in: [logger.ts:32](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L32)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [logger.ts:34](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **tokenOutput?**: `number`
 
-Defined in: [logger.ts:35](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L35)
+Defined in: [logger.ts:33](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L33)
 
 ***
 
@@ -102,4 +102,4 @@ Defined in: [logger.ts:35](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **userId?**: `string`
 
-Defined in: [logger.ts:25](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L25)
+Defined in: [logger.ts:23](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L23)

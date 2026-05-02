@@ -278,7 +278,9 @@ async function generateHtmlReport(
 </html>`;
 
   const resolvedPath = path.resolve(process.cwd(), outputPath);
-  if (!resolvedPath.startsWith(process.cwd())) {
+  const relativePath = path.relative(process.cwd(), resolvedPath);
+
+  if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
     throw new Error(
       `Invalid output path: ${outputPath}. Must be within the current working directory.`,
     );

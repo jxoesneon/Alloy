@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/session/session-store.ts:1](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L1)
+Defined in: [engine/src/session/session-store.ts:1](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L1)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/session/session-store.ts:1](https://github.com/jxoesneon
 
 > **conversationContext**: `string`[]
 
-Defined in: [engine/src/session/session-store.ts:5](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L5)
+Defined in: [engine/src/session/session-store.ts:5](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L5)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/session/session-store.ts:5](https://github.com/jxoesneon
 
 > **createdAt**: `Date`
 
-Defined in: [engine/src/session/session-store.ts:6](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L6)
+Defined in: [engine/src/session/session-store.ts:6](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L6)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [engine/src/session/session-store.ts:6](https://github.com/jxoesneon
 
 > **id**: `string`
 
-Defined in: [engine/src/session/session-store.ts:2](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L2)
+Defined in: [engine/src/session/session-store.ts:2](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L2)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [engine/src/session/session-store.ts:2](https://github.com/jxoesneon
 
 > **lastActivityAt**: `Date`
 
-Defined in: [engine/src/session/session-store.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L7)
+Defined in: [engine/src/session/session-store.ts:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L7)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [engine/src/session/session-store.ts:7](https://github.com/jxoesneon
 
 > **permissions**: `string`[]
 
-Defined in: [engine/src/session/session-store.ts:4](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L4)
+Defined in: [engine/src/session/session-store.ts:4](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L4)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [engine/src/session/session-store.ts:4](https://github.com/jxoesneon
 
 > `optional` **state?**: `Record`\<`string`, `any`\>
 
-Defined in: [engine/src/session/session-store.ts:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L10)
+Defined in: [engine/src/session/session-store.ts:10](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L10)
 
 Generic state record for component-level persistence (RFC-001)
 
@@ -60,7 +60,7 @@ Generic state record for component-level persistence (RFC-001)
 
 > **ttlSeconds**: `number`
 
-Defined in: [engine/src/session/session-store.ts:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L8)
+Defined in: [engine/src/session/session-store.ts:8](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L8)
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [engine/src/session/session-store.ts:8](https://github.com/jxoesneon
 
 > **userId**: `string`
 
-Defined in: [engine/src/session/session-store.ts:3](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L3)
+Defined in: [engine/src/session/session-store.ts:3](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L3)

@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [packages/tools/src/types.ts:74](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L74)
+Defined in: [packages/tools/src/types.ts:74](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L74)
 
 Manifest representation of a tool for the LLM
 
@@ -12,7 +12,7 @@ Manifest representation of a tool for the LLM
 
 > **description**: `string`
 
-Defined in: [packages/tools/src/types.ts:76](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L76)
+Defined in: [packages/tools/src/types.ts:76](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L76)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [packages/tools/src/types.ts:76](https://github.com/jxoesneon/FerroU
 
 > **name**: `string`
 
-Defined in: [packages/tools/src/types.ts:75](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L75)
+Defined in: [packages/tools/src/types.ts:75](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L75)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [packages/tools/src/types.ts:75](https://github.com/jxoesneon/FerroU
 
 > **parameters**: `any`
 
-Defined in: [packages/tools/src/types.ts:77](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L77)
+Defined in: [packages/tools/src/types.ts:77](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L77)

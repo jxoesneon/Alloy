@@ -4,7 +4,7 @@
 
 > **FerroUIComponent** = `object`
 
-Defined in: [types.ts:108](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L108)
+Defined in: [types.ts:108](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L108)
 
 Base Component Definition
 Defined in Section 2.2 of the specification
@@ -15,7 +15,7 @@ Defined in Section 2.2 of the specification
 
 > `optional` **action?**: [`Action`](Action.md)
 
-Defined in: [types.ts:113](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L113)
+Defined in: [types.ts:113](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L113)
 
 ***
 
@@ -23,7 +23,7 @@ Defined in: [types.ts:113](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **aria**: [`AriaProps`](AriaProps.md)
 
-Defined in: [types.ts:114](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L114)
+Defined in: [types.ts:114](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L114)
 
 ***
 
@@ -31,7 +31,7 @@ Defined in: [types.ts:114](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **children?**: `FerroUIComponent`[]
 
-Defined in: [types.ts:112](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L112)
+Defined in: [types.ts:112](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L112)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [types.ts:112](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **id?**: `string`
 
-Defined in: [types.ts:110](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L110)
+Defined in: [types.ts:110](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L110)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: [types.ts:110](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **props?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [types.ts:111](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L111)
+Defined in: [types.ts:111](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L111)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [types.ts:111](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **stateMachine?**: [`StateMachineDefinition`](StateMachineDefinition.md)
 
-Defined in: [types.ts:115](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L115)
+Defined in: [types.ts:115](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L115)
 
 ***
 
@@ -63,4 +63,4 @@ Defined in: [types.ts:115](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **type**: `string`
 
-Defined in: [types.ts:109](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L109)
+Defined in: [types.ts:109](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L109)

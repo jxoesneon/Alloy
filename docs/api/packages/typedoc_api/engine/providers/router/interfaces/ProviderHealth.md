@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/providers/router.ts:32](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L32)
+Defined in: [engine/src/providers/router.ts:32](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L32)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/providers/router.ts:32](https://github.com/jxoesneon/Fer
 
 > **circuitOpen**: `boolean`
 
-Defined in: [engine/src/providers/router.ts:35](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L35)
+Defined in: [engine/src/providers/router.ts:35](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L35)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/providers/router.ts:35](https://github.com/jxoesneon/Fer
 
 > **failures**: `number`
 
-Defined in: [engine/src/providers/router.ts:33](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L33)
+Defined in: [engine/src/providers/router.ts:33](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L33)
 
 ***
 
@@ -26,4 +26,4 @@ Defined in: [engine/src/providers/router.ts:33](https://github.com/jxoesneon/Fer
 
 > **lastFailureAt**: `number`
 
-Defined in: [engine/src/providers/router.ts:34](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L34)
+Defined in: [engine/src/providers/router.ts:34](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L34)

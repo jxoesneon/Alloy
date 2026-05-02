@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [packages/tools/src/types.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L26)
+Defined in: [packages/tools/src/types.ts:26](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L26)
 
 Generic Logger interface for tools
 
@@ -12,7 +12,7 @@ Generic Logger interface for tools
 
 > **debug**(`message`, `context?`): `void`
 
-Defined in: [packages/tools/src/types.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L27)
+Defined in: [packages/tools/src/types.ts:27](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L27)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [packages/tools/src/types.ts:27](https://github.com/jxoesneon/FerroU
 
 > **error**(`message`, `context?`): `void`
 
-Defined in: [packages/tools/src/types.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L30)
+Defined in: [packages/tools/src/types.ts:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L30)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [packages/tools/src/types.ts:30](https://github.com/jxoesneon/FerroU
 
 > **info**(`message`, `context?`): `void`
 
-Defined in: [packages/tools/src/types.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L28)
+Defined in: [packages/tools/src/types.ts:28](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L28)
 
 #### Parameters
 
@@ -78,7 +78,7 @@ Defined in: [packages/tools/src/types.ts:28](https://github.com/jxoesneon/FerroU
 
 > **warn**(`message`, `context?`): `void`
 
-Defined in: [packages/tools/src/types.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/types.ts#L29)
+Defined in: [packages/tools/src/types.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/types.ts#L29)
 
 #### Parameters
 

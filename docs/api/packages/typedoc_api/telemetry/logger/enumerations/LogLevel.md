@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [logger.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L15)
+Defined in: [logger.ts:13](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L13)
 
 ## Enumeration Members
 
@@ -10,7 +10,7 @@ Defined in: [logger.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **DEBUG**: `"debug"`
 
-Defined in: [logger.ts:16](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L16)
+Defined in: [logger.ts:14](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L14)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [logger.ts:16](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **ERROR**: `"error"`
 
-Defined in: [logger.ts:19](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L19)
+Defined in: [logger.ts:17](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L17)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [logger.ts:19](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **FATAL**: `"fatal"`
 
-Defined in: [logger.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L20)
+Defined in: [logger.ts:18](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L18)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [logger.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **INFO**: `"info"`
 
-Defined in: [logger.ts:17](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L17)
+Defined in: [logger.ts:15](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L15)
 
 ***
 
@@ -42,4 +42,4 @@ Defined in: [logger.ts:17](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **WARN**: `"warn"`
 
-Defined in: [logger.ts:18](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/logger.ts#L18)
+Defined in: [logger.ts:16](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/logger.ts#L16)

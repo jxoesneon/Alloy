@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/session/session-store.ts:68](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L68)
+Defined in: [engine/src/session/session-store.ts:68](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L68)
 
 ## Implements
 
@@ -14,7 +14,7 @@ Defined in: [engine/src/session/session-store.ts:68](https://github.com/jxoesneo
 
 > **new RedisSessionStore**(`client`): `RedisSessionStore`
 
-Defined in: [engine/src/session/session-store.ts:71](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L71)
+Defined in: [engine/src/session/session-store.ts:71](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L71)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [engine/src/session/session-store.ts:71](https://github.com/jxoesneo
 
 > `private` **client**: [`RedisSessionClientLike`](../interfaces/RedisSessionClientLike.md)
 
-Defined in: [engine/src/session/session-store.ts:71](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L71)
+Defined in: [engine/src/session/session-store.ts:71](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L71)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [engine/src/session/session-store.ts:71](https://github.com/jxoesneo
 
 > `private` **prefix**: `string` = `'ferroui:session:'`
 
-Defined in: [engine/src/session/session-store.ts:69](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L69)
+Defined in: [engine/src/session/session-store.ts:69](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L69)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Defined in: [engine/src/session/session-store.ts:69](https://github.com/jxoesneo
 
 > **delete**(`sessionId`): `Promise`\<`void`\>
 
-Defined in: [engine/src/session/session-store.ts:89](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L89)
+Defined in: [engine/src/session/session-store.ts:89](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L89)
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: [engine/src/session/session-store.ts:89](https://github.com/jxoesneo
 
 > **get**(`sessionId`): `Promise`\<[`SessionState`](../interfaces/SessionState.md) \| `undefined`\>
 
-Defined in: [engine/src/session/session-store.ts:73](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L73)
+Defined in: [engine/src/session/session-store.ts:73](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L73)
 
 #### Parameters
 
@@ -92,7 +92,7 @@ Defined in: [engine/src/session/session-store.ts:73](https://github.com/jxoesneo
 
 > **set**(`sessionId`, `session`): `Promise`\<`void`\>
 
-Defined in: [engine/src/session/session-store.ts:84](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L84)
+Defined in: [engine/src/session/session-store.ts:84](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L84)
 
 #### Parameters
 
@@ -118,7 +118,7 @@ Defined in: [engine/src/session/session-store.ts:84](https://github.com/jxoesneo
 
 > **touch**(`sessionId`): `Promise`\<`void`\>
 
-Defined in: [engine/src/session/session-store.ts:93](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L93)
+Defined in: [engine/src/session/session-store.ts:93](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L93)
 
 #### Parameters
 

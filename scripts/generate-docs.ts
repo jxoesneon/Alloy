@@ -33,20 +33,22 @@ const API_DIR = path.join(DOCS_DIR, "api");
 /*  Helpers                                                                   */
 /* -------------------------------------------------------------------------- */
 
-function esc(str: string): string {
+export function esc(str: string): string {
   if (typeof str !== "string") return "";
   return str
-    .replace(/\|/g, "\\|")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\r?\n/g, " ");
+    .replace(/\\/g, "\\\\")   
+    .replace(/\|/g, "\\|")    
+    .replace(/</g, "&lt;")    
+    .replace(/>/g, "&gt;")    
+    .replace(/`/g, "\\`")     
+    .replace(/\r?\n/g, " ");   
 }
 
-function codeInline(value: string): string {
+export function codeInline(value: string): string {
   return "`" + value + "`";
 }
 
-type JsonSchemaNode = {
+export type JsonSchemaNode = {
   type?: string | string[];
   description?: string;
   enum?: unknown[];
@@ -67,14 +69,14 @@ type JsonSchemaNode = {
 };
 
 // Zod v4 ships with a native JSON Schema exporter — no external converter needed.
-function toSchema(input: unknown): JsonSchemaNode {
+export function toSchema(input: unknown): JsonSchemaNode {
   return z.toJSONSchema(input as z.ZodType) as unknown as JsonSchemaNode;
 }
 
 /**
  * Render a JSON-Schema fragment into a human-readable type label.
  */
-function describeType(node: JsonSchemaNode | undefined): string {
+export function describeType(node: JsonSchemaNode | undefined): string {
   if (!node) return "unknown";
   if (node.$ref) return esc(node.$ref.replace(/^#\/definitions\//, ""));
   if (node.const !== undefined) return codeInline(JSON.stringify(node.const));

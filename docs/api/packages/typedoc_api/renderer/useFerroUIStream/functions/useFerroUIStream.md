@@ -4,7 +4,7 @@
 
 > **useFerroUIStream**(`options?`): `object`
 
-Defined in: [useFerroUIStream.ts:36](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L36)
+Defined in: [renderer/src/useFerroUIStream.ts:81](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L81)
 
 React hook for streaming FerroUILayout from the engine SSE endpoint.
 

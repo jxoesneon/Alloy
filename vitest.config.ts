@@ -1,4 +1,5 @@
 import { defineConfig } from "vitest/config";
+import path from "node:path";
 
 /**
  * Root-level vitest config — only for tests/ directory (integration tests).
@@ -20,6 +21,15 @@ export default defineConfig({
         functions: 80,
         lines: 80,
       },
+    },
+    alias: {
+      "@ferroui/engine": path.resolve(__dirname, "./packages/engine/src"),
+      "@ferroui/registry": path.resolve(__dirname, "./packages/registry/src"),
+      "@ferroui/schema": path.resolve(__dirname, "./packages/schema/src"),
+      "@ferroui/tools": path.resolve(__dirname, "./packages/tools/src"),
+      "@ferroui/telemetry": path.resolve(__dirname, "./packages/telemetry/src"),
+      "@ferroui/i18n": path.resolve(__dirname, "./packages/i18n/src"),
+      "@ferroui/renderer": path.resolve(__dirname, "./packages/renderer/src"),
     },
   },
 });

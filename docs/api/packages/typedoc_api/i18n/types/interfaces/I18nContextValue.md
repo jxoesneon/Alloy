@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [types.ts:22](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L22)
+Defined in: [types.ts:22](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L22)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [types.ts:22](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **direction**: [`Direction`](../type-aliases/Direction.md)
 
-Defined in: [types.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L24)
+Defined in: [types.ts:24](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L24)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [types.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **formatCurrency**: (`amount`, `currency`, `options?`) => `string`
 
-Defined in: [types.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L28)
+Defined in: [types.ts:28](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L28)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [types.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **formatDate**: (`date`, `options?`) => `string`
 
-Defined in: [types.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L26)
+Defined in: [types.ts:26](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L26)
 
 #### Parameters
 
@@ -66,7 +66,7 @@ Defined in: [types.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **formatNumber**: (`num`, `options?`) => `string`
 
-Defined in: [types.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L27)
+Defined in: [types.ts:27](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L27)
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: [types.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **loadBundle**: (`locale`, `namespace`, `bundle`) => `void`
 
-Defined in: [types.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L30)
+Defined in: [types.ts:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L30)
 
 #### Parameters
 
@@ -114,7 +114,7 @@ Defined in: [types.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **locale**: [`SupportedLocale`](../type-aliases/SupportedLocale.md)
 
-Defined in: [types.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L23)
+Defined in: [types.ts:23](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L23)
 
 ***
 
@@ -122,7 +122,7 @@ Defined in: [types.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **setLocale**: (`locale`) => `void`
 
-Defined in: [types.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L29)
+Defined in: [types.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L29)
 
 #### Parameters
 
@@ -140,7 +140,7 @@ Defined in: [types.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **t**: (`key`, `options?`) => `string`
 
-Defined in: [types.ts:25](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/types.ts#L25)
+Defined in: [types.ts:25](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/types.ts#L25)
 
 #### Parameters
 

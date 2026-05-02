@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/session/session-store.ts:62](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L62)
+Defined in: [engine/src/session/session-store.ts:62](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L62)
 
 ## Methods
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/session/session-store.ts:62](https://github.com/jxoesneo
 
 > **del**(`key`): `Promise`\<`number`\>
 
-Defined in: [engine/src/session/session-store.ts:65](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L65)
+Defined in: [engine/src/session/session-store.ts:65](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L65)
 
 #### Parameters
 
@@ -28,7 +28,7 @@ Defined in: [engine/src/session/session-store.ts:65](https://github.com/jxoesneo
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [engine/src/session/session-store.ts:63](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L63)
+Defined in: [engine/src/session/session-store.ts:63](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L63)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [engine/src/session/session-store.ts:63](https://github.com/jxoesneo
 
 > **set**(`key`, `value`, `options?`): `Promise`\<`string` \| `null`\>
 
-Defined in: [engine/src/session/session-store.ts:64](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/session/session-store.ts#L64)
+Defined in: [engine/src/session/session-store.ts:64](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/session/session-store.ts#L64)
 
 #### Parameters
 

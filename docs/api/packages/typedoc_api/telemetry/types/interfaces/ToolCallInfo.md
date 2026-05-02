@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [types.ts:82](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L82)
+Defined in: [types.ts:82](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L82)
 
 Tool execution info for instrumentation
 
@@ -12,7 +12,7 @@ Tool execution info for instrumentation
 
 > **durationMs**: `number`
 
-Defined in: [types.ts:85](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L85)
+Defined in: [types.ts:85](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L85)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:85](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **name**: `string`
 
-Defined in: [types.ts:83](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L83)
+Defined in: [types.ts:83](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L83)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [types.ts:83](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **success**: `boolean`
 
-Defined in: [types.ts:84](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L84)
+Defined in: [types.ts:84](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L84)

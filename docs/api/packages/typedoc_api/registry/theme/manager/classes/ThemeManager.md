@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [theme/manager.ts:6](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L6)
+Defined in: [theme/manager.ts:6](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L6)
 
 Manages runtime themes and design token access.
 
@@ -12,7 +12,7 @@ Manages runtime themes and design token access.
 
 > `private` **new ThemeManager**(): `ThemeManager`
 
-Defined in: [theme/manager.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L11)
+Defined in: [theme/manager.ts:11](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L11)
 
 #### Returns
 
@@ -24,7 +24,7 @@ Defined in: [theme/manager.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629
 
 > `private` **currentThemeName**: `string` = `'light'`
 
-Defined in: [theme/manager.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L9)
+Defined in: [theme/manager.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L9)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [theme/manager.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629c
 
 > `private` **themes**: `Map`\<`string`, [`Theme`](../../types/interfaces/Theme.md)\>
 
-Defined in: [theme/manager.ts:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L8)
+Defined in: [theme/manager.ts:8](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L8)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [theme/manager.ts:8](https://github.com/jxoesneon/FerroUI/blob/f629c
 
 > `private` `static` **instance**: `ThemeManager`
 
-Defined in: [theme/manager.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L7)
+Defined in: [theme/manager.ts:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L7)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Defined in: [theme/manager.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629c
 
 > **getCurrentTheme**(): `string`
 
-Defined in: [theme/manager.ts:44](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L44)
+Defined in: [theme/manager.ts:44](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L44)
 
 Gets the globally active theme name.
 
@@ -62,7 +62,7 @@ Gets the globally active theme name.
 
 > **getTheme**(`name`): [`Theme`](../../types/interfaces/Theme.md) \| `undefined`
 
-Defined in: [theme/manager.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L30)
+Defined in: [theme/manager.ts:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L30)
 
 Retrieves a registered theme by name.
 
@@ -82,7 +82,7 @@ Retrieves a registered theme by name.
 
 > **getToken**(`path`, `options?`): `any`
 
-Defined in: [theme/manager.ts:52](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L52)
+Defined in: [theme/manager.ts:52](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L52)
 
 Resolves a token value by path.
 Path should be like 'color.primary.DEFAULT'.
@@ -107,7 +107,7 @@ Path should be like 'color.primary.DEFAULT'.
 
 > **registerTheme**(`theme`): `void`
 
-Defined in: [theme/manager.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L23)
+Defined in: [theme/manager.ts:23](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L23)
 
 Registers a theme definition in the manager.
 
@@ -127,7 +127,7 @@ Registers a theme definition in the manager.
 
 > `private` **resolvePath**(`obj`, `path`): `any`
 
-Defined in: [theme/manager.ts:66](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L66)
+Defined in: [theme/manager.ts:66](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L66)
 
 #### Parameters
 
@@ -149,7 +149,7 @@ Defined in: [theme/manager.ts:66](https://github.com/jxoesneon/FerroUI/blob/f629
 
 > **setCurrentTheme**(`name`): `void`
 
-Defined in: [theme/manager.ts:37](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L37)
+Defined in: [theme/manager.ts:37](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L37)
 
 Sets the globally active theme name for token access.
 
@@ -169,7 +169,7 @@ Sets the globally active theme name for token access.
 
 > `static` **getInstance**(): `ThemeManager`
 
-Defined in: [theme/manager.ts:13](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L13)
+Defined in: [theme/manager.ts:13](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L13)
 
 #### Returns
 

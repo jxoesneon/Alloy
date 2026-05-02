@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/types.ts:49](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L49)
+Defined in: [engine/src/types.ts:46](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L46)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/types.ts:49](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **content?**: `string`
 
-Defined in: [engine/src/types.ts:52](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L52)
+Defined in: [engine/src/types.ts:55](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L55)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/types.ts:52](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **error?**: `object`
 
-Defined in: [engine/src/types.ts:62](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L62)
+Defined in: [engine/src/types.ts:65](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L65)
 
 #### code
 
@@ -36,9 +36,9 @@ Defined in: [engine/src/types.ts:62](https://github.com/jxoesneon/FerroUI/blob/f
 
 ### layout?
 
-> `optional` **layout?**: `Partial`\<\{ `layout`: `FerroUIComponent`; `locale`: `string`; `metadata?`: \{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `repairAttempts?`: `number`; \}; `requestId`: `string`; `schemaVersion`: `string`; \}\>
+> `optional` **layout?**: `Partial`\<\{ `layout`: `FerroUIComponent`; `locale`: `string`; `metadata?`: \{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `publicKey?`: `string`; `repairAttempts?`: `number`; `signature?`: `string`; \}; `requestId`: `string`; `schemaVersion`: `string`; \}\>
 
-Defined in: [engine/src/types.ts:61](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L61)
+Defined in: [engine/src/types.ts:64](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L64)
 
 ***
 
@@ -46,7 +46,27 @@ Defined in: [engine/src/types.ts:61](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **phase?**: `1` \| `2`
 
-Defined in: [engine/src/types.ts:51](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L51)
+Defined in: [engine/src/types.ts:54](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L54)
+
+***
+
+### publicKey?
+
+> `optional` **publicKey?**: `string`
+
+Defined in: [engine/src/types.ts:73](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L73)
+
+Public key used to verify the signature
+
+***
+
+### signature?
+
+> `optional` **signature?**: `string`
+
+Defined in: [engine/src/types.ts:71](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L71)
+
+Ed25519 signature of the chunk content (for layout_chunks)
 
 ***
 
@@ -54,7 +74,7 @@ Defined in: [engine/src/types.ts:51](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **toolCall?**: `object`
 
-Defined in: [engine/src/types.ts:53](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L53)
+Defined in: [engine/src/types.ts:56](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L56)
 
 #### args
 
@@ -70,7 +90,7 @@ Defined in: [engine/src/types.ts:53](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **toolOutput?**: `object`
 
-Defined in: [engine/src/types.ts:57](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L57)
+Defined in: [engine/src/types.ts:60](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L60)
 
 #### name
 
@@ -86,4 +106,4 @@ Defined in: [engine/src/types.ts:57](https://github.com/jxoesneon/FerroUI/blob/f
 
 > **type**: `"phase"` \| `"tool_call"` \| `"tool_output"` \| `"layout_chunk"` \| `"complete"` \| `"error"`
 
-Defined in: [engine/src/types.ts:50](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L50)
+Defined in: [engine/src/types.ts:47](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L47)

@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/engine.ts:14](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L14)
+Defined in: [engine/src/engine.ts:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L7)
 
 ## Constructors
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/engine.ts:14](https://github.com/jxoesneon/FerroUI/blob/
 
 > **new FerroUIEngine**(`provider`, `config?`): `FerroUIEngine`
 
-Defined in: [engine/src/engine.ts:18](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L18)
+Defined in: [engine/src/engine.ts:11](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L11)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [engine/src/engine.ts:18](https://github.com/jxoesneon/FerroUI/blob/
 
 > `private` **config**: [`EngineConfig`](../../types/interfaces/EngineConfig.md)
 
-Defined in: [engine/src/engine.ts:16](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L16)
+Defined in: [engine/src/engine.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L9)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [engine/src/engine.ts:16](https://github.com/jxoesneon/FerroUI/blob/
 
 > `private` **provider**: [`LlmProvider`](../../providers/base/interfaces/LlmProvider.md)
 
-Defined in: [engine/src/engine.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L15)
+Defined in: [engine/src/engine.ts:8](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L8)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Defined in: [engine/src/engine.ts:15](https://github.com/jxoesneon/FerroUI/blob/
 
 > `private` **getSafeModeLayout**(`requestId`, `locale`): `any`
 
-Defined in: [engine/src/engine.ts:133](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L133)
+Defined in: [engine/src/engine.ts:80](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L80)
 
 Generates a static, pre-built layout for use in Safe Mode.
 
@@ -72,7 +72,7 @@ Generates a static, pre-built layout for use in Safe Mode.
 
 > **process**(`prompt`, `context`): `AsyncGenerator`\<[`EngineChunk`](../../types/interfaces/EngineChunk.md), `void`, `undefined`\>
 
-Defined in: [engine/src/engine.ts:81](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L81)
+Defined in: [engine/src/engine.ts:25](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L25)
 
 Main entry point for the FerroUI engine.
 Processes a user prompt through the Dual-Phase Pipeline.
@@ -93,25 +93,11 @@ Processes a user prompt through the Dual-Phase Pipeline.
 
 ***
 
-### registerSystemTools()
-
-> `private` **registerSystemTools**(): `void`
-
-Defined in: [engine/src/engine.ts:33](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L33)
-
-Registers privileged system tools for engine control.
-
-#### Returns
-
-`void`
-
-***
-
 ### setProvider()
 
 > **setProvider**(`provider`): `void`
 
-Defined in: [engine/src/engine.ts:156](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L156)
+Defined in: [engine/src/engine.ts:104](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L104)
 
 #### Parameters
 
@@ -129,7 +115,7 @@ Defined in: [engine/src/engine.ts:156](https://github.com/jxoesneon/FerroUI/blob
 
 > **updateConfig**(`config`): `void`
 
-Defined in: [engine/src/engine.ts:160](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/engine.ts#L160)
+Defined in: [engine/src/engine.ts:108](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/engine.ts#L108)
 
 #### Parameters
 

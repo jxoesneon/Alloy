@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [packages/tools/src/errors.ts:18](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/errors.ts#L18)
+Defined in: [packages/tools/src/errors.ts:18](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/errors.ts#L18)
 
 Custom Error class for tool execution
 Extends the native Error class with specific code and optional data
@@ -17,7 +17,7 @@ Extends the native Error class with specific code and optional data
 
 > **new ToolError**(`code`, `message`, `data?`): `ToolError`
 
-Defined in: [packages/tools/src/errors.ts:22](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/errors.ts#L22)
+Defined in: [packages/tools/src/errors.ts:22](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/errors.ts#L22)
 
 #### Parameters
 
@@ -59,7 +59,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.3/node\_modules/typescript/lib/li
 
 > `readonly` **code**: [`ToolErrorCode`](../type-aliases/ToolErrorCode.md)
 
-Defined in: [packages/tools/src/errors.ts:19](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/errors.ts#L19)
+Defined in: [packages/tools/src/errors.ts:19](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/errors.ts#L19)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: [packages/tools/src/errors.ts:19](https://github.com/jxoesneon/Ferro
 
 > `readonly` `optional` **data?**: `unknown`
 
-Defined in: [packages/tools/src/errors.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/errors.ts#L20)
+Defined in: [packages/tools/src/errors.ts:20](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/errors.ts#L20)
 
 ***
 

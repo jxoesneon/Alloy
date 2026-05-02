@@ -4,7 +4,7 @@
 
 > **getProvider**(): `OpenAIProvider` \| `AnthropicProvider`
 
-Defined in: [packages/mcp-server/src/index.ts:52](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/mcp-server/src/index.ts#L52)
+Defined in: [packages/mcp-server/src/index.ts:52](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/mcp-server/src/index.ts#L52)
 
 ## Returns
 

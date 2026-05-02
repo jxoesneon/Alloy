@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/providers/router.ts:41](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L41)
+Defined in: [engine/src/providers/router.ts:41](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L41)
 
 ## Implements
 
@@ -14,7 +14,7 @@ Defined in: [engine/src/providers/router.ts:41](https://github.com/jxoesneon/Fer
 
 > **new ProviderRouter**(`providers`): `ProviderRouter`
 
-Defined in: [engine/src/providers/router.ts:47](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L47)
+Defined in: [engine/src/providers/router.ts:47](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L47)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [engine/src/providers/router.ts:47](https://github.com/jxoesneon/Fer
 
 > `readonly` **contextWindowTokens**: `number`
 
-Defined in: [engine/src/providers/router.ts:43](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L43)
+Defined in: [engine/src/providers/router.ts:43](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L43)
 
 #### Implementation of
 
@@ -44,15 +44,15 @@ Defined in: [engine/src/providers/router.ts:43](https://github.com/jxoesneon/Fer
 
 > `private` **health**: `Map`\<`string`, [`ProviderHealth`](../interfaces/ProviderHealth.md)\>
 
-Defined in: [engine/src/providers/router.ts:45](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L45)
+Defined in: [engine/src/providers/router.ts:45](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L45)
 
 ***
 
 ### id
 
-> `readonly` **id**: `"router"` = `'router'`
+> `readonly` **id**: `"router"` = `"router"`
 
-Defined in: [engine/src/providers/router.ts:42](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L42)
+Defined in: [engine/src/providers/router.ts:42](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L42)
 
 #### Implementation of
 
@@ -64,7 +64,7 @@ Defined in: [engine/src/providers/router.ts:42](https://github.com/jxoesneon/Fer
 
 > `private` `readonly` **providers**: [`RoutedProvider`](../interfaces/RoutedProvider.md)[]
 
-Defined in: [engine/src/providers/router.ts:47](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L47)
+Defined in: [engine/src/providers/router.ts:47](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L47)
 
 ## Methods
 
@@ -72,7 +72,7 @@ Defined in: [engine/src/providers/router.ts:47](https://github.com/jxoesneon/Fer
 
 > **completePrompt**(`req`): `Promise`\<[`LlmResponse`](../../../types/interfaces/LlmResponse.md)\>
 
-Defined in: [engine/src/providers/router.ts:115](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L115)
+Defined in: [engine/src/providers/router.ts:138](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L138)
 
 Non-streaming version for simpler tasks like repair or small data generation.
 
@@ -92,11 +92,41 @@ Non-streaming version for simpler tasks like repair or small data generation.
 
 ***
 
+### estimateCost()
+
+> **estimateCost**(`tokens`): `number`
+
+Defined in: [engine/src/providers/router.ts:161](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L161)
+
+Estimates cost (in cents) for a given token count.
+
+#### Parameters
+
+##### tokens
+
+###### input
+
+`number`
+
+###### output
+
+`number`
+
+#### Returns
+
+`number`
+
+#### Implementation of
+
+[`LlmProvider`](../../base/interfaces/LlmProvider.md).[`estimateCost`](../../base/interfaces/LlmProvider.md#estimatecost)
+
+***
+
 ### estimateTokens()
 
 > **estimateTokens**(`text`): `number`
 
-Defined in: [engine/src/providers/router.ts:136](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L136)
+Defined in: [engine/src/providers/router.ts:154](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L154)
 
 Estimates tokens for a given text.
 
@@ -120,7 +150,7 @@ Estimates tokens for a given text.
 
 > `private` **getHealth**(`providerId`): [`ProviderHealth`](../interfaces/ProviderHealth.md)
 
-Defined in: [engine/src/providers/router.ts:54](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L54)
+Defined in: [engine/src/providers/router.ts:60](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L60)
 
 #### Parameters
 
@@ -138,13 +168,17 @@ Defined in: [engine/src/providers/router.ts:54](https://github.com/jxoesneon/Fer
 
 > **getHealthSnapshot**(): `Record`\<`string`, [`ProviderHealth`](../interfaces/ProviderHealth.md) & `object`\>
 
-Defined in: [engine/src/providers/router.ts:141](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L141)
+Defined in: [engine/src/providers/router.ts:92](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L92)
 
-Returns a snapshot of current provider health for observability
+Optional health status.
 
 #### Returns
 
 `Record`\<`string`, [`ProviderHealth`](../interfaces/ProviderHealth.md) & `object`\>
+
+#### Implementation of
+
+[`LlmProvider`](../../base/interfaces/LlmProvider.md).[`getHealthSnapshot`](../../base/interfaces/LlmProvider.md#gethealthsnapshot)
 
 ***
 
@@ -152,7 +186,7 @@ Returns a snapshot of current provider health for observability
 
 > `private` **isHealthy**(`providerId`): `boolean`
 
-Defined in: [engine/src/providers/router.ts:76](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L76)
+Defined in: [engine/src/providers/router.ts:100](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L100)
 
 #### Parameters
 
@@ -170,7 +204,7 @@ Defined in: [engine/src/providers/router.ts:76](https://github.com/jxoesneon/Fer
 
 > **processPrompt**(`req`): `AsyncGenerator`\<`string`, [`LlmResponse`](../../../types/interfaces/LlmResponse.md), `undefined`\>
 
-Defined in: [engine/src/providers/router.ts:97](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L97)
+Defined in: [engine/src/providers/router.ts:118](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L118)
 
 Processes a prompt and returns an AsyncGenerator for streaming content.
 Yields content chunks and eventually returns the final response object.
@@ -195,7 +229,7 @@ Yields content chunks and eventually returns the final response object.
 
 > `private` **recordFailure**(`providerId`): `void`
 
-Defined in: [engine/src/providers/router.ts:65](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L65)
+Defined in: [engine/src/providers/router.ts:77](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L77)
 
 #### Parameters
 
@@ -213,7 +247,7 @@ Defined in: [engine/src/providers/router.ts:65](https://github.com/jxoesneon/Fer
 
 > `private` **recordSuccess**(`providerId`): `void`
 
-Defined in: [engine/src/providers/router.ts:58](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L58)
+Defined in: [engine/src/providers/router.ts:70](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L70)
 
 #### Parameters
 
@@ -231,9 +265,7 @@ Defined in: [engine/src/providers/router.ts:58](https://github.com/jxoesneon/Fer
 
 > `private` **selectCandidates**(): [`RoutedProvider`](../interfaces/RoutedProvider.md)[]
 
-Defined in: [engine/src/providers/router.ts:91](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L91)
-
-Returns providers sorted cheapest-first, filtered to healthy ones
+Defined in: [engine/src/providers/router.ts:112](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L112)
 
 #### Returns
 

@@ -4,7 +4,7 @@
 
 > **useTheme**(): [`ThemeContextValue`](../../types/interfaces/ThemeContextValue.md)
 
-Defined in: [theme/context.tsx:44](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/context.tsx#L44)
+Defined in: [theme/context.tsx:44](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/context.tsx#L44)
 
 Hook to access and manipulate the current theme.
 

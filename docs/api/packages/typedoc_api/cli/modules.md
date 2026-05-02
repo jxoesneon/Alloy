@@ -13,6 +13,7 @@
 - [commands/generate](commands/generate/README.md)
 - [commands/logs](commands/logs/README.md)
 - [commands/migrate](commands/migrate/README.md)
+- [commands/prompt](commands/prompt/README.md)
 - [commands/publish](commands/publish/README.md)
 - [commands/registry](commands/registry/README.md)
 - [commands/tokens](commands/tokens/README.md)

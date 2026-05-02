@@ -5,6 +5,7 @@
 
 import type { Request, Response, NextFunction } from "express";
 import { AuditLogger, AuditEventType } from "../audit/audit-logger.js";
+import { securityManager } from "../security/manager.js";
 
 export interface BudgetConfig {
   maxTokensPerDay: number;
@@ -57,9 +58,13 @@ export function createTenantBudgetMiddleware(auditLogger: AuditLogger) {
     if (violations.length > 0) {
       auditLogger.log({
         type: AuditEventType.RATE_LIMITED,
-        requestId: (req as any).context?.requestId || "unknown",
-        userId: (req as any).auth?.sub || "unknown",
-        ip: req.ip || "unknown",
+        requestId: securityManager.sanitizeForLog(
+          (req as any).context?.requestId || "unknown",
+        ),
+        userId: securityManager.sanitizeForLog(
+          (req as any).auth?.sub || "unknown",
+        ),
+        ip: securityManager.sanitizeForLog(req.ip || "unknown"),
       });
 
       res.status(429).json({

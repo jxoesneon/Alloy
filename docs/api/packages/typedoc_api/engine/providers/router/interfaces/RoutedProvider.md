@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/providers/router.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L23)
+Defined in: [engine/src/providers/router.ts:23](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L23)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/providers/router.ts:23](https://github.com/jxoesneon/Fer
 
 > **costPerKToken**: `number`
 
-Defined in: [engine/src/providers/router.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L26)
+Defined in: [engine/src/providers/router.ts:26](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L26)
 
 Estimated cost per 1 000 tokens in USD
 
@@ -20,7 +20,7 @@ Estimated cost per 1 000 tokens in USD
 
 > `optional` **maxRpm?**: `number`
 
-Defined in: [engine/src/providers/router.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L29)
+Defined in: [engine/src/providers/router.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L29)
 
 Maximum requests per minute (0 = unlimited)
 
@@ -30,7 +30,7 @@ Maximum requests per minute (0 = unlimited)
 
 > **provider**: [`LlmProvider`](../../base/interfaces/LlmProvider.md)
 
-Defined in: [engine/src/providers/router.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L24)
+Defined in: [engine/src/providers/router.ts:24](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L24)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [engine/src/providers/router.ts:24](https://github.com/jxoesneon/Fer
 
 > **tier**: [`ProviderTier`](../type-aliases/ProviderTier.md)
 
-Defined in: [engine/src/providers/router.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/router.ts#L27)
+Defined in: [engine/src/providers/router.ts:27](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/router.ts#L27)

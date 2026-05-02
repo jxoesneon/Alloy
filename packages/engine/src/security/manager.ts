@@ -50,10 +50,18 @@ export class SecurityManager {
 
   /**
    * Strips all HTML tags from a string to prevent injection in LLM prompts.
+   * Uses a non-backtracking pattern and handles malformed/multi-character injections.
    */
   stripHtml(text: string): string {
     if (typeof text !== "string") return "";
-    return text.trim().replace(/<[^>]*>?/gm, "");
+    // Robust stripping: handle multi-character and malformed tags
+    let sanitized = text.trim();
+    let previous;
+    do {
+      previous = sanitized;
+      sanitized = sanitized.replace(/<[^>]*>?/gm, "");
+    } while (sanitized !== previous);
+    return sanitized;
   }
 
   /**
@@ -78,7 +86,7 @@ export class SecurityManager {
       return data
         .replace(/[^\s@]+@[^\s@]+\.[^\s@]{2,}/g, "[REDACTED_EMAIL]")
         .replace(/\b\d{3}-\d{2}-\d{4}\b/g, "[REDACTED_SSN]")
-        .replace(/\b\d{4}-\d{4}-\d{4}-\d{4}\b/g, "[REDACTED_CARD]")
+        .replace(/\b(?:\d{4}-){3}\d{4}\b/g, "[REDACTED_CARD]")
         .replace(/\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b/g, "[REDACTED_IBAN]")
         .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g, "[REDACTED_IP]")
         .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, "[REDACTED_PHONE]");
@@ -89,9 +97,11 @@ export class SecurityManager {
     }
 
     if (typeof data === "object") {
-      // Use Object.create(null) to prevent prototype pollution at the source
+      // Prevent prototype pollution by avoiding polluted keys
       const redacted: Record<string, any> = Object.create(null);
       for (const [key, value] of Object.entries(data)) {
+        if (key === "__proto__" || key === "constructor") continue;
+        
         const lowerKey = key.toLowerCase();
 
         // Sensitivity based on keys + recursive redaction of values

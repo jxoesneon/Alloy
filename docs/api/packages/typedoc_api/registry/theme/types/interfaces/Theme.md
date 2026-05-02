@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [theme/types.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L20)
+Defined in: [theme/types.ts:20](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L20)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [theme/types.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cf
 
 > **name**: `string`
 
-Defined in: [theme/types.ts:21](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L21)
+Defined in: [theme/types.ts:21](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L21)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [theme/types.ts:21](https://github.com/jxoesneon/FerroUI/blob/f629cf
 
 > **tokens**: `object`
 
-Defined in: [theme/types.ts:22](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L22)
+Defined in: [theme/types.ts:22](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L22)
 
 #### component?
 

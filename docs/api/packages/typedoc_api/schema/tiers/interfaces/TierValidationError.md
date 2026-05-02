@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [tiers.ts:73](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/tiers.ts#L73)
+Defined in: [tiers.ts:73](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/tiers.ts#L73)
 
 Validation error for tier rules.
 
@@ -12,7 +12,7 @@ Validation error for tier rules.
 
 > **message**: `string`
 
-Defined in: [tiers.ts:75](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/tiers.ts#L75)
+Defined in: [tiers.ts:75](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/tiers.ts#L75)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [tiers.ts:75](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **path**: `string`
 
-Defined in: [tiers.ts:74](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/tiers.ts#L74)
+Defined in: [tiers.ts:74](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/tiers.ts#L74)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [tiers.ts:74](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **rule**: `string`
 
-Defined in: [tiers.ts:76](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/tiers.ts#L76)
+Defined in: [tiers.ts:76](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/tiers.ts#L76)

@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/auth/jwt.ts:4](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L4)
+Defined in: [engine/src/auth/jwt.ts:4](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L4)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/auth/jwt.ts:4](https://github.com/jxoesneon/FerroUI/blob
 
 > `optional` **exp?**: `number`
 
-Defined in: [engine/src/auth/jwt.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L9)
+Defined in: [engine/src/auth/jwt.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L9)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/auth/jwt.ts:9](https://github.com/jxoesneon/FerroUI/blob
 
 > `optional` **iat?**: `number`
 
-Defined in: [engine/src/auth/jwt.ts:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L8)
+Defined in: [engine/src/auth/jwt.ts:8](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L8)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [engine/src/auth/jwt.ts:8](https://github.com/jxoesneon/FerroUI/blob
 
 > **permissions**: `string`[]
 
-Defined in: [engine/src/auth/jwt.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L7)
+Defined in: [engine/src/auth/jwt.ts:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L7)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [engine/src/auth/jwt.ts:7](https://github.com/jxoesneon/FerroUI/blob
 
 > **sub**: `string`
 
-Defined in: [engine/src/auth/jwt.ts:5](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L5)
+Defined in: [engine/src/auth/jwt.ts:5](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L5)
 
 ***
 
@@ -42,4 +42,4 @@ Defined in: [engine/src/auth/jwt.ts:5](https://github.com/jxoesneon/FerroUI/blob
 
 > **userId**: `string`
 
-Defined in: [engine/src/auth/jwt.ts:6](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L6)
+Defined in: [engine/src/auth/jwt.ts:6](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L6)

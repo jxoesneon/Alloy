@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [theme/types.ts:34](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L34)
+Defined in: [theme/types.ts:34](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L34)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [theme/types.ts:34](https://github.com/jxoesneon/FerroUI/blob/f629cf
 
 > **children**: `ReactNode`
 
-Defined in: [theme/types.ts:36](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L36)
+Defined in: [theme/types.ts:36](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L36)
 
 ***
 
@@ -18,4 +18,4 @@ Defined in: [theme/types.ts:36](https://github.com/jxoesneon/FerroUI/blob/f629cf
 
 > `optional` **theme?**: `string`
 
-Defined in: [theme/types.ts:35](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L35)
+Defined in: [theme/types.ts:35](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L35)

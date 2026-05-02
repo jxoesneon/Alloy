@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/middleware/tenant-budget.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L15)
+Defined in: [engine/src/middleware/tenant-budget.ts:15](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L15)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/middleware/tenant-budget.ts:15](https://github.com/jxoes
 
 > **config**: [`BudgetConfig`](BudgetConfig.md)
 
-Defined in: [engine/src/middleware/tenant-budget.ts:17](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L17)
+Defined in: [engine/src/middleware/tenant-budget.ts:17](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L17)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/middleware/tenant-budget.ts:17](https://github.com/jxoes
 
 > **tenantId**: `string`
 
-Defined in: [engine/src/middleware/tenant-budget.ts:16](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L16)
+Defined in: [engine/src/middleware/tenant-budget.ts:16](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L16)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [engine/src/middleware/tenant-budget.ts:16](https://github.com/jxoes
 
 > **usage**: `object`
 
-Defined in: [engine/src/middleware/tenant-budget.ts:18](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/middleware/tenant-budget.ts#L18)
+Defined in: [engine/src/middleware/tenant-budget.ts:18](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/middleware/tenant-budget.ts#L18)
 
 #### costCents
 

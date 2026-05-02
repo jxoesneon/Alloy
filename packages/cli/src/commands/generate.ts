@@ -34,11 +34,17 @@ generateCommand
       const componentName = name.charAt(0).toUpperCase() + name.slice(1);
       const outputDir = path.resolve(process.cwd(), options.dir, componentName);
 
-      if (fs.existsSync(outputDir)) {
-        spinner.fail(
-          chalk.red(`Component directory already exists: ${outputDir}`),
-        );
-        process.exit(1);
+      try {
+        await fs.ensureDir(path.dirname(outputDir));
+        await fs.mkdir(outputDir);
+      } catch (error: any) {
+        if (error.code === "EEXIST") {
+          spinner.fail(
+            chalk.red(`Component directory already exists: ${outputDir}`),
+          );
+          process.exit(1);
+        }
+        throw error;
       }
 
       const templatesDir = path.resolve(__dirname, "../templates/component");
@@ -63,8 +69,6 @@ generateCommand
           output: `${componentName}.test.tsx`,
         });
       }
-
-      await fs.ensureDir(outputDir);
 
       for (const file of filesToGenerate) {
         const templateContent = await fs.readFile(
@@ -114,9 +118,15 @@ generateCommand
       const toolName = name.charAt(0).toLowerCase() + name.slice(1);
       const outputDir = path.resolve(process.cwd(), options.dir, toolName);
 
-      if (fs.existsSync(outputDir)) {
-        spinner.fail(chalk.red(`Tool directory already exists: ${outputDir}`));
-        process.exit(1);
+      try {
+        await fs.ensureDir(path.dirname(outputDir));
+        await fs.mkdir(outputDir);
+      } catch (error: any) {
+        if (error.code === "EEXIST") {
+          spinner.fail(chalk.red(`Tool directory already exists: ${outputDir}`));
+          process.exit(1);
+        }
+        throw error;
       }
 
       const templatesDir = path.resolve(__dirname, "../templates/tool");
@@ -131,8 +141,6 @@ generateCommand
       if (options.mock) {
         filesToGenerate.push({ template: "mock.ts.hbs", output: "mock.ts" });
       }
-
-      await fs.ensureDir(outputDir);
 
       for (const file of filesToGenerate) {
         const templateContent = await fs.readFile(
@@ -178,11 +186,6 @@ generateCommand
       const outputDir = path.resolve(process.cwd(), options.dir, version);
       const outputFile = path.join(outputDir, `${promptName}.md`);
 
-      if (fs.existsSync(outputFile)) {
-        spinner.fail(chalk.red(`Prompt file already exists: ${outputFile}`));
-        process.exit(1);
-      }
-
       await fs.ensureDir(outputDir);
 
       const templatePath = path.resolve(
@@ -205,7 +208,15 @@ generateCommand
         date: new Date().toISOString().slice(0, 10),
       });
 
-      await fs.writeFile(outputFile, result);
+      try {
+        await fs.writeFile(outputFile, result, { flag: "wx" });
+      } catch (error: any) {
+        if (error.code === "EEXIST") {
+          spinner.fail(chalk.red(`Prompt file already exists: ${outputFile}`));
+          process.exit(1);
+        }
+        throw error;
+      }
 
       spinner.succeed(
         chalk.green(

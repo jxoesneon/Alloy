@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [theme/types.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L29)
+Defined in: [theme/types.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L29)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [theme/types.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cf
 
 > **setTheme**: (`theme`) => `void`
 
-Defined in: [theme/types.ts:31](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L31)
+Defined in: [theme/types.ts:31](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L31)
 
 #### Parameters
 
@@ -28,4 +28,4 @@ Defined in: [theme/types.ts:31](https://github.com/jxoesneon/FerroUI/blob/f629cf
 
 > **theme**: `string`
 
-Defined in: [theme/types.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/types.ts#L30)
+Defined in: [theme/types.ts:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/types.ts#L30)

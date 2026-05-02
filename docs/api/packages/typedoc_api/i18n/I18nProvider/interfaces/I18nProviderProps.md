@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [I18nProvider.tsx:6](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/I18nProvider.tsx#L6)
+Defined in: [I18nProvider.tsx:26](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/I18nProvider.tsx#L26)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [I18nProvider.tsx:6](https://github.com/jxoesneon/FerroUI/blob/f629c
 
 > **children**: `ReactNode`
 
-Defined in: [I18nProvider.tsx:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/I18nProvider.tsx#L7)
+Defined in: [I18nProvider.tsx:27](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/I18nProvider.tsx#L27)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [I18nProvider.tsx:7](https://github.com/jxoesneon/FerroUI/blob/f629c
 
 > `optional` **initialBundles?**: [`LocaleBundle`](../../types/interfaces/LocaleBundle.md)
 
-Defined in: [I18nProvider.tsx:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/I18nProvider.tsx#L9)
+Defined in: [I18nProvider.tsx:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/I18nProvider.tsx#L29)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [I18nProvider.tsx:9](https://github.com/jxoesneon/FerroUI/blob/f629c
 
 > `optional` **initialLocale?**: [`SupportedLocale`](../../types/type-aliases/SupportedLocale.md)
 
-Defined in: [I18nProvider.tsx:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/I18nProvider.tsx#L8)
+Defined in: [I18nProvider.tsx:28](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/I18nProvider.tsx#L28)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [I18nProvider.tsx:8](https://github.com/jxoesneon/FerroUI/blob/f629c
 
 > `optional` **onLocaleChange?**: (`locale`) => `void`
 
-Defined in: [I18nProvider.tsx:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/I18nProvider.tsx#L10)
+Defined in: [I18nProvider.tsx:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/I18nProvider.tsx#L30)
 
 #### Parameters
 

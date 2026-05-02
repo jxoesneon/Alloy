@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/cache/cache-backend.ts:85](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L85)
+Defined in: [engine/src/cache/cache-backend.ts:88](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L88)
 
 Cache Backend Abstraction — Semantic Caching spec §4
 
@@ -19,7 +19,7 @@ for in-memory, Redis, and SQLite backends.
 
 > **new SQLiteCacheBackend**(`db`): `SQLiteCacheBackend`
 
-Defined in: [engine/src/cache/cache-backend.ts:86](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L86)
+Defined in: [engine/src/cache/cache-backend.ts:89](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L89)
 
 #### Parameters
 
@@ -37,7 +37,7 @@ Defined in: [engine/src/cache/cache-backend.ts:86](https://github.com/jxoesneon/
 
 > `private` **db**: `Database`
 
-Defined in: [engine/src/cache/cache-backend.ts:86](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L86)
+Defined in: [engine/src/cache/cache-backend.ts:89](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L89)
 
 ## Methods
 
@@ -45,7 +45,7 @@ Defined in: [engine/src/cache/cache-backend.ts:86](https://github.com/jxoesneon/
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:135](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L135)
+Defined in: [engine/src/cache/cache-backend.ts:151](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L151)
 
 #### Returns
 
@@ -61,7 +61,7 @@ Defined in: [engine/src/cache/cache-backend.ts:135](https://github.com/jxoesneon
 
 > **delete**(`key`): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:117](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L117)
+Defined in: [engine/src/cache/cache-backend.ts:125](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L125)
 
 #### Parameters
 
@@ -83,7 +83,7 @@ Defined in: [engine/src/cache/cache-backend.ts:117](https://github.com/jxoesneon
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:98](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L98)
+Defined in: [engine/src/cache/cache-backend.ts:103](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L103)
 
 #### Parameters
 
@@ -105,7 +105,7 @@ Defined in: [engine/src/cache/cache-backend.ts:98](https://github.com/jxoesneon/
 
 > **keys**(`pattern?`): `Promise`\<`string`[]\>
 
-Defined in: [engine/src/cache/cache-backend.ts:121](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L121)
+Defined in: [engine/src/cache/cache-backend.ts:129](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L129)
 
 #### Parameters
 
@@ -127,7 +127,7 @@ Defined in: [engine/src/cache/cache-backend.ts:121](https://github.com/jxoesneon
 
 > **set**(`key`, `value`, `ttlMs`): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:110](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L110)
+Defined in: [engine/src/cache/cache-backend.ts:116](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L116)
 
 #### Parameters
 

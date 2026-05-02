@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/auth/jwt.ts:12](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L12)
+Defined in: [engine/src/auth/jwt.ts:12](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L12)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/auth/jwt.ts:12](https://github.com/jxoesneon/FerroUI/blo
 
 > `optional` **cookieName?**: `string`
 
-Defined in: [engine/src/auth/jwt.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L15)
+Defined in: [engine/src/auth/jwt.ts:15](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L15)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/auth/jwt.ts:15](https://github.com/jxoesneon/FerroUI/blo
 
 > `optional` **expiresIn?**: `string` \| `number`
 
-Defined in: [engine/src/auth/jwt.ts:14](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L14)
+Defined in: [engine/src/auth/jwt.ts:14](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L14)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [engine/src/auth/jwt.ts:14](https://github.com/jxoesneon/FerroUI/blo
 
 > `optional` **secret?**: `string`
 
-Defined in: [engine/src/auth/jwt.ts:13](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L13)
+Defined in: [engine/src/auth/jwt.ts:13](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L13)
 
 ***
 
@@ -34,4 +34,4 @@ Defined in: [engine/src/auth/jwt.ts:13](https://github.com/jxoesneon/FerroUI/blo
 
 > `optional` **skipPaths?**: `string`[]
 
-Defined in: [engine/src/auth/jwt.ts:16](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/auth/jwt.ts#L16)
+Defined in: [engine/src/auth/jwt.ts:16](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/auth/jwt.ts#L16)

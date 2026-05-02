@@ -14,6 +14,8 @@
 
 - [AuditLoggerOptions](interfaces/AuditLoggerOptions.md)
 - [CircuitEvent](interfaces/CircuitEvent.md)
+- [CostEstimatedEvent](interfaces/CostEstimatedEvent.md)
+- [ProvenanceSignedEvent](interfaces/ProvenanceSignedEvent.md)
 - [RateLimitedEvent](interfaces/RateLimitedEvent.md)
 - [RequestCompleteEvent](interfaces/RequestCompleteEvent.md)
 - [RequestErrorEvent](interfaces/RequestErrorEvent.md)

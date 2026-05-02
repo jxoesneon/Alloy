@@ -120,7 +120,7 @@ export async function* runDualPhasePipeline(
   if (isSuspicious) {
     console.warn(
       "[Security] Prompt blocked by %s firewall in request %s: %s",
-      firewallResult.provider,
+      securityManager.sanitizeForLog(firewallResult.provider),
       securityManager.sanitizeForLog(context.requestId),
       securityManager.sanitizeForLog(firewallResult.reason || "blocked"),
     );
@@ -138,12 +138,16 @@ export async function* runDualPhasePipeline(
 
   auditLogger.log({
     type: AuditEventType.REQUEST_START,
-    requestId: context.requestId,
-    userId: context.userId,
-    promptHash: CryptoJS.SHA256(prompt.trim().toLowerCase()).toString(),
+    requestId: securityManager.sanitizeForLog(context.requestId),
+    userId: securityManager.sanitizeForLog(context.userId),
+    promptHash: CryptoJS.SHA256(
+      String(prompt || "")
+        .trim()
+        .toLowerCase(),
+    ).toString(),
     permissions: context.permissions,
-    locale: context.locale,
-    tenantId: context.tenantId ?? "default",
+    locale: securityManager.sanitizeForLog(context.locale),
+    tenantId: securityManager.sanitizeForLog(context.tenantId ?? "default"),
     isSuspicious,
   });
 
@@ -251,15 +255,16 @@ export async function* runDualPhasePipeline(
       yield { type: "tool_output", toolOutput: { name: call.name, result } };
       auditLogger.log({
         type: AuditEventType.TOOL_CALL,
-        requestId: context.requestId,
-        userId: context.userId,
-        toolName: call.name,
+        requestId: securityManager.sanitizeForLog(context.requestId),
+        userId: securityManager.sanitizeForLog(context.userId),
+        toolName: securityManager.sanitizeForLog(call.name),
         args: call.args as Record<string, unknown>,
         success: true,
         durationMs: Date.now() - toolStart,
       });
     } catch (err) {
-      const error = { error: err instanceof Error ? err.message : String(err) };
+      const errorMsg = err instanceof Error ? err.message : String(err);
+      const error = { error: errorMsg };
       toolOutputs[call.name] = error;
       cacheToolOutputs[call.name] = { error, args: call.args };
       yield {
@@ -268,13 +273,13 @@ export async function* runDualPhasePipeline(
       };
       auditLogger.log({
         type: AuditEventType.TOOL_CALL,
-        requestId: context.requestId,
-        userId: context.userId,
-        toolName: call.name,
+        requestId: securityManager.sanitizeForLog(context.requestId),
+        userId: securityManager.sanitizeForLog(context.userId),
+        toolName: securityManager.sanitizeForLog(call.name),
         args: call.args as Record<string, unknown>,
         success: false,
         durationMs: Date.now() - toolStart,
-        error: err instanceof Error ? err.message : String(err),
+        error: securityManager.sanitizeForLog(errorMsg),
       });
     }
   }
@@ -355,16 +360,16 @@ export async function* runDualPhasePipeline(
 
   auditLogger.log({
     type: AuditEventType.COST_ESTIMATED,
-    requestId: context.requestId,
-    userId: context.userId,
-    tenantId,
+    requestId: securityManager.sanitizeForLog(context.requestId),
+    userId: securityManager.sanitizeForLog(context.userId),
+    tenantId: securityManager.sanitizeForLog(tenantId),
     phase: 2,
     costCents: phase2CostEstimate,
     cumulativeCostCents: currentUsage.cents,
     limitCents: budget.dailyCostLimitCents,
   });
 
-  if (!dailyBudgetStore.checkBudget(tenantId, phase2CostEstimate)) {
+  if (!(await dailyBudgetStore.checkBudget(tenantId, phase2CostEstimate))) {
     yield {
       type: "error",
       error: {
@@ -466,10 +471,10 @@ export async function* runDualPhasePipeline(
 
   auditLogger.log({
     type: AuditEventType.PROVENANCE_SIGNED,
-    requestId: context.requestId,
-    userId: context.userId,
-    signature,
-    publicKey,
+    requestId: securityManager.sanitizeForLog(context.requestId),
+    userId: securityManager.sanitizeForLog(context.userId),
+    signature: securityManager.sanitizeForLog(signature),
+    publicKey: securityManager.sanitizeForLog(publicKey),
   });
 
   // Final success!
@@ -489,8 +494,8 @@ export async function* runDualPhasePipeline(
 
   auditLogger.log({
     type: AuditEventType.REQUEST_COMPLETE,
-    requestId: context.requestId,
-    userId: context.userId,
+    requestId: securityManager.sanitizeForLog(context.requestId),
+    userId: securityManager.sanitizeForLog(context.userId),
     success: true,
     durationMs: Date.now() - pipelineStart,
     hasSensitiveData,

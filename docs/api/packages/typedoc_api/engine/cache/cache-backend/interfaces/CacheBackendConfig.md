@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/cache/cache-backend.ts:144](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L144)
+Defined in: [engine/src/cache/cache-backend.ts:160](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L160)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/cache/cache-backend.ts:144](https://github.com/jxoesneon
 
 > `optional` **redisClient?**: `Redis`
 
-Defined in: [engine/src/cache/cache-backend.ts:146](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L146)
+Defined in: [engine/src/cache/cache-backend.ts:162](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L162)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/cache/cache-backend.ts:146](https://github.com/jxoesneon
 
 > `optional` **sqliteDb?**: `Database`
 
-Defined in: [engine/src/cache/cache-backend.ts:147](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L147)
+Defined in: [engine/src/cache/cache-backend.ts:163](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L163)
 
 ***
 
@@ -26,4 +26,4 @@ Defined in: [engine/src/cache/cache-backend.ts:147](https://github.com/jxoesneon
 
 > **type**: [`CacheBackendType`](../type-aliases/CacheBackendType.md)
 
-Defined in: [engine/src/cache/cache-backend.ts:145](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L145)
+Defined in: [engine/src/cache/cache-backend.ts:161](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L161)

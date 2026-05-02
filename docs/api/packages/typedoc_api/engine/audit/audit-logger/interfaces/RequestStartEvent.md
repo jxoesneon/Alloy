@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/audit/audit-logger.ts:44](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L44)
+Defined in: [engine/src/audit/audit-logger.ts:47](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L47)
 
 ## Extends
 
@@ -14,7 +14,7 @@ Defined in: [engine/src/audit/audit-logger.ts:44](https://github.com/jxoesneon/F
 
 > `optional` **isSuspicious?**: `boolean`
 
-Defined in: [engine/src/audit/audit-logger.ts:50](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L50)
+Defined in: [engine/src/audit/audit-logger.ts:53](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L53)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [engine/src/audit/audit-logger.ts:50](https://github.com/jxoesneon/F
 
 > **locale**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:48](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L48)
+Defined in: [engine/src/audit/audit-logger.ts:51](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L51)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [engine/src/audit/audit-logger.ts:48](https://github.com/jxoesneon/F
 
 > **permissions**: `string`[]
 
-Defined in: [engine/src/audit/audit-logger.ts:47](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L47)
+Defined in: [engine/src/audit/audit-logger.ts:50](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L50)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [engine/src/audit/audit-logger.ts:47](https://github.com/jxoesneon/F
 
 > **promptHash**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:46](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L46)
+Defined in: [engine/src/audit/audit-logger.ts:49](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L49)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [engine/src/audit/audit-logger.ts:46](https://github.com/jxoesneon/F
 
 > **requestId**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:19](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L19)
+Defined in: [engine/src/audit/audit-logger.ts:22](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L22)
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: [engine/src/audit/audit-logger.ts:19](https://github.com/jxoesneon/F
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:49](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L49)
+Defined in: [engine/src/audit/audit-logger.ts:52](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L52)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [engine/src/audit/audit-logger.ts:49](https://github.com/jxoesneon/F
 
 > `optional` **timestamp?**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:21](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L21)
+Defined in: [engine/src/audit/audit-logger.ts:24](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L24)
 
 #### Inherited from
 
@@ -78,7 +78,7 @@ Defined in: [engine/src/audit/audit-logger.ts:21](https://github.com/jxoesneon/F
 
 > **type**: [`REQUEST_START`](../enumerations/AuditEventType.md#request_start)
 
-Defined in: [engine/src/audit/audit-logger.ts:45](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L45)
+Defined in: [engine/src/audit/audit-logger.ts:48](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L48)
 
 #### Overrides
 
@@ -90,7 +90,7 @@ Defined in: [engine/src/audit/audit-logger.ts:45](https://github.com/jxoesneon/F
 
 > **userId**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L20)
+Defined in: [engine/src/audit/audit-logger.ts:23](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L23)
 
 #### Inherited from
 

@@ -5,7 +5,7 @@ import path, { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "fs-extra";
 import ora from "ora";
-import { execSync, spawnSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,15 +20,23 @@ function detectPkgManager(cwd: string): string {
 /** Open a URL in the system default browser (cross-platform). */
 function openBrowser(url: string): void {
   try {
+    // Basic URL validation to prevent shell injection via protocol
+    const urlObj = new URL(url);
+    if (urlObj.protocol !== "http:" && urlObj.protocol !== "https:") {
+      return;
+    }
+    const sanitizedUrl = urlObj.toString();
+
     if (process.platform === "win32") {
-      spawnSync("cmd", ["/c", "start", '""', url], {
+      // Use explorer.exe to open URLs on Windows safely without cmd /c
+      spawnSync("explorer.exe", [sanitizedUrl], {
         stdio: "ignore",
         shell: false,
       });
     } else if (process.platform === "darwin") {
-      spawnSync("open", [url], { stdio: "ignore" });
+      spawnSync("open", [sanitizedUrl], { stdio: "ignore" });
     } else {
-      spawnSync("xdg-open", [url], { stdio: "ignore" });
+      spawnSync("xdg-open", [sanitizedUrl], { stdio: "ignore" });
     }
   } catch {
     // best-effort
@@ -59,15 +67,39 @@ export const devCommand = new Command("dev")
     const startRenderer =
       options.rendererOnly || (!options.engineOnly && !options.rendererOnly);
 
+    // Parse and validate ports to prevent injection and ensure correctness
+    const playgroundPort = parseInt(options.port, 10);
+    const enginePort = parseInt(options.enginePort, 10);
+    const inspectorPort = parseInt(options.inspectorPort, 10);
+
+    if (
+      isNaN(playgroundPort) ||
+      playgroundPort <= 0 ||
+      playgroundPort > 65535
+    ) {
+      console.error(chalk.red(`Invalid playground port: ${options.port}`));
+      process.exit(1);
+    }
+    if (isNaN(enginePort) || enginePort <= 0 || enginePort > 65535) {
+      console.error(chalk.red(`Invalid engine port: ${options.enginePort}`));
+      process.exit(1);
+    }
+    if (
+      isNaN(inspectorPort) ||
+      inspectorPort <= 0 ||
+      inspectorPort > 65535
+    ) {
+      console.error(
+        chalk.red(`Invalid inspector port: ${options.inspectorPort}`),
+      );
+      process.exit(1);
+    }
+
     // Determine monorepo layout: if running inside the monorepo, use workspace paths.
     // Otherwise fall back to locally installed package entry points.
     const monoRoot = path.resolve(__dirname, "../../../..");
     const appsDir = path.join(monoRoot, "apps");
     const packagesDir = path.join(monoRoot, "packages");
-
-    const playgroundPort = options.port;
-    const enginePort = options.enginePort;
-    const inspectorPort = options.inspectorPort;
 
     const spinner = ora("Starting development services...").start();
 
@@ -84,7 +116,7 @@ export const devCommand = new Command("dev")
         if (webExists) {
           const playground = execa(
             pkgManager,
-            ["run", "dev", "--", "--port", playgroundPort],
+            ["run", "dev", "--", "--port", String(playgroundPort)],
             {
               cwd: webDir,
               stdio: "inherit",

@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [utils.ts:22](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/utils.ts#L22)
+Defined in: [utils.ts:22](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/utils.ts#L22)
 
 Parse a BCP 47 locale string into its constituent parts.
 
@@ -12,7 +12,7 @@ Parse a BCP 47 locale string into its constituent parts.
 
 > **language**: `string`
 
-Defined in: [utils.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/utils.ts#L23)
+Defined in: [utils.ts:23](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/utils.ts#L23)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [utils.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > `optional` **region?**: `string`
 
-Defined in: [utils.ts:25](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/utils.ts#L25)
+Defined in: [utils.ts:25](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/utils.ts#L25)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [utils.ts:25](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > `optional` **script?**: `string`
 
-Defined in: [utils.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/utils.ts#L24)
+Defined in: [utils.ts:24](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/utils.ts#L24)

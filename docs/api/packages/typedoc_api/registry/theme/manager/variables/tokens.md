@@ -4,7 +4,7 @@
 
 > `const` **tokens**: `object`
 
-Defined in: [theme/manager.ts:104](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/registry/src/theme/manager.ts#L104)
+Defined in: [theme/manager.ts:104](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/registry/src/theme/manager.ts#L104)
 
 Runtime token access API.
 

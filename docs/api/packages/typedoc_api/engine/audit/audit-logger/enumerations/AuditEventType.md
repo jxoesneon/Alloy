@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/audit/audit-logger.ts:6](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L6)
+Defined in: [engine/src/audit/audit-logger.ts:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L7)
 
 ## Enumeration Members
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/audit/audit-logger.ts:6](https://github.com/jxoesneon/Fe
 
 > **CIRCUIT\_OPEN**: `"circuit_open"`
 
-Defined in: [engine/src/audit/audit-logger.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L11)
+Defined in: [engine/src/audit/audit-logger.ts:12](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L12)
 
 ***
 
@@ -18,7 +18,23 @@ Defined in: [engine/src/audit/audit-logger.ts:11](https://github.com/jxoesneon/F
 
 > **CIRCUIT\_RESET**: `"circuit_reset"`
 
-Defined in: [engine/src/audit/audit-logger.ts:12](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L12)
+Defined in: [engine/src/audit/audit-logger.ts:13](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L13)
+
+***
+
+### COST\_ESTIMATED
+
+> **COST\_ESTIMATED**: `"cost_estimated"`
+
+Defined in: [engine/src/audit/audit-logger.ts:16](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L16)
+
+***
+
+### PROVENANCE\_SIGNED
+
+> **PROVENANCE\_SIGNED**: `"provenance_signed"`
+
+Defined in: [engine/src/audit/audit-logger.ts:17](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L17)
 
 ***
 
@@ -26,7 +42,7 @@ Defined in: [engine/src/audit/audit-logger.ts:12](https://github.com/jxoesneon/F
 
 > **RATE\_LIMITED**: `"rate_limited"`
 
-Defined in: [engine/src/audit/audit-logger.ts:13](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L13)
+Defined in: [engine/src/audit/audit-logger.ts:14](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L14)
 
 ***
 
@@ -34,7 +50,7 @@ Defined in: [engine/src/audit/audit-logger.ts:13](https://github.com/jxoesneon/F
 
 > **REQUEST\_COMPLETE**: `"request_complete"`
 
-Defined in: [engine/src/audit/audit-logger.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L9)
+Defined in: [engine/src/audit/audit-logger.ts:10](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L10)
 
 ***
 
@@ -42,7 +58,7 @@ Defined in: [engine/src/audit/audit-logger.ts:9](https://github.com/jxoesneon/Fe
 
 > **REQUEST\_ERROR**: `"request_error"`
 
-Defined in: [engine/src/audit/audit-logger.ts:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L10)
+Defined in: [engine/src/audit/audit-logger.ts:11](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L11)
 
 ***
 
@@ -50,7 +66,7 @@ Defined in: [engine/src/audit/audit-logger.ts:10](https://github.com/jxoesneon/F
 
 > **REQUEST\_START**: `"request_start"`
 
-Defined in: [engine/src/audit/audit-logger.ts:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L8)
+Defined in: [engine/src/audit/audit-logger.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L9)
 
 ***
 
@@ -58,7 +74,7 @@ Defined in: [engine/src/audit/audit-logger.ts:8](https://github.com/jxoesneon/Fe
 
 > **SESSION\_UPDATED**: `"session_updated"`
 
-Defined in: [engine/src/audit/audit-logger.ts:14](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L14)
+Defined in: [engine/src/audit/audit-logger.ts:15](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L15)
 
 ***
 
@@ -66,4 +82,4 @@ Defined in: [engine/src/audit/audit-logger.ts:14](https://github.com/jxoesneon/F
 
 > **TOOL\_CALL**: `"tool_call"`
 
-Defined in: [engine/src/audit/audit-logger.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L7)
+Defined in: [engine/src/audit/audit-logger.ts:8](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L8)

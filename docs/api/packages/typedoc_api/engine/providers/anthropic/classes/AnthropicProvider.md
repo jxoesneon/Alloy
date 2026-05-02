@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/providers/anthropic.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L26)
+Defined in: [engine/src/providers/anthropic.ts:27](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L27)
 
 ## Implements
 
@@ -14,7 +14,7 @@ Defined in: [engine/src/providers/anthropic.ts:26](https://github.com/jxoesneon/
 
 > **new AnthropicProvider**(`options?`): `AnthropicProvider`
 
-Defined in: [engine/src/providers/anthropic.ts:32](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L32)
+Defined in: [engine/src/providers/anthropic.ts:33](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L33)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [engine/src/providers/anthropic.ts:32](https://github.com/jxoesneon/
 
 > `private` **client**: `Anthropic`
 
-Defined in: [engine/src/providers/anthropic.ts:29](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L29)
+Defined in: [engine/src/providers/anthropic.ts:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L30)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [engine/src/providers/anthropic.ts:29](https://github.com/jxoesneon/
 
 > `readonly` **contextWindowTokens**: `200000` = `200000`
 
-Defined in: [engine/src/providers/anthropic.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L28)
+Defined in: [engine/src/providers/anthropic.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L29)
 
 #### Implementation of
 
@@ -52,7 +52,7 @@ Defined in: [engine/src/providers/anthropic.ts:28](https://github.com/jxoesneon/
 
 > `readonly` **id**: `"anthropic"` = `'anthropic'`
 
-Defined in: [engine/src/providers/anthropic.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L27)
+Defined in: [engine/src/providers/anthropic.ts:28](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L28)
 
 #### Implementation of
 
@@ -64,7 +64,7 @@ Defined in: [engine/src/providers/anthropic.ts:27](https://github.com/jxoesneon/
 
 > `private` **model**: `string`
 
-Defined in: [engine/src/providers/anthropic.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L30)
+Defined in: [engine/src/providers/anthropic.ts:31](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L31)
 
 ## Methods
 
@@ -72,7 +72,7 @@ Defined in: [engine/src/providers/anthropic.ts:30](https://github.com/jxoesneon/
 
 > `private` **buildSystemParam**(`systemPrompt`, `enablePromptCache?`): `string` \| `ContentBlockParam`[]
 
-Defined in: [engine/src/providers/anthropic.ts:40](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L40)
+Defined in: [engine/src/providers/anthropic.ts:41](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L41)
 
 Builds system param — adds ephemeral cache_control when enablePromptCache is set (B2)
 
@@ -96,7 +96,7 @@ Builds system param — adds ephemeral cache_control when enablePromptCache is s
 
 > **completePrompt**(`req`): `Promise`\<[`LlmResponse`](../../../types/interfaces/LlmResponse.md)\>
 
-Defined in: [engine/src/providers/anthropic.ts:117](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L117)
+Defined in: [engine/src/providers/anthropic.ts:118](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L118)
 
 Non-streaming version for simpler tasks like repair or small data generation.
 
@@ -116,11 +116,41 @@ Non-streaming version for simpler tasks like repair or small data generation.
 
 ***
 
+### estimateCost()
+
+> **estimateCost**(`tokens`): `number`
+
+Defined in: [engine/src/providers/anthropic.ts:174](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L174)
+
+Estimates cost (in cents) for a given token count.
+
+#### Parameters
+
+##### tokens
+
+###### input
+
+`number`
+
+###### output
+
+`number`
+
+#### Returns
+
+`number`
+
+#### Implementation of
+
+[`LlmProvider`](../../base/interfaces/LlmProvider.md).[`estimateCost`](../../base/interfaces/LlmProvider.md#estimatecost)
+
+***
+
 ### estimateTokens()
 
 > **estimateTokens**(`text`): `number`
 
-Defined in: [engine/src/providers/anthropic.ts:169](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L169)
+Defined in: [engine/src/providers/anthropic.ts:170](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L170)
 
 Estimates tokens for a given text.
 
@@ -144,7 +174,7 @@ Estimates tokens for a given text.
 
 > **processPrompt**(`req`): `AsyncGenerator`\<`string`, [`LlmResponse`](../../../types/interfaces/LlmResponse.md), `undefined`\>
 
-Defined in: [engine/src/providers/anthropic.ts:54](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/anthropic.ts#L54)
+Defined in: [engine/src/providers/anthropic.ts:55](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/anthropic.ts#L55)
 
 Processes a prompt and returns an AsyncGenerator for streaming content.
 Yields content chunks and eventually returns the final response object.

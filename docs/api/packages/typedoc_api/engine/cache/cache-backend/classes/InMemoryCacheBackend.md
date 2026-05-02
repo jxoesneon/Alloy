@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/cache/cache-backend.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L20)
+Defined in: [engine/src/cache/cache-backend.ts:23](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L23)
 
 Cache Backend Abstraction — Semantic Caching spec §4
 
@@ -29,7 +29,7 @@ for in-memory, Redis, and SQLite backends.
 
 > `private` **store**: `Map`\<`string`, [`MemoryEntry`](../interfaces/MemoryEntry.md)\>
 
-Defined in: [engine/src/cache/cache-backend.ts:21](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L21)
+Defined in: [engine/src/cache/cache-backend.ts:24](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L24)
 
 ## Methods
 
@@ -37,7 +37,7 @@ Defined in: [engine/src/cache/cache-backend.ts:21](https://github.com/jxoesneon/
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:48](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L48)
+Defined in: [engine/src/cache/cache-backend.ts:51](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L51)
 
 #### Returns
 
@@ -53,7 +53,7 @@ Defined in: [engine/src/cache/cache-backend.ts:48](https://github.com/jxoesneon/
 
 > **delete**(`key`): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:37](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L37)
+Defined in: [engine/src/cache/cache-backend.ts:40](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L40)
 
 #### Parameters
 
@@ -75,7 +75,7 @@ Defined in: [engine/src/cache/cache-backend.ts:37](https://github.com/jxoesneon/
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L23)
+Defined in: [engine/src/cache/cache-backend.ts:26](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L26)
 
 #### Parameters
 
@@ -97,7 +97,7 @@ Defined in: [engine/src/cache/cache-backend.ts:23](https://github.com/jxoesneon/
 
 > **keys**(`pattern?`): `Promise`\<`string`[]\>
 
-Defined in: [engine/src/cache/cache-backend.ts:41](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L41)
+Defined in: [engine/src/cache/cache-backend.ts:44](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L44)
 
 #### Parameters
 
@@ -119,7 +119,7 @@ Defined in: [engine/src/cache/cache-backend.ts:41](https://github.com/jxoesneon/
 
 > **set**(`key`, `value`, `ttlMs`): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/cache-backend.ts:33](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/cache-backend.ts#L33)
+Defined in: [engine/src/cache/cache-backend.ts:36](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/cache-backend.ts#L36)
 
 #### Parameters
 

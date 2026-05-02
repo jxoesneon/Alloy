@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [types.ts:171](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L171)
+Defined in: [types.ts:173](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L173)
 
 Validation Result Interface
 
@@ -12,7 +12,7 @@ Validation Result Interface
 
 > **code**: `string`
 
-Defined in: [types.ts:174](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L174)
+Defined in: [types.ts:176](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L176)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:174](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **message**: `string`
 
-Defined in: [types.ts:173](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L173)
+Defined in: [types.ts:175](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L175)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:173](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > **path**: `string`
 
-Defined in: [types.ts:172](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L172)
+Defined in: [types.ts:174](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L174)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [types.ts:172](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad
 
 > `optional` **rule?**: `string`
 
-Defined in: [types.ts:175](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/schema/src/types.ts#L175)
+Defined in: [types.ts:177](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/schema/src/types.ts#L177)

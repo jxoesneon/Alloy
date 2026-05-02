@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [useFerroUIStream.ts:5](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L5)
+Defined in: [renderer/src/useFerroUIStream.ts:5](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L5)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [useFerroUIStream.ts:5](https://github.com/jxoesneon/FerroUI/blob/f6
 
 > **cacheHit**: `boolean`
 
-Defined in: [useFerroUIStream.ts:17](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L17)
+Defined in: [renderer/src/useFerroUIStream.ts:17](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L17)
 
 Cache hit indicator.
 
@@ -20,7 +20,7 @@ Cache hit indicator.
 
 > **error**: `string` \| `null`
 
-Defined in: [useFerroUIStream.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L11)
+Defined in: [renderer/src/useFerroUIStream.ts:11](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L11)
 
 Error from the stream or pipeline.
 
@@ -30,7 +30,7 @@ Error from the stream or pipeline.
 
 > **layout**: `FerroUIComponent` \| `null`
 
-Defined in: [useFerroUIStream.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L7)
+Defined in: [renderer/src/useFerroUIStream.ts:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L7)
 
 Current layout tree (may be partial during streaming).
 
@@ -40,7 +40,7 @@ Current layout tree (may be partial during streaming).
 
 > **loading**: `boolean`
 
-Defined in: [useFerroUIStream.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L9)
+Defined in: [renderer/src/useFerroUIStream.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L9)
 
 Whether the stream is actively receiving data.
 
@@ -50,7 +50,7 @@ Whether the stream is actively receiving data.
 
 > **phase**: `1` \| `2` \| `null`
 
-Defined in: [useFerroUIStream.ts:13](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L13)
+Defined in: [renderer/src/useFerroUIStream.ts:13](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L13)
 
 Phase currently in progress (1 = data gathering, 2 = UI generation).
 
@@ -60,7 +60,7 @@ Phase currently in progress (1 = data gathering, 2 = UI generation).
 
 > **toolCalls**: `object`[]
 
-Defined in: [useFerroUIStream.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/useFerroUIStream.ts#L15)
+Defined in: [renderer/src/useFerroUIStream.ts:15](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/useFerroUIStream.ts#L15)
 
 Tool calls made during Phase 1.
 

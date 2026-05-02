@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [types.ts:4](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L4)
+Defined in: [types.ts:4](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L4)
 
 Attribute keys for FerroUI telemetry as defined in docs/ops/Observability_Telemetry_Dictionary.md
 
@@ -12,7 +12,7 @@ Attribute keys for FerroUI telemetry as defined in docs/ops/Observability_Teleme
 
 > **CACHE\_HIT**: `"cache.hit"`
 
-Defined in: [types.ts:13](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L13)
+Defined in: [types.ts:13](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L13)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:13](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **CACHE\_STATUS**: `"cache.status"`
 
-Defined in: [types.ts:21](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L21)
+Defined in: [types.ts:21](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L21)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:21](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **COMPONENT\_COUNT**: `"component.count"`
 
-Defined in: [types.ts:17](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L17)
+Defined in: [types.ts:17](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L17)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [types.ts:17](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **PHASE\_LATENCY\_MS**: `"phase.latency_ms"`
 
-Defined in: [types.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L11)
+Defined in: [types.ts:11](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L11)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [types.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **PROMPT\_HASH**: `"prompt.hash"`
 
-Defined in: [types.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L7)
+Defined in: [types.ts:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L7)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [types.ts:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65
 
 > **PROVIDER\_ID**: `"provider.id"`
 
-Defined in: [types.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L9)
+Defined in: [types.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L9)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [types.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65
 
 > **PROVIDER\_MODEL**: `"provider.model"`
 
-Defined in: [types.ts:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L10)
+Defined in: [types.ts:10](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L10)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [types.ts:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **REPAIR\_ATTEMPTS**: `"repair.attempts"`
 
-Defined in: [types.ts:12](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L12)
+Defined in: [types.ts:12](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L12)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [types.ts:12](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **REQUEST\_ID**: `"request.id"`
 
-Defined in: [types.ts:5](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L5)
+Defined in: [types.ts:5](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L5)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [types.ts:5](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65
 
 > **SCHEMA\_VERSION**: `"schema.version"`
 
-Defined in: [types.ts:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L8)
+Defined in: [types.ts:8](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L8)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [types.ts:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65
 
 > **SECURITY\_INJECTION\_DETECTED**: `"security.injection_detected"`
 
-Defined in: [types.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L20)
+Defined in: [types.ts:20](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L20)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [types.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **TOKEN\_INPUT**: `"token.input"`
 
-Defined in: [types.ts:18](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L18)
+Defined in: [types.ts:18](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L18)
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [types.ts:18](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **TOKEN\_OUTPUT**: `"token.output"`
 
-Defined in: [types.ts:19](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L19)
+Defined in: [types.ts:19](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L19)
 
 ***
 
@@ -116,7 +116,7 @@ Defined in: [types.ts:19](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **TOOL\_DURATION\_MS**: `"tool.duration_ms"`
 
-Defined in: [types.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L15)
+Defined in: [types.ts:15](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L15)
 
 ***
 
@@ -124,7 +124,7 @@ Defined in: [types.ts:15](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **TOOL\_NAME**: `"tool.name"`
 
-Defined in: [types.ts:14](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L14)
+Defined in: [types.ts:14](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L14)
 
 ***
 
@@ -132,7 +132,7 @@ Defined in: [types.ts:14](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **TOOL\_SUCCESS**: `"tool.success"`
 
-Defined in: [types.ts:16](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L16)
+Defined in: [types.ts:16](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L16)
 
 ***
 
@@ -140,4 +140,4 @@ Defined in: [types.ts:16](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **USER\_ID**: `"user.id"`
 
-Defined in: [types.ts:6](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L6)
+Defined in: [types.ts:6](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L6)

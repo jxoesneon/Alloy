@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [types.ts:59](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L59)
+Defined in: [types.ts:59](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L59)
 
 Pipeline phase names
 
@@ -12,7 +12,7 @@ Pipeline phase names
 
 > **CONTEXT\_RESOLUTION**: `"context_resolution"`
 
-Defined in: [types.ts:60](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L60)
+Defined in: [types.ts:60](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L60)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:60](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **DATA\_GATHERING**: `"phase1_data_gathering"`
 
-Defined in: [types.ts:61](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L61)
+Defined in: [types.ts:61](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L61)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:61](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **SELF\_HEALING**: `"self_healing"`
 
-Defined in: [types.ts:64](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L64)
+Defined in: [types.ts:64](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L64)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [types.ts:64](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **STREAM\_DELIVERY**: `"stream_delivery"`
 
-Defined in: [types.ts:65](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L65)
+Defined in: [types.ts:65](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L65)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [types.ts:65](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **UI\_GENERATION**: `"phase2_ui_generation"`
 
-Defined in: [types.ts:62](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L62)
+Defined in: [types.ts:62](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L62)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [types.ts:62](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad6
 
 > **VALIDATION**: `"validation"`
 
-Defined in: [types.ts:63](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/types.ts#L63)
+Defined in: [types.ts:63](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/types.ts#L63)

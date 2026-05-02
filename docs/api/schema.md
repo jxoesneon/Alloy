@@ -57,6 +57,12 @@ This page publishes the **canonical JSON Schema** emitted from the live Zod defi
         },
         "cacheHit": {
           "type": "boolean"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "publicKey": {
+          "type": "string"
         }
       },
       "required": [

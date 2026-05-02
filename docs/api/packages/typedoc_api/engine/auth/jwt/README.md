@@ -11,5 +11,7 @@
 
 - [clearSessionCookie](functions/clearSessionCookie.md)
 - [createAuthMiddleware](functions/createAuthMiddleware.md)
+- [isStrictEnvironment](functions/isStrictEnvironment.md)
+- [requirePermissions](functions/requirePermissions.md)
 - [setSessionCookie](functions/setSessionCookie.md)
 - [signToken](functions/signToken.md)

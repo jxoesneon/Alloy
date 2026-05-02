@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/cache/semantic-cache.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L24)
+Defined in: [engine/src/cache/semantic-cache.ts:26](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L26)
 
 ## Constructors
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:24](https://github.com/jxoesneon
 
 > `private` **new SemanticCache**(): `SemanticCache`
 
-Defined in: [engine/src/cache/semantic-cache.ts:30](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L30)
+Defined in: [engine/src/cache/semantic-cache.ts:32](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L32)
 
 #### Returns
 
@@ -22,7 +22,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:30](https://github.com/jxoesneon
 
 > `private` **backend**: [`CacheBackend`](../../cache-backend/interfaces/CacheBackend.md)
 
-Defined in: [engine/src/cache/semantic-cache.ts:26](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L26)
+Defined in: [engine/src/cache/semantic-cache.ts:28](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L28)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:26](https://github.com/jxoesneon
 
 > `private` **maxSize**: `number` = `1000`
 
-Defined in: [engine/src/cache/semantic-cache.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L28)
+Defined in: [engine/src/cache/semantic-cache.ts:30](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L30)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:28](https://github.com/jxoesneon
 
 > `private` **usageOrder**: `Set`\<`string`\>
 
-Defined in: [engine/src/cache/semantic-cache.ts:27](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L27)
+Defined in: [engine/src/cache/semantic-cache.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L29)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:27](https://github.com/jxoesneon
 
 > `private` `static` **instance**: `SemanticCache`
 
-Defined in: [engine/src/cache/semantic-cache.ts:25](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L25)
+Defined in: [engine/src/cache/semantic-cache.ts:27](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L27)
 
 ## Methods
 
@@ -54,7 +54,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:25](https://github.com/jxoesneon
 
 > **clear**(): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/semantic-cache.ts:227](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L227)
+Defined in: [engine/src/cache/semantic-cache.ts:262](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L262)
 
 #### Returns
 
@@ -66,7 +66,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:227](https://github.com/jxoesneo
 
 > `private` **generateKey**(`prompt`, `permissions`, `userId`, `toolOutputs`, `classification`): `string`
 
-Defined in: [engine/src/cache/semantic-cache.ts:190](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L190)
+Defined in: [engine/src/cache/semantic-cache.ts:223](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L223)
 
 #### Parameters
 
@@ -98,9 +98,9 @@ Defined in: [engine/src/cache/semantic-cache.ts:190](https://github.com/jxoesneo
 
 ### get()
 
-> **get**(`prompt`, `permissions`, `userId`, `toolOutputs`): `Promise`\<\{ `layout`: `FerroUIComponent`; `locale`: `string`; `metadata?`: \{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `repairAttempts?`: `number`; \}; `requestId`: `string`; `schemaVersion`: `string`; \} \| `undefined`\>
+> **get**(`prompt`, `permissions`, `userId`, `toolOutputs`): `Promise`\<\{ `layout`: `FerroUIComponent`; `locale`: `string`; `metadata?`: \{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `publicKey?`: `string`; `repairAttempts?`: `number`; `signature?`: `string`; \}; `requestId`: `string`; `schemaVersion`: `string`; \} \| `undefined`\>
 
-Defined in: [engine/src/cache/semantic-cache.ts:63](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L63)
+Defined in: [engine/src/cache/semantic-cache.ts:69](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L69)
 
 #### Parameters
 
@@ -122,7 +122,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:63](https://github.com/jxoesneon
 
 #### Returns
 
-`Promise`\<\{ `layout`: `FerroUIComponent`; `locale`: `string`; `metadata?`: \{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `repairAttempts?`: `number`; \}; `requestId`: `string`; `schemaVersion`: `string`; \} \| `undefined`\>
+`Promise`\<\{ `layout`: `FerroUIComponent`; `locale`: `string`; `metadata?`: \{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `publicKey?`: `string`; `repairAttempts?`: `number`; `signature?`: `string`; \}; `requestId`: `string`; `schemaVersion`: `string`; \} \| `undefined`\>
 
 ***
 
@@ -130,7 +130,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:63](https://github.com/jxoesneon
 
 > **invalidate**(`toolName`, `params?`): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/semantic-cache.ts:151](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L151)
+Defined in: [engine/src/cache/semantic-cache.ts:179](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L179)
 
 #### Parameters
 
@@ -152,7 +152,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:151](https://github.com/jxoesneo
 
 > **invalidatePattern**(`pattern`): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/semantic-cache.ts:174](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L174)
+Defined in: [engine/src/cache/semantic-cache.ts:205](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L205)
 
 #### Parameters
 
@@ -170,7 +170,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:174](https://github.com/jxoesneo
 
 > `private` **resolveClassification**(`toolOutputs`): [`DataClassification`](../type-aliases/DataClassification.md)
 
-Defined in: [engine/src/cache/semantic-cache.ts:53](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L53)
+Defined in: [engine/src/cache/semantic-cache.ts:55](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L55)
 
 #### Parameters
 
@@ -188,7 +188,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:53](https://github.com/jxoesneon
 
 > **set**(`prompt`, `permissions`, `userId`, `toolOutputs`, `layout`, `classification`): `Promise`\<`void`\>
 
-Defined in: [engine/src/cache/semantic-cache.ts:114](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L114)
+Defined in: [engine/src/cache/semantic-cache.ts:136](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L136)
 
 #### Parameters
 
@@ -220,7 +220,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:114](https://github.com/jxoesneo
 
 ###### metadata?
 
-\{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `repairAttempts?`: `number`; \}
+\{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `publicKey?`: `string`; `repairAttempts?`: `number`; `signature?`: `string`; \}
 
 ###### metadata.cacheHit?
 
@@ -242,9 +242,17 @@ Defined in: [engine/src/cache/semantic-cache.ts:114](https://github.com/jxoesneo
 
 `string`
 
+###### metadata.publicKey?
+
+`string`
+
 ###### metadata.repairAttempts?
 
 `number`
+
+###### metadata.signature?
+
+`string`
 
 ###### requestId
 
@@ -268,7 +276,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:114](https://github.com/jxoesneo
 
 > **setBackend**(`backend`): `void`
 
-Defined in: [engine/src/cache/semantic-cache.ts:39](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L39)
+Defined in: [engine/src/cache/semantic-cache.ts:41](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L41)
 
 #### Parameters
 
@@ -286,7 +294,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:39](https://github.com/jxoesneon
 
 > **setMaxSize**(`size`): `void`
 
-Defined in: [engine/src/cache/semantic-cache.ts:44](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L44)
+Defined in: [engine/src/cache/semantic-cache.ts:46](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L46)
 
 #### Parameters
 
@@ -304,7 +312,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:44](https://github.com/jxoesneon
 
 > `private` **signEntry**(`layout`, `toolOutputs`, `timestamp`): `string`
 
-Defined in: [engine/src/cache/semantic-cache.ts:104](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L104)
+Defined in: [engine/src/cache/semantic-cache.ts:118](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L118)
 
 #### Parameters
 
@@ -320,7 +328,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:104](https://github.com/jxoesneo
 
 ###### metadata?
 
-\{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `repairAttempts?`: `number`; \}
+\{ `cacheHit?`: `boolean`; `generatedAt`: `string`; `latencyMs?`: `number`; `model?`: `string`; `provider?`: `string`; `publicKey?`: `string`; `repairAttempts?`: `number`; `signature?`: `string`; \}
 
 ###### metadata.cacheHit?
 
@@ -342,9 +350,17 @@ Defined in: [engine/src/cache/semantic-cache.ts:104](https://github.com/jxoesneo
 
 `string`
 
+###### metadata.publicKey?
+
+`string`
+
 ###### metadata.repairAttempts?
 
 `number`
+
+###### metadata.signature?
+
+`string`
 
 ###### requestId
 
@@ -372,7 +388,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:104](https://github.com/jxoesneo
 
 > `private` **touch**(`key`): `void`
 
-Defined in: [engine/src/cache/semantic-cache.ts:48](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L48)
+Defined in: [engine/src/cache/semantic-cache.ts:50](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L50)
 
 #### Parameters
 
@@ -390,7 +406,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:48](https://github.com/jxoesneon
 
 > `private` **verifyEntry**(`entry`): `boolean`
 
-Defined in: [engine/src/cache/semantic-cache.ts:109](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L109)
+Defined in: [engine/src/cache/semantic-cache.ts:127](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L127)
 
 #### Parameters
 
@@ -408,7 +424,7 @@ Defined in: [engine/src/cache/semantic-cache.ts:109](https://github.com/jxoesneo
 
 > `static` **getInstance**(): `SemanticCache`
 
-Defined in: [engine/src/cache/semantic-cache.ts:32](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/cache/semantic-cache.ts#L32)
+Defined in: [engine/src/cache/semantic-cache.ts:34](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/cache/semantic-cache.ts#L34)
 
 #### Returns
 

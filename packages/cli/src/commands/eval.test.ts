@@ -1,19 +1,19 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from "vitest";
 import { evalCommand } from "./eval.js";
 import fs from "fs-extra";
+import path from "path";
 
 vi.mock("fs-extra");
 
 describe("evalCommand", () => {
   let consoleLogMock: Mock;
-  let processExitMock: Mock;
   let fetchMock: Mock;
   let originalFetch: typeof fetch;
 
   beforeEach(() => {
     vi.clearAllMocks();
     consoleLogMock = vi.spyOn(console, "log").mockImplementation(() => {});
-    processExitMock = vi.spyOn(process, "exit").mockImplementation(((
+    vi.spyOn(process, "exit").mockImplementation(((
       code: any,
     ) => {
       throw new Error(`Exit ${code}`);
@@ -228,5 +228,70 @@ describe("evalCommand", () => {
     ]);
 
     expect(fetchMock).toHaveBeenCalled();
+  });
+
+  describe("Path Traversal Security", () => {
+    it("should block path traversal to parent directory", async () => {
+      const traversalPath = "../traversal-test.html";
+      await expect(
+        evalCommand.parseAsync([
+          "node",
+          "eval",
+          "--prompt",
+          "Test",
+          "--output",
+          traversalPath,
+        ]),
+      ).rejects.toThrow(/Invalid output path/);
+      expect(fs.writeFile).not.toHaveBeenCalled();
+    });
+
+    it("should block path traversal to absolute path outside CWD", async () => {
+      const absolutePath = path.resolve(process.cwd(), "..", "outside.html");
+      await expect(
+        evalCommand.parseAsync([
+          "node",
+          "eval",
+          "--prompt",
+          "Test",
+          "--output",
+          absolutePath,
+        ]),
+      ).rejects.toThrow(/Invalid output path/);
+      expect(fs.writeFile).not.toHaveBeenCalled();
+    });
+
+    it("should block partial path traversal (CVE-style)", async () => {
+      const cwd = process.cwd();
+      const maliciousPath = cwd + "-secret" + path.sep + "report.html";
+      await expect(
+        evalCommand.parseAsync([
+          "node",
+          "eval",
+          "--prompt",
+          "Test",
+          "--output",
+          maliciousPath,
+        ]),
+      ).rejects.toThrow(/Invalid output path/);
+      expect(fs.writeFile).not.toHaveBeenCalled();
+    });
+
+    it("should allow valid paths within CWD", async () => {
+      const validPath = "ferroui/evals/report.html";
+      await evalCommand.parseAsync([
+        "node",
+        "eval",
+        "--prompt",
+        "Test",
+        "--output",
+        validPath,
+      ]);
+      expect(fs.writeFile).toHaveBeenCalledWith(
+        expect.stringContaining(path.normalize(validPath)),
+        expect.any(String),
+        "utf-8",
+      );
+    });
   });
 });

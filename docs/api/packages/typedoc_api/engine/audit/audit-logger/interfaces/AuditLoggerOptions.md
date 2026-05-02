@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/audit/audit-logger.ts:84](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L84)
+Defined in: [engine/src/audit/audit-logger.ts:104](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L104)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/audit/audit-logger.ts:84](https://github.com/jxoesneon/F
 
 > `optional` **filePath?**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:86](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L86)
+Defined in: [engine/src/audit/audit-logger.ts:106](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L106)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/audit/audit-logger.ts:86](https://github.com/jxoesneon/F
 
 > `optional` **hmacSecret?**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:88](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L88)
+Defined in: [engine/src/audit/audit-logger.ts:108](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L108)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [engine/src/audit/audit-logger.ts:88](https://github.com/jxoesneon/F
 
 > `optional` **output?**: `"memory"` \| `"sqlite"` \| `"console"` \| `"file"`
 
-Defined in: [engine/src/audit/audit-logger.ts:85](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L85)
+Defined in: [engine/src/audit/audit-logger.ts:105](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L105)
 
 ***
 
@@ -34,4 +34,4 @@ Defined in: [engine/src/audit/audit-logger.ts:85](https://github.com/jxoesneon/F
 
 > `optional` **sqlitePath?**: `string`
 
-Defined in: [engine/src/audit/audit-logger.ts:87](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/audit/audit-logger.ts#L87)
+Defined in: [engine/src/audit/audit-logger.ts:107](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/audit/audit-logger.ts#L107)

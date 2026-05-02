@@ -4,7 +4,7 @@
 
 > **useTranslation**(`namespace?`): `object`
 
-Defined in: [hooks.ts:19](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/i18n/src/hooks.ts#L19)
+Defined in: [hooks.ts:19](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/i18n/src/hooks.ts#L19)
 
 Hook for component translation with namespace support
 

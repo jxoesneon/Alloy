@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [ActionHandler.tsx:4](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/ActionHandler.tsx#L4)
+Defined in: [renderer/src/ActionHandler.tsx:4](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/ActionHandler.tsx#L4)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [ActionHandler.tsx:4](https://github.com/jxoesneon/FerroUI/blob/f629
 
 > **children**: `ReactNode`
 
-Defined in: [ActionHandler.tsx:5](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/ActionHandler.tsx#L5)
+Defined in: [renderer/src/ActionHandler.tsx:5](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/ActionHandler.tsx#L5)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [ActionHandler.tsx:5](https://github.com/jxoesneon/FerroUI/blob/f629
 
 > `optional` **onNavigate?**: (`path`, `params?`) => `void`
 
-Defined in: [ActionHandler.tsx:6](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/ActionHandler.tsx#L6)
+Defined in: [renderer/src/ActionHandler.tsx:6](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/ActionHandler.tsx#L6)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [ActionHandler.tsx:6](https://github.com/jxoesneon/FerroUI/blob/f629
 
 > `optional` **onRefresh?**: (`payload?`) => `void`
 
-Defined in: [ActionHandler.tsx:8](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/ActionHandler.tsx#L8)
+Defined in: [renderer/src/ActionHandler.tsx:8](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/ActionHandler.tsx#L8)
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: [ActionHandler.tsx:8](https://github.com/jxoesneon/FerroUI/blob/f629
 
 > `optional` **onStateUpdate?**: (`componentId`, `newState`) => `void`
 
-Defined in: [ActionHandler.tsx:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/ActionHandler.tsx#L10)
+Defined in: [renderer/src/ActionHandler.tsx:10](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/ActionHandler.tsx#L10)
 
 #### Parameters
 
@@ -80,7 +80,7 @@ Defined in: [ActionHandler.tsx:10](https://github.com/jxoesneon/FerroUI/blob/f62
 
 > `optional` **onToast?**: (`message`, `variant`, `duration?`) => `void`
 
-Defined in: [ActionHandler.tsx:7](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/ActionHandler.tsx#L7)
+Defined in: [renderer/src/ActionHandler.tsx:7](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/ActionHandler.tsx#L7)
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Defined in: [ActionHandler.tsx:7](https://github.com/jxoesneon/FerroUI/blob/f629
 
 > `optional` **onToolCall?**: (`tool`, `args`) => `void`
 
-Defined in: [ActionHandler.tsx:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/renderer/src/ActionHandler.tsx#L9)
+Defined in: [renderer/src/ActionHandler.tsx:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/renderer/src/ActionHandler.tsx#L9)
 
 #### Parameters
 

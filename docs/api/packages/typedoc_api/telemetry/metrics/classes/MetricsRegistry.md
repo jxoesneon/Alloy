@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [metrics.ts:51](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L51)
+Defined in: [metrics.ts:62](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L62)
 
 Common metrics registry
 
@@ -12,7 +12,7 @@ Common metrics registry
 
 > `private` **new MetricsRegistry**(): `MetricsRegistry`
 
-Defined in: [metrics.ts:81](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L81)
+Defined in: [metrics.ts:92](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L92)
 
 #### Returns
 
@@ -24,7 +24,7 @@ Defined in: [metrics.ts:81](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **cacheHits**: `Counter`
 
-Defined in: [metrics.ts:59](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L59)
+Defined in: [metrics.ts:70](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L70)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [metrics.ts:59](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **cacheMisses**: `Counter`
 
-Defined in: [metrics.ts:60](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L60)
+Defined in: [metrics.ts:71](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L71)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [metrics.ts:60](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **llmCalls**: `Counter`
 
-Defined in: [metrics.ts:63](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L63)
+Defined in: [metrics.ts:74](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L74)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [metrics.ts:63](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **llmCost**: `Counter`
 
-Defined in: [metrics.ts:67](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L67)
+Defined in: [metrics.ts:78](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L78)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [metrics.ts:67](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **llmDuration**: `Histogram`
 
-Defined in: [metrics.ts:64](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L64)
+Defined in: [metrics.ts:75](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L75)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [metrics.ts:64](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **llmTokensInput**: `Counter`
 
-Defined in: [metrics.ts:65](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L65)
+Defined in: [metrics.ts:76](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L76)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [metrics.ts:65](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **llmTokensOutput**: `Counter`
 
-Defined in: [metrics.ts:66](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L66)
+Defined in: [metrics.ts:77](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L77)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [metrics.ts:66](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `private` **meter**: `Meter`
 
-Defined in: [metrics.ts:53](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L53)
+Defined in: [metrics.ts:64](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L64)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [metrics.ts:53](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **requestsDuration**: `Histogram`
 
-Defined in: [metrics.ts:57](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L57)
+Defined in: [metrics.ts:68](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L68)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [metrics.ts:57](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **requestsErrors**: `Counter`
 
-Defined in: [metrics.ts:58](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L58)
+Defined in: [metrics.ts:69](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L69)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [metrics.ts:58](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **requestsTotal**: `Counter`
 
-Defined in: [metrics.ts:56](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L56)
+Defined in: [metrics.ts:67](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L67)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [metrics.ts:56](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **toolsCalls**: `Counter`
 
-Defined in: [metrics.ts:70](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L70)
+Defined in: [metrics.ts:81](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L81)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [metrics.ts:70](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **toolsDuration**: `Histogram`
 
-Defined in: [metrics.ts:71](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L71)
+Defined in: [metrics.ts:82](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L82)
 
 ***
 
@@ -128,7 +128,7 @@ Defined in: [metrics.ts:71](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **toolsErrors**: `Counter`
 
-Defined in: [metrics.ts:72](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L72)
+Defined in: [metrics.ts:83](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L83)
 
 ***
 
@@ -136,7 +136,7 @@ Defined in: [metrics.ts:72](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **toolsTimeout**: `Counter`
 
-Defined in: [metrics.ts:73](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L73)
+Defined in: [metrics.ts:84](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L84)
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: [metrics.ts:73](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **validationFailed**: `Counter`
 
-Defined in: [metrics.ts:77](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L77)
+Defined in: [metrics.ts:88](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L88)
 
 ***
 
@@ -152,7 +152,7 @@ Defined in: [metrics.ts:77](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **validationHallucinations**: `Counter`
 
-Defined in: [metrics.ts:79](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L79)
+Defined in: [metrics.ts:90](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L90)
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: [metrics.ts:79](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **validationRepairs**: `Counter`
 
-Defined in: [metrics.ts:78](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L78)
+Defined in: [metrics.ts:89](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L89)
 
 ***
 
@@ -168,7 +168,7 @@ Defined in: [metrics.ts:78](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `readonly` **validationTotal**: `Counter`
 
-Defined in: [metrics.ts:76](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L76)
+Defined in: [metrics.ts:87](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L87)
 
 ***
 
@@ -176,7 +176,7 @@ Defined in: [metrics.ts:76](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `private` `static` **instance**: `MetricsRegistry`
 
-Defined in: [metrics.ts:52](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L52)
+Defined in: [metrics.ts:63](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L63)
 
 ## Methods
 
@@ -184,7 +184,7 @@ Defined in: [metrics.ts:52](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aa
 
 > `static` **getInstance**(): `MetricsRegistry`
 
-Defined in: [metrics.ts:107](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/telemetry/src/metrics.ts#L107)
+Defined in: [metrics.ts:166](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/telemetry/src/metrics.ts#L166)
 
 #### Returns
 

@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/types.ts:20](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L20)
+Defined in: [engine/src/types.ts:17](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L17)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/types.ts:20](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **conversationContext?**: `string`[]
 
-Defined in: [engine/src/types.ts:23](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L23)
+Defined in: [engine/src/types.ts:20](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L20)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/types.ts:23](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **enablePromptCache?**: `boolean`
 
-Defined in: [engine/src/types.ts:37](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L37)
+Defined in: [engine/src/types.ts:34](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L34)
 
 When true, marks the system prompt as a candidate for provider-level
 prompt caching (Anthropic ephemeral cache / OpenAI cached prefix).
@@ -29,7 +29,7 @@ prompt caching (Anthropic ephemeral cache / OpenAI cached prefix).
 
 > `optional` **jsonMode?**: `boolean`
 
-Defined in: [engine/src/types.ts:32](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L32)
+Defined in: [engine/src/types.ts:29](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L29)
 
 When true, instructs the provider to return valid JSON only.
 - OpenAI: sets response_format = { type: 'json_object' }
@@ -42,7 +42,7 @@ When true, instructs the provider to return valid JSON only.
 
 > `optional` **maxTokens?**: `number`
 
-Defined in: [engine/src/types.ts:25](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L25)
+Defined in: [engine/src/types.ts:22](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L22)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [engine/src/types.ts:25](https://github.com/jxoesneon/FerroUI/blob/f
 
 > **systemPrompt**: `string`
 
-Defined in: [engine/src/types.ts:21](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L21)
+Defined in: [engine/src/types.ts:18](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L18)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [engine/src/types.ts:21](https://github.com/jxoesneon/FerroUI/blob/f
 
 > `optional` **temperature?**: `number`
 
-Defined in: [engine/src/types.ts:24](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L24)
+Defined in: [engine/src/types.ts:21](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L21)
 
 ***
 
@@ -66,4 +66,4 @@ Defined in: [engine/src/types.ts:24](https://github.com/jxoesneon/FerroUI/blob/f
 
 > **userPrompt**: `string`
 
-Defined in: [engine/src/types.ts:22](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L22)
+Defined in: [engine/src/types.ts:19](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L19)

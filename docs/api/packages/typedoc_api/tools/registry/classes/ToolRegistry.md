@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [packages/tools/src/registry.ts:9](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L9)
+Defined in: [packages/tools/src/registry.ts:9](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L9)
 
 Central registry for all backend tools
 
@@ -12,7 +12,7 @@ Central registry for all backend tools
 
 > `private` **new ToolRegistry**(): `ToolRegistry`
 
-Defined in: [packages/tools/src/registry.ts:13](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L13)
+Defined in: [packages/tools/src/registry.ts:13](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L13)
 
 #### Returns
 
@@ -24,7 +24,7 @@ Defined in: [packages/tools/src/registry.ts:13](https://github.com/jxoesneon/Fer
 
 > `private` **tools**: `Map`\<`string`, [`ToolDefinition`](../../types/interfaces/ToolDefinition.md)\<`any`, `any`\>\>
 
-Defined in: [packages/tools/src/registry.ts:11](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L11)
+Defined in: [packages/tools/src/registry.ts:11](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L11)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [packages/tools/src/registry.ts:11](https://github.com/jxoesneon/Fer
 
 > `private` `static` **instance**: `ToolRegistry`
 
-Defined in: [packages/tools/src/registry.ts:10](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L10)
+Defined in: [packages/tools/src/registry.ts:10](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L10)
 
 ## Methods
 
@@ -40,7 +40,7 @@ Defined in: [packages/tools/src/registry.ts:10](https://github.com/jxoesneon/Fer
 
 > **clear**(): `void`
 
-Defined in: [packages/tools/src/registry.ts:63](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L63)
+Defined in: [packages/tools/src/registry.ts:63](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L63)
 
 Clears the registry (useful for testing)
 
@@ -54,7 +54,7 @@ Clears the registry (useful for testing)
 
 > **get**(`name`): [`ToolDefinition`](../../types/interfaces/ToolDefinition.md)\<`any`, `any`\> \| `undefined`
 
-Defined in: [packages/tools/src/registry.ts:49](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L49)
+Defined in: [packages/tools/src/registry.ts:49](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L49)
 
 Gets a tool by its name
 
@@ -74,7 +74,7 @@ Gets a tool by its name
 
 > **getAll**(): [`ToolDefinition`](../../types/interfaces/ToolDefinition.md)\<`any`, `any`\>[]
 
-Defined in: [packages/tools/src/registry.ts:56](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L56)
+Defined in: [packages/tools/src/registry.ts:56](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L56)
 
 Returns all registered tools
 
@@ -88,7 +88,7 @@ Returns all registered tools
 
 > **register**\<`TParams`, `TResult`\>(`tool`): [`ToolDefinition`](../../types/interfaces/ToolDefinition.md)\<`TParams`, `TResult`\>
 
-Defined in: [packages/tools/src/registry.ts:28](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L28)
+Defined in: [packages/tools/src/registry.ts:28](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L28)
 
 Registers a new tool in the system
 
@@ -118,7 +118,7 @@ Registers a new tool in the system
 
 > `static` **getInstance**(): `ToolRegistry`
 
-Defined in: [packages/tools/src/registry.ts:18](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/tools/src/registry.ts#L18)
+Defined in: [packages/tools/src/registry.ts:18](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/tools/src/registry.ts#L18)
 
 Singleton accessor for the registry
 

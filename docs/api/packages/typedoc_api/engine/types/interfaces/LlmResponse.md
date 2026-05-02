@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/types.ts:40](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L40)
+Defined in: [engine/src/types.ts:37](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L37)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [engine/src/types.ts:40](https://github.com/jxoesneon/FerroUI/blob/f
 
 > **content**: `string`
 
-Defined in: [engine/src/types.ts:41](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L41)
+Defined in: [engine/src/types.ts:38](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L38)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [engine/src/types.ts:41](https://github.com/jxoesneon/FerroUI/blob/f
 
 > **tokens**: `object`
 
-Defined in: [engine/src/types.ts:42](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/types.ts#L42)
+Defined in: [engine/src/types.ts:39](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/types.ts#L39)
 
 #### input
 

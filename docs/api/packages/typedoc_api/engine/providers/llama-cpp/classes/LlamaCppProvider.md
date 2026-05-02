@@ -2,7 +2,7 @@
 
 ***
 
-Defined in: [engine/src/providers/llama-cpp.ts:35](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L35)
+Defined in: [engine/src/providers/llama-cpp.ts:36](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L36)
 
 ## Implements
 
@@ -14,7 +14,7 @@ Defined in: [engine/src/providers/llama-cpp.ts:35](https://github.com/jxoesneon/
 
 > **new LlamaCppProvider**(`options?`): `LlamaCppProvider`
 
-Defined in: [engine/src/providers/llama-cpp.ts:40](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L40)
+Defined in: [engine/src/providers/llama-cpp.ts:41](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L41)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [engine/src/providers/llama-cpp.ts:40](https://github.com/jxoesneon/
 
 > `private` **baseURL**: `string`
 
-Defined in: [engine/src/providers/llama-cpp.ts:38](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L38)
+Defined in: [engine/src/providers/llama-cpp.ts:39](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L39)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [engine/src/providers/llama-cpp.ts:38](https://github.com/jxoesneon/
 
 > `readonly` **contextWindowTokens**: `32768` = `32768`
 
-Defined in: [engine/src/providers/llama-cpp.ts:37](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L37)
+Defined in: [engine/src/providers/llama-cpp.ts:38](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L38)
 
 #### Implementation of
 
@@ -52,7 +52,7 @@ Defined in: [engine/src/providers/llama-cpp.ts:37](https://github.com/jxoesneon/
 
 > `readonly` **id**: `"llama-cpp"` = `'llama-cpp'`
 
-Defined in: [engine/src/providers/llama-cpp.ts:36](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L36)
+Defined in: [engine/src/providers/llama-cpp.ts:37](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L37)
 
 #### Implementation of
 
@@ -64,7 +64,7 @@ Defined in: [engine/src/providers/llama-cpp.ts:36](https://github.com/jxoesneon/
 
 > **completePrompt**(`req`): `Promise`\<[`LlmResponse`](../../../types/interfaces/LlmResponse.md)\>
 
-Defined in: [engine/src/providers/llama-cpp.ts:103](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L103)
+Defined in: [engine/src/providers/llama-cpp.ts:104](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L104)
 
 Non-streaming version for simpler tasks like repair or small data generation.
 
@@ -84,11 +84,41 @@ Non-streaming version for simpler tasks like repair or small data generation.
 
 ***
 
+### estimateCost()
+
+> **estimateCost**(`tokens`): `number`
+
+Defined in: [engine/src/providers/llama-cpp.ts:135](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L135)
+
+Estimates cost (in cents) for a given token count.
+
+#### Parameters
+
+##### tokens
+
+###### input
+
+`number`
+
+###### output
+
+`number`
+
+#### Returns
+
+`number`
+
+#### Implementation of
+
+[`LlmProvider`](../../base/interfaces/LlmProvider.md).[`estimateCost`](../../base/interfaces/LlmProvider.md#estimatecost)
+
+***
+
 ### estimateTokens()
 
 > **estimateTokens**(`text`): `number`
 
-Defined in: [engine/src/providers/llama-cpp.ts:130](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L130)
+Defined in: [engine/src/providers/llama-cpp.ts:131](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L131)
 
 Estimates tokens for a given text.
 
@@ -112,7 +142,7 @@ Estimates tokens for a given text.
 
 > **processPrompt**(`req`): `AsyncGenerator`\<`string`, [`LlmResponse`](../../../types/interfaces/LlmResponse.md), `undefined`\>
 
-Defined in: [engine/src/providers/llama-cpp.ts:44](https://github.com/jxoesneon/FerroUI/blob/f629cfe8aad65aa35e0bd2ea86f61d378dcad807/packages/engine/src/providers/llama-cpp.ts#L44)
+Defined in: [engine/src/providers/llama-cpp.ts:45](https://github.com/jxoesneon/FerroUI/blob/43f31a9c88cc61ac36f959f0f168a9323f8272f2/packages/engine/src/providers/llama-cpp.ts#L45)
 
 Processes a prompt and returns an AsyncGenerator for streaming content.
 Yields content chunks and eventually returns the final response object.
