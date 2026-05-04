@@ -42,7 +42,7 @@ describe("updateCommand", () => {
   it("should successfully update to latest version without prompt if --yes is passed", async () => {
     vi.mocked(execSync).mockImplementation((cmd: any) => {
       if (typeof cmd === "string" && cmd.includes("npm view")) {
-        return '"2.0.0"';
+        return '"3.0.0"';
       }
       return "";
     });
@@ -70,20 +70,22 @@ describe("updateCommand", () => {
   });
 
   it("should handle same version case", async () => {
-    // We expect the current version to be "1.0.0" (or similar) from package.json
+    // We expect the current version to be "2.0.0" (or similar) from package.json
     // We will return exactly what current version is to match it
     vi.mocked(execSync).mockImplementation((cmd: any) => {
       if (typeof cmd === "string" && cmd.includes("npm view")) {
-        return '"1.0.0"'; // Assuming current version in package.json is 1.0.0
+        return '"2.0.0"'; // Assuming current version in package.json is 2.0.0
       }
       return "";
     });
 
+    vi.mocked(prompts).mockResolvedValue({ confirmed: false });
+
     await updateCommand.parseAsync(["node", "update"]);
 
-    // Since the mocked latestVersion is 1.0.0, they should match
+    // Since the mocked latestVersion is 2.0.0, they should match
     expect(consoleLogMock).toHaveBeenCalledWith(
-      expect.stringContaining("Already up to date."),
+      expect.stringContaining("Already up to date"),
     );
     expect(execSync).not.toHaveBeenCalledWith(
       expect.stringContaining("add -g"),
@@ -93,7 +95,7 @@ describe("updateCommand", () => {
   it("should prompt for confirmation and cancel if user says no", async () => {
     vi.mocked(execSync).mockImplementation((cmd: any) => {
       if (typeof cmd === "string" && cmd.includes("npm view")) {
-        return '"2.0.0"';
+        return '"3.0.0"';
       }
       return "";
     });
@@ -103,7 +105,7 @@ describe("updateCommand", () => {
     await updateCommand.parseAsync(["node", "update"]);
 
     expect(consoleLogMock).toHaveBeenCalledWith(
-      expect.stringContaining("Update cancelled."),
+      expect.stringContaining("Update cancelled"),
     );
     expect(execSync).not.toHaveBeenCalledWith(
       expect.stringContaining("add -g"),
@@ -113,10 +115,10 @@ describe("updateCommand", () => {
   it("should prompt for confirmation and proceed if user says yes with yarn", async () => {
     vi.mocked(execSync).mockImplementation((cmd: any) => {
       if (typeof cmd === "string" && cmd.includes("npm view")) {
-        return '"2.0.0"';
+        return '"3.0.0"';
       }
       if (typeof cmd === "string" && cmd.includes("--version")) {
-        return "2.0.0";
+        return "3.0.0";
       }
       return "";
     });
@@ -133,7 +135,7 @@ describe("updateCommand", () => {
       expect.stringContaining("updated successfully"),
     );
     expect(consoleLogMock).toHaveBeenCalledWith(
-      expect.stringContaining("Installed version: 2.0.0"),
+      expect.stringContaining("Installed version: 3.0.0"),
     );
   });
 
@@ -159,7 +161,7 @@ describe("updateCommand", () => {
   it("should handle install error", async () => {
     vi.mocked(execSync).mockImplementation((cmd: any) => {
       if (typeof cmd === "string" && cmd.includes("npm view")) {
-        return '"2.0.0"';
+        return '"3.0.0"';
       }
       if (typeof cmd === "string" && cmd.includes("add -g")) {
         throw new Error("Install failed");
