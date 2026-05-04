@@ -73,20 +73,18 @@ export class SecurityManager {
     if (!data) return data;
 
     if (typeof data === "string") {
-      // Robustness: Attempt to parse stringified JSON first
       try {
         if (data.startsWith("{") || data.startsWith("[")) {
           const parsed = JSON.parse(data);
           return JSON.stringify(this.redactPII(parsed));
         }
       } catch {
-        // Not valid JSON, proceed to standard string redaction
+        /* ignore */
       }
 
-      // Non-backtracking, safer regexes for PII
       return data
         .replace(
-          /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
+          /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b/g,
           "[REDACTED_EMAIL]",
         )
         .replace(/\d{3}-\d{2}-\d{4}/g, "[REDACTED_SSN]")
@@ -101,46 +99,31 @@ export class SecurityManager {
     }
 
     if (typeof data === "object") {
-      // Prevent prototype pollution and property injection
-      const redacted: Record<string, any> = Object.create(null);
+      const redacted = Object.create(null);
       for (const key of Object.keys(data)) {
         if (key === "__proto__" || key === "constructor" || key === "prototype")
           continue;
-
-        const value = (data as any)[key];
-        const lowerKey = key.toLowerCase();
-
-        // Sensitivity based on keys + recursive redaction of values
-        if (
-          [
-            "ssn",
-            "email",
-            "password",
-            "secret",
-            "token",
-            "card",
-            "creditcard",
-            "iban",
-          ].some((k) => lowerKey.includes(k))
-        ) {
-          Object.defineProperty(redacted, key, {
-            value: "[REDACTED_SENSITIVE_KEY]",
-            writable: true,
-            enumerable: true,
-            configurable: true,
-          });
-        } else {
-          Object.defineProperty(redacted, key, {
-            value: this.redactPII(value),
-            writable: true,
-            enumerable: true,
-            configurable: true,
-          });
-        }
+        const val = (data as any)[key];
+        const isS = [
+          "ssn",
+          "email",
+          "password",
+          "secret",
+          "token",
+          "card",
+          "creditcard",
+          "iban",
+        ].some((k) => key.toLowerCase().includes(k));
+        const finalVal = isS ? "[REDACTED_SENSITIVE_KEY]" : this.redactPII(val);
+        Object.defineProperty(redacted, key, {
+          value: finalVal,
+          writable: true,
+          enumerable: true,
+          configurable: true,
+        });
       }
       return redacted;
     }
-
     return data;
   }
 
