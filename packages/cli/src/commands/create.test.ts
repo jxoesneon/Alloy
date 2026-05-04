@@ -14,6 +14,7 @@ describe("createCommand", () => {
   let consoleLogMock: Mock;
   let consoleErrorMock: Mock;
   let _processExitMock: Mock;
+
   let oraStartMock: Mock;
   let oraSucceedMock: Mock;
   let oraWarnMock: Mock;
@@ -23,7 +24,7 @@ describe("createCommand", () => {
     vi.clearAllMocks();
     consoleLogMock = vi.spyOn(console, "log").mockImplementation(() => {});
     consoleErrorMock = vi.spyOn(console, "error").mockImplementation(() => {});
-    processExitMock = vi.spyOn(process, "exit").mockImplementation(((
+    _processExitMock = vi.spyOn(process, "exit").mockImplementation(((
       code: any,
     ) => {
       throw new Error(`Exit ${code}`);
