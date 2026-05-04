@@ -1,6 +1,6 @@
 {
   "name": "@ferroui/tokens",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Design tokens for the FerroUI system, providing unified color, spacing, and typography scales.",
   "type": "module",

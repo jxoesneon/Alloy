@@ -3,7 +3,7 @@
   "private": true,
   "displayName": "FerroUI",
   "description": "AI-powered UI development assistant",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "publisher": "ferroui",
   "engines": {
     "vscode": "^1.85.0"
@@ -69,7 +69,11 @@
         "ferroui.defaultProvider": {
           "type": "string",
           "default": "anthropic",
-          "enum": ["anthropic", "openai", "google"],
+          "enum": [
+            "anthropic",
+            "openai",
+            "google"
+          ],
           "description": "Default LLM provider"
         }
       }
