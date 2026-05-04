@@ -85,7 +85,10 @@ export class SecurityManager {
 
       // Non-backtracking, safer regexes for PII
       return data
-        .replace(/[^\s@]+@[^\s@]+\.[^\s@]+/g, "[REDACTED_EMAIL]")
+        .replace(
+          /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
+          "[REDACTED_EMAIL]",
+        )
         .replace(/\d{3}-\d{2}-\d{4}/g, "[REDACTED_SSN]")
         .replace(/(?:\d{4}-){3}\d{4}/g, "[REDACTED_CARD]")
         .replace(/[A-Z]{2}\d{2}[A-Z0-9]{11,30}/g, "[REDACTED_IBAN]")
@@ -98,11 +101,13 @@ export class SecurityManager {
     }
 
     if (typeof data === "object") {
-      // Prevent prototype pollution by avoiding polluted keys
+      // Prevent prototype pollution and property injection
       const redacted: Record<string, any> = Object.create(null);
-      for (const [key, value] of Object.entries(data)) {
-        if (key === "__proto__" || key === "constructor") continue;
+      for (const key of Object.keys(data)) {
+        if (key === "__proto__" || key === "constructor" || key === "prototype")
+          continue;
 
+        const value = (data as any)[key];
         const lowerKey = key.toLowerCase();
 
         // Sensitivity based on keys + recursive redaction of values
@@ -118,9 +123,19 @@ export class SecurityManager {
             "iban",
           ].some((k) => lowerKey.includes(k))
         ) {
-          redacted[key] = "[REDACTED_SENSITIVE_KEY]";
+          Object.defineProperty(redacted, key, {
+            value: "[REDACTED_SENSITIVE_KEY]",
+            writable: true,
+            enumerable: true,
+            configurable: true,
+          });
         } else {
-          redacted[key] = this.redactPII(value);
+          Object.defineProperty(redacted, key, {
+            value: this.redactPII(value),
+            writable: true,
+            enumerable: true,
+            configurable: true,
+          });
         }
       }
       return redacted;
