@@ -13,7 +13,6 @@
  */
 
 import type { Request, Response, NextFunction } from "express";
-import { securityManager } from "../security/manager.js";
 
 export interface TenantBudget {
   dailyCostLimitCents: number;

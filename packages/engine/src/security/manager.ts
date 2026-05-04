@@ -55,11 +55,13 @@ export class SecurityManager {
   stripHtml(text: string): string {
     if (typeof text !== "string") return "";
     let sanitized = text.trim();
-    let previous;
-    do {
-      previous = sanitized;
-      sanitized = sanitized.replace(/<[^>]+>/g, "");
-    } while (sanitized !== previous);
+    // Non-regex, safe stripping for simple tags
+    while (sanitized.indexOf("<") !== -1 && sanitized.indexOf(">") !== -1) {
+      const start = sanitized.indexOf("<");
+      const end = sanitized.indexOf(">", start);
+      if (end === -1) break;
+      sanitized = sanitized.substring(0, start) + sanitized.substring(end + 1);
+    }
     return sanitized;
   }
 
@@ -83,7 +85,7 @@ export class SecurityManager {
 
       // Non-backtracking, safer regexes for PII
       return data
-        .replace(/\S+@\S+\.\S+/g, "[REDACTED_EMAIL]")
+        .replace(/[^\s@]+@[^\s@]+\.[^\s@]+/g, "[REDACTED_EMAIL]")
         .replace(/\d{3}-\d{2}-\d{4}/g, "[REDACTED_SSN]")
         .replace(/(?:\d{4}-){3}\d{4}/g, "[REDACTED_CARD]")
         .replace(/[A-Z]{2}\d{2}[A-Z0-9]{11,30}/g, "[REDACTED_IBAN]")

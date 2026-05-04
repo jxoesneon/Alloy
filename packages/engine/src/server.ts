@@ -372,7 +372,6 @@ export function createServer(
         message: "User data deleted from session store and semantic cache.",
       });
     } catch (err) {
-      const safeUserId = securityManager.sanitizeForLog(userId);
       console.error(
         "[GDPR] Deletion failed for userId: %s",
         String(userId).replace(/\n|\r/g, ""),
