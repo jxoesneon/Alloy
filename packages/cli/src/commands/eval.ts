@@ -278,16 +278,17 @@ async function generateHtmlReport(
 </html>`;
 
   const resolvedPath = path.resolve(process.cwd(), outputPath);
-  const relativePath = path.relative(process.cwd(), resolvedPath);
+  const normalizedRoot = path.normalize(process.cwd()) + path.sep;
+  const normalizedPath = path.normalize(resolvedPath);
 
-  if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
+  if (!normalizedPath.startsWith(normalizedRoot)) {
     throw new Error(
       `Invalid output path: ${outputPath}. Must be within the current working directory.`,
     );
   }
 
-  await fs.ensureDir(path.dirname(resolvedPath));
-  await fs.writeFile(resolvedPath, html, "utf-8");
+  await fs.ensureDir(path.dirname(normalizedPath));
+  await fs.writeFile(normalizedPath, html, "utf-8");
 }
 
 /**

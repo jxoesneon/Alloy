@@ -42,10 +42,12 @@ export class SecurityManager {
   }
 
   /**
-   * Neutralizes potential log injection vectors.
+   * Neutralizes potential log injection vectors by removing line breaks and non-printable characters.
    */
   sanitizeForLog(text: string): string {
-    return String(text).replace(/[\r\n]/g, " ");
+    return String(text)
+      .replace(/[\r\n\v\f]/g, " ")
+      .replace(/[^\x20-\x7E]/g, "?");
   }
 
   /**
