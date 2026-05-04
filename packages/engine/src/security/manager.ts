@@ -45,7 +45,7 @@ export class SecurityManager {
    * Neutralizes potential log injection vectors by removing line breaks.
    */
   sanitizeForLog(text: string): string {
-    return String(text).replace(/\n|\r/g, "");
+    return String(text).replace(/\n|\r/g, " ");
   }
 
   /**
