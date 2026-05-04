@@ -99,7 +99,7 @@ export class DailyBudgetStore {
     if (usage.safetyEvents >= budget.maxSafetyEventsPerDay) {
       console.error(
         "[Safety] Daily safety event limit exceeded for tenant %s.",
-        securityManager.sanitizeForLog(tenantId),
+        String(tenantId).replace(/\n|\r/g, ""),
       );
     }
   }
@@ -228,7 +228,7 @@ export async function tenantQuotaMiddleware(
   if (await dailyBudgetStore.isSafetyBlocked(tenantId)) {
     console.warn(
       "[Metric] ferroui.safety.budget_exceeded tenant=%s",
-      securityManager.sanitizeForLog(tenantId),
+      String(tenantId).replace(/\n|\r/g, ""),
     );
     res.status(429).json({
       error: "Daily safety event limit exceeded",

@@ -120,9 +120,9 @@ export async function* runDualPhasePipeline(
   if (isSuspicious) {
     console.warn(
       "[Security] Prompt blocked by %s firewall in request %s: %s",
-      securityManager.sanitizeForLog(firewallResult.provider),
-      securityManager.sanitizeForLog(context.requestId),
-      securityManager.sanitizeForLog(firewallResult.reason || "blocked"),
+      String(firewallResult.provider).replace(/\n|\r/g, ""),
+      String(context.requestId).replace(/\n|\r/g, ""),
+      String(firewallResult.reason || "blocked").replace(/\n|\r/g, ""),
     );
     dailyBudgetStore.recordSafetyEvent(context.tenantId ?? "default");
     yield {

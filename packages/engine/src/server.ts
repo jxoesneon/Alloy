@@ -375,8 +375,8 @@ export function createServer(
       const safeUserId = securityManager.sanitizeForLog(userId);
       console.error(
         "[GDPR] Deletion failed for userId: %s",
-        safeUserId,
-        securityManager.sanitizeForLog(String(err)),
+        String(userId).replace(/\n|\r/g, ""),
+        String(err).replace(/\n|\r/g, ""),
       );
       res.status(500).json({
         error: "Data deletion failed",
@@ -609,8 +609,8 @@ export function createServer(
     try {
       console.log(
         "[Engine] Starting process for prompt: %s (RequestID: %s)",
-        securityManager.sanitizeForLog(sanitizedPrompt),
-        safeRequestId,
+        String(sanitizedPrompt).replace(/\n|\r/g, ""),
+        String(safeRequestId).replace(/\n|\r/g, ""),
       );
 
       for await (const chunk of engine.process(sanitizedPrompt, context)) {
@@ -636,14 +636,13 @@ export function createServer(
 
       console.log(
         "[Engine] Successfully completed process for RequestID: %s",
-        safeRequestId,
+        String(safeRequestId).replace(/\n|\r/g, ""),
       );
     } catch (error) {
-      const safeError = securityManager.sanitizeForLog(String(error));
       console.error(
         "[Engine] Error processing request %s: %s",
-        safeRequestId,
-        safeError,
+        String(safeRequestId).replace(/\n|\r/g, ""),
+        String(error).replace(/\n|\r/g, ""),
       );
       recordFailure();
       recordRequestCompletion(Date.now() - requestStart, false, {
@@ -671,7 +670,7 @@ export function createServer(
 
   const server = app.listen(port, () => {
     console.log(
-      `[FerroUI] Engine Server listening on port ${port} (Provider: ${securityManager.sanitizeForLog(provider.id)})`,
+      `[FerroUI] Engine Server listening on port ${port} (Provider: ${String(provider.id).replace(/\n|\r/g, "")})`,
     );
   });
 
