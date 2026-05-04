@@ -41,7 +41,7 @@
   "license": "MIT",
   "devDependencies": {
     "puppeteer": "^24.42.0",
-    "@axe-core/playwright": "^4.11.2",
+    "@axe-core/playwright": "^4.11.3",
     "@changesets/cli": "latest",
     "@chromatic-com/storybook": "^5.1.2",
     "@eslint/js": "^10.0.1",
