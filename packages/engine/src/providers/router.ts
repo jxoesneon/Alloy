@@ -126,7 +126,7 @@ export class ProviderRouter implements LlmProvider {
         const result = yield* candidate.provider.processPrompt(req);
         this.recordSuccess(candidate.provider.id);
         return result;
-      } catch (err) {
+      } catch (_err) {
         this.recordFailure(candidate.provider.id);
       }
     }
@@ -144,7 +144,7 @@ export class ProviderRouter implements LlmProvider {
         const result = await candidate.provider.completePrompt(req);
         this.recordSuccess(candidate.provider.id);
         return result;
-      } catch (err) {
+      } catch (_err) {
         this.recordFailure(candidate.provider.id);
       }
     }

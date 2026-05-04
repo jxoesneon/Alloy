@@ -308,7 +308,7 @@ describe("migrateCommand", () => {
       } as never);
 
       vi.mocked(registry.getComponentEntry).mockImplementation(
-        (type: string) => undefined,
+        (_type: string) => undefined,
       );
 
       await migrateCommand.parseAsync([

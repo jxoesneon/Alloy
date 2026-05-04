@@ -8,7 +8,7 @@ vi.mock("fs-extra");
 
 describe("doctorCommand", () => {
   let consoleLogMock: Mock;
-  let consoleErrorMock: Mock;
+  let _consoleErrorMock: Mock;
   let processExitMock: Mock;
   let originalEnv: NodeJS.ProcessEnv;
 
@@ -16,7 +16,7 @@ describe("doctorCommand", () => {
     vi.clearAllMocks();
     originalEnv = { ...process.env };
     consoleLogMock = vi.spyOn(console, "log").mockImplementation(() => {});
-    consoleErrorMock = vi.spyOn(console, "error").mockImplementation(() => {});
+    _consoleErrorMock = vi.spyOn(console, "error").mockImplementation(() => {});
     processExitMock = vi
       .spyOn(process, "exit")
       .mockImplementation((() => {}) as any);

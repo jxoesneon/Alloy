@@ -13,7 +13,7 @@ vi.mock("ora");
 describe("createCommand", () => {
   let consoleLogMock: Mock;
   let consoleErrorMock: Mock;
-  let processExitMock: Mock;
+  let _processExitMock: Mock;
   let oraStartMock: Mock;
   let oraSucceedMock: Mock;
   let oraWarnMock: Mock;

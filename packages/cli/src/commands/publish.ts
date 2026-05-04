@@ -25,8 +25,6 @@ const ComponentPackageSchema = z.object({
   examples: z.array(z.record(z.string(), z.any())).optional(),
 });
 
-type ComponentPackage = z.infer<typeof ComponentPackageSchema>;
-
 export async function publishCommand(
   componentPath: string,
   options: PublishOptions,
