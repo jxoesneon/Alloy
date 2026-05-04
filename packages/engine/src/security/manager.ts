@@ -100,7 +100,9 @@ export class SecurityManager {
 
     if (typeof data === "object") {
       const redacted = Object.create(null);
-      for (const key of Object.keys(data)) {
+      const ownKeys = Object.keys(data);
+      for (let i = 0; i < ownKeys.length; i++) {
+        const key = ownKeys[i];
         if (key === "__proto__" || key === "constructor" || key === "prototype")
           continue;
         const val = (data as any)[key];
