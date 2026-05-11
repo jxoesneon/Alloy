@@ -13,7 +13,7 @@
     "@ferroui/registry": "workspace:*",
     "@ferroui/schema": "workspace:*",
     "clsx": "^2.1.1",
-    "eventsource-parser": "^3.0.6",
+    "eventsource-parser": "^3.0.8",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",
     "partial-json-parser": "^1.2.2",
