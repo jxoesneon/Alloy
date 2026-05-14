@@ -3,7 +3,7 @@
   "private": true,
   "displayName": "FerroUI",
   "description": "AI-powered UI development assistant",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "ferroui",
   "engines": {
     "vscode": "^1.85.0"

@@ -1,6 +1,6 @@
 {
   "name": "@ferroui/edge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Edge computing worker for FerroUI, designed for Cloudflare Workers.",
   "type": "module",
