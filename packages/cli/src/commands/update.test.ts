@@ -70,11 +70,15 @@ describe("updateCommand", () => {
   });
 
   it("should handle same version case", async () => {
-    // We expect the current version to be "2.0.0" (or similar) from package.json
-    // We will return exactly what current version is to match it
+    // Dynamically get the version from package.json to avoid breakage on release bumps
+    const pkgPath = new URL("../../package.json", import.meta.url);
+    const { version } = JSON.parse(
+      await import("fs/promises").then((fs) => fs.readFile(pkgPath, "utf-8")),
+    );
+
     vi.mocked(execSync).mockImplementation((cmd: any) => {
       if (typeof cmd === "string" && cmd.includes("npm view")) {
-        return '"2.0.0"'; // Assuming current version in package.json is 2.0.0
+        return `"${version}"`;
       }
       return "";
     });
