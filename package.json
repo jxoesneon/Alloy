@@ -98,6 +98,10 @@
   },
   "pnpm": {
     "overrides": {
+      "esbuild": "^0.28.0",
+      "dompurify": "^3.4.2",
+      "vite": "^8.0.12",
+      "ip-address": ">=10.1.1",
       "fast-uri": "^3.1.2",
       "basic-ftp": "^5.3.0",
       "protobufjs": "^8.3.0",
